@@ -16,18 +16,18 @@ export class AuthService {
   constructor(private UserService: UserService, private mailerService: MailerService, @InjectModel('verify') private readonly verifyModel: Model<Verify>) { }
 
   async signUp(CreateUserDto: createUserDto): Promise<userSignUpResponse> {
-    try {
-      const hashPass = await hash(CreateUserDto.password, 10)
-      await this.UserService.createUser({ ...CreateUserDto, password: hashPass })
-      return { message: "New user created" }
-    } catch (error) {
-      throw new Error
-    }
+      if (CreateUserDto.password !== CreateUserDto.repeat_password) {
+        throw new HttpException('Passwords are different', HttpStatus.UNAUTHORIZED)
+      } else {
+        const hashPass = await hash(CreateUserDto.password, 10)
+        await this.UserService.createUser({ ...CreateUserDto, password: hashPass })
+        return { message: "New user created" }
+      }
   }
 
 
   async signIn(userSignin: userSignInResponse): Promise<userTokenResponse> {
-    try {
+
       const user = await this.UserService.getUserByEmail(userSignin.email)
       if (!user) {
         throw new NotFoundException()
@@ -38,14 +38,12 @@ export class AuthService {
       }
       const token = sign({ email: user.email }, "jwt_olympos_2023", { expiresIn: '10m' })
       return { token, message: "You are successfully logged in" }
-    } catch (error) {
-      throw new Error
-    }
+
   }
 
 
   async forgetPass(email: string) {
-    try {
+
       const user = await this.UserService.getUserByEmail(email)
       if (!user) {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND)
@@ -59,9 +57,7 @@ export class AuthService {
         html: `Verify code : ${verify_code}`
       })
       return 'A verification code has been sent to your email'
-    } catch (error) {
-      throw new Error
-    }
+
   }
 
 
@@ -84,7 +80,6 @@ export class AuthService {
         throw new HttpException('Token is wrong', HttpStatus.UNAUTHORIZED)
       }
       const hashPass = await hash(forget.password, 10)
-    
 
     })
 

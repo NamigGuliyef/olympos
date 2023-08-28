@@ -13,8 +13,6 @@ export class User {
   phone_number: string;
   @Prop({ required: true })
   password: string
-  @Prop({ required: true })
-  repeat_password: string
 }
 
 export const userModel = SchemaFactory.createForClass(User)
