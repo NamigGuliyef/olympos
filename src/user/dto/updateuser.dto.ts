@@ -20,5 +20,10 @@ export class updateUserDto {
 
   @IsNotEmpty()
   @Length(8, 16)
-  password: string;
+  old_password: string;
+
+  @IsNotEmpty()
+  @Length(8, 16)
+  new_password: string;
+
 }

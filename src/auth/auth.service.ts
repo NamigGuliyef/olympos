@@ -1,62 +1,69 @@
 import { MailerService } from '@nestjs-modules/mailer';
-import { HttpException, HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { REQUEST } from '@nestjs/core';
 import { InjectModel } from '@nestjs/mongoose';
 import { compare, hash } from 'bcrypt';
 import { sign, verify } from 'jsonwebtoken';
 import { Model } from 'mongoose';
+import { tokenRequestType } from 'src/middleware/tokenRequsetType';
 import { createUserDto } from 'src/user/dto/createuser.dto';
-import { User, userModel } from 'src/user/schema/user.schema';
+import { recoveryPasswordDto } from 'src/user/dto/recoveryPassword.dto';
+import { User } from 'src/user/schema/user.schema';
 import { UserService } from 'src/user/user.service';
 import { Verify } from 'src/verify/verify_code.schema';
-import { userSignInResponse, userSignUpResponse, userTokenResponse, verifyCodeResponse } from './auth.types';
+import { userSignInResponse, userSignUpResponse, userTokenResponse } from './auth.types';
 
 
 @Injectable()
 export class AuthService {
-  constructor(private UserService: UserService, private mailerService: MailerService, @InjectModel('verify') private readonly verifyModel: Model<Verify>) { }
+  constructor(private UserService: UserService, private mailerService: MailerService,
+    @InjectModel('verify') private readonly verifyModel: Model<Verify>,
+    @InjectModel('user') private readonly userModel: Model<User>,
+    @Inject(REQUEST) private readonly req: tokenRequestType
+  ) { }
 
   async signUp(CreateUserDto: createUserDto): Promise<userSignUpResponse> {
-      if (CreateUserDto.password !== CreateUserDto.repeat_password) {
-        throw new HttpException('Passwords are different', HttpStatus.UNAUTHORIZED)
-      } else {
-        const hashPass = await hash(CreateUserDto.password, 10)
-        await this.UserService.createUser({ ...CreateUserDto, password: hashPass })
-        return { message: "New user created" }
-      }
+    if (CreateUserDto.password !== CreateUserDto.repeat_password) {
+      throw new HttpException('Passwords are different', HttpStatus.UNAUTHORIZED)
+    } else {
+      const hashPass = await hash(CreateUserDto.password, 10)
+      await this.UserService.createUser({ ...CreateUserDto, password: hashPass })
+      return { message: "New user created" }
+    }
   }
 
 
   async signIn(userSignin: userSignInResponse): Promise<userTokenResponse> {
 
-      const user = await this.UserService.getUserByEmail(userSignin.email)
-      if (!user) {
-        throw new NotFoundException()
-      }
-      const passRight = await compare(userSignin.password, user.password)
-      if (!passRight) {
-        throw new UnauthorizedException()
-      }
-      const token = sign({ email: user.email }, "jwt_olympos_2023", { expiresIn: '10m' })
-      return { token, message: "You are successfully logged in" }
+    const user = await this.UserService.getUserByEmail(userSignin.email)
+    if (!user) {
+      throw new NotFoundException()
+    }
+    const passRight = await compare(userSignin.password, user.password)
+    if (!passRight) {
+      throw new UnauthorizedException()
+    }
+    const token = sign({ email: user.email }, "jwt_olympos_2023", { expiresIn: '10m' })
+    return { token, message: "You are successfully logged in" }
 
   }
 
 
   async forgetPass(email: string) {
 
-      const user = await this.UserService.getUserByEmail(email)
-      if (!user) {
-        throw new HttpException('User not found', HttpStatus.NOT_FOUND)
-      }
-      const verify_code = Math.floor(Math.random() * 1000000)
-      this.verifyModel.create({ verify_code, userEmail: user.email })
-      this.mailerService.sendMail({
-        from: "quliyevnamiq8@gmail.com",
-        to: `${email}`,
-        subject: " Verify code",
-        html: `Verify code : ${verify_code}`
-      })
-      return 'A verification code has been sent to your email'
+    const user = await this.UserService.getUserByEmail(email)
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND)
+    }
+    const verify_code = Math.floor(Math.random() * 1000000)
+    this.verifyModel.create({ verify_code, userEmail: user.email })
+    this.mailerService.sendMail({
+      from: "quliyevnamiq8@gmail.com",
+      to: `${email}`,
+      subject: " Verify code",
+      html: `Verify code : ${verify_code}`
+    })
+    return 'A verification code has been sent to your email'
 
   }
 
@@ -71,20 +78,24 @@ export class AuthService {
   }
 
 
-  async recoveryPassword(token: string) {
-    if (!token) {
+  async recoveryPassword(token: string, RecoveryPasswordDto: recoveryPasswordDto): Promise<void> {
+
+    if (!this.req.params.token) {
       throw new HttpException('Token is invalid', HttpStatus.NOT_FOUND)
     }
-    verify(token, 'jwt_olympos_2023', async (err, forget: User) => {
+    verify(this.req.params.token, 'jwt_olympos_2023', async (err, forget: User) => {
       if (err) {
         throw new HttpException('Token is wrong', HttpStatus.UNAUTHORIZED)
       }
-      const hashPass = await hash(forget.password, 10)
+      if (RecoveryPasswordDto.password !== RecoveryPasswordDto.repeat_password) {
+        throw new HttpException('Passwords are different', HttpStatus.UNAUTHORIZED)
+      } else {
+        const hashPass = await hash(RecoveryPasswordDto.password, 10)
+        await this.userModel.findOneAndUpdate({ email: forget.email }, { $set: { password: hashPass } }, { new: true })
+        return 'Your password has been updated successfully '
+      }
 
     })
-
-
   }
-
 }
 

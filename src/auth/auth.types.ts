@@ -21,8 +21,3 @@ export interface verifyCodeResponse {
   verify_code: number
 }
 
-export interface recoveryPassword {
-  new_password: string
-  repeat_pasword: string
-}
-

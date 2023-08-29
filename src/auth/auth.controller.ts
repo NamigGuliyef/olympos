@@ -1,5 +1,6 @@
-import { Body, Controller, HttpCode, HttpStatus, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Param, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
 import { createUserDto } from 'src/user/dto/createuser.dto';
+import { recoveryPasswordDto } from 'src/user/dto/recoveryPassword.dto';
 import { AuthService } from './auth.service';
 import { forgetPassResponse, userSignInResponse, verifyCodeResponse } from './auth.types';
 
@@ -10,8 +11,8 @@ export class AuthController {
   @Post('/sign-up')
   @HttpCode(HttpStatus.CREATED)
   @UsePipes(new ValidationPipe())
-  async signUp(@Body() CreateUser: createUserDto) {
-    return this.AuthService.signUp(CreateUser)
+  async signUp(@Body() CreateUserDto: createUserDto) {
+    return this.AuthService.signUp(CreateUserDto)
   }
 
   @Post('/sign-in')
@@ -32,7 +33,11 @@ export class AuthController {
     return this.AuthService.verifyCode(verifyCodeResponse.verify_code)
   }
 
-
-  
+  @Put('/recovery/:token')
+  @HttpCode(HttpStatus.OK)
+  @UsePipes(new ValidationPipe())
+  async recoveryPass(@Param('token') token: string, @Body() RecoveryPasswordDto: recoveryPasswordDto) {
+    return this.AuthService.recoveryPassword(token, RecoveryPasswordDto)
+  }
 
 }
