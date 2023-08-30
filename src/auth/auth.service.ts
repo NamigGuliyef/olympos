@@ -22,12 +22,13 @@ export class AuthService {
     @Inject(REQUEST) private readonly req: tokenRequestType
   ) { }
 
+
   async signUp(CreateUserDto: createUserDto): Promise<userSignUpResponse> {
     if (CreateUserDto.password !== CreateUserDto.repeat_password) {
       throw new HttpException('Passwords are different', HttpStatus.UNAUTHORIZED)
     } else {
       const hashPass = await hash(CreateUserDto.password, 10)
-      await this.UserService.createUser({ ...CreateUserDto, password: hashPass })
+      await this.userModel.create({ ...CreateUserDto, password: hashPass })
       return { message: "New user created" }
     }
   }
@@ -35,7 +36,7 @@ export class AuthService {
 
   async signIn(userSignin: userSignInResponse): Promise<userTokenResponse> {
 
-    const user = await this.UserService.getUserByEmail(userSignin.email)
+    const user = await this.userModel.findOne({email:userSignin.email})
     if (!user) {
       throw new NotFoundException()
     }
@@ -51,7 +52,7 @@ export class AuthService {
 
   async forgetPass(email: string) {
 
-    const user = await this.UserService.getUserByEmail(email)
+    const user = await this.userModel.findOne({email})
     if (!user) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND)
     }
@@ -73,17 +74,17 @@ export class AuthService {
     if (!check_confirmation) {
       throw new HttpException('Verification code is incorrect', HttpStatus.UNAUTHORIZED)
     }
-    const token = sign({ email: check_confirmation.userEmail }, 'jwt_olympos_2023', { expiresIn: "10m" })
+    const token = sign({ email: check_confirmation.userEmail }, 'jwt_olympos_2023', { expiresIn: "30m" })
     return { token, message: "Verification code is correct" }
   }
 
-
-  async recoveryPassword(token: string, RecoveryPasswordDto: recoveryPasswordDto): Promise<void> {
+// token :string goturmur ---?
+  async recoveryPassword(token: string, RecoveryPasswordDto: recoveryPasswordDto) {
 
     if (!this.req.params.token) {
-      throw new HttpException('Token is invalid', HttpStatus.NOT_FOUND)
+      throw new HttpException("Token is invalid",HttpStatus.NOT_FOUND)
     }
-    verify(this.req.params.token, 'jwt_olympos_2023', async (err, forget: User) => {
+    verify(this.req.params.token, 'jwt_olympos_2023', async (err, forget: User):Promise<User> => {
       if (err) {
         throw new HttpException('Token is wrong', HttpStatus.UNAUTHORIZED)
       }
@@ -91,10 +92,9 @@ export class AuthService {
         throw new HttpException('Passwords are different', HttpStatus.UNAUTHORIZED)
       } else {
         const hashPass = await hash(RecoveryPasswordDto.password, 10)
-        await this.userModel.findOneAndUpdate({ email: forget.email }, { $set: { password: hashPass } }, { new: true })
-        return 'Your password has been updated successfully '
+        const updatePass = await this.userModel.findOneAndUpdate({ email: forget.email }, { $set: { password: hashPass } }, { new: true })
+        return updatePass
       }
-
     })
   }
 }
