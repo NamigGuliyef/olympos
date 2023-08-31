@@ -9,14 +9,13 @@ import { tokenRequestType } from 'src/middleware/tokenRequsetType';
 import { createUserDto } from 'src/user/dto/createuser.dto';
 import { recoveryPasswordDto } from 'src/user/dto/recoveryPassword.dto';
 import { User } from 'src/user/schema/user.schema';
-import { UserService } from 'src/user/user.service';
 import { Verify } from 'src/verify/verify_code.schema';
 import { userSignInResponse, userSignUpResponse, userTokenResponse } from './auth.types';
 
 
 @Injectable()
 export class AuthService {
-  constructor(private UserService: UserService, private mailerService: MailerService,
+  constructor(private mailerService: MailerService,
     @InjectModel('verify') private readonly verifyModel: Model<Verify>,
     @InjectModel('user') private readonly userModel: Model<User>,
     @Inject(REQUEST) private readonly req: tokenRequestType
