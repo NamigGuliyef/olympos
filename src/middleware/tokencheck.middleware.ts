@@ -13,9 +13,7 @@ export class tokenCheckMiddleware implements NestMiddleware {
     verify(token, 'jwt_olympos_2023', (err, user: User) => {
       if (err) {
         throw new HttpException('Invalid Authorization Token', HttpStatus.FORBIDDEN)
-      } else if (req.body.email !== user.email) {
-        throw new HttpException('Emails are different', HttpStatus.FORBIDDEN)
-      } else {
+      }else{       
         req.user = user
         next()
       }
