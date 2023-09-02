@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, NestMiddleware } from '@nestjs/common'
 import { NextFunction, Response } from 'express'
 import { verify } from 'jsonwebtoken'
 import { User } from 'src/user/schema/user.schema'
-import { tokenRequestType } from './tokenRequsetType'
+import { tokenRequestType } from './tokenRequestType'
 
 export class tokenCheckMiddleware implements NestMiddleware {
   use(req: tokenRequestType, res: Response, next: NextFunction) {
@@ -13,7 +13,7 @@ export class tokenCheckMiddleware implements NestMiddleware {
     verify(token, 'jwt_olympos_2023', (err, user: User) => {
       if (err) {
         throw new HttpException('Invalid Authorization Token', HttpStatus.FORBIDDEN)
-      }else{       
+      } else {
         req.user = user
         next()
       }
