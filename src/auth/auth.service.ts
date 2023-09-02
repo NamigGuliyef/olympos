@@ -5,7 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { compare, hash } from 'bcrypt';
 import { sign, verify } from 'jsonwebtoken';
 import { Model } from 'mongoose';
-import { tokenRequestType } from 'src/middleware/tokenRequsetType';
+import { tokenRequestType } from 'src/middleware/tokenRequestType';
 import { createUserDto } from 'src/user/dto/createuser.dto';
 import { recoveryPasswordDto } from 'src/user/dto/recoveryPassword.dto';
 import { User } from 'src/user/schema/user.schema';
@@ -34,7 +34,7 @@ export class AuthService {
 
   async signIn(userSignin: userSignInResponse): Promise<userTokenResponse> {
 
-    const user = await this.userModel.findOne({email:userSignin.email})
+    const user = await this.userModel.findOne({ email: userSignin.email })
     if (!user) {
       throw new NotFoundException()
     }
@@ -50,7 +50,7 @@ export class AuthService {
 
   async forgetPass(email: string) {
 
-    const user = await this.userModel.findOne({email})
+    const user = await this.userModel.findOne({ email })
     if (!user) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND)
     }
@@ -76,13 +76,13 @@ export class AuthService {
     return { token, message: "Verification code is correct" }
   }
 
-// token :string goturmur ---?
+  // token :string goturmur ---?
   async recoveryPassword(token: string, RecoveryPasswordDto: recoveryPasswordDto) {
 
     if (!this.req.params.token) {
-      throw new HttpException("Token is invalid",HttpStatus.NOT_FOUND)
+      throw new HttpException("Token is invalid", HttpStatus.NOT_FOUND)
     }
-    verify(this.req.params.token, 'jwt_olympos_2023', async (err, forget: User):Promise<User> => {
+    verify(this.req.params.token, 'jwt_olympos_2023', async (err, forget: User): Promise<User> => {
       if (err) {
         throw new HttpException('Token is wrong', HttpStatus.UNAUTHORIZED)
       }
