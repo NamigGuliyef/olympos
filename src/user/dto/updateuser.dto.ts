@@ -1,12 +1,13 @@
 import { IsEmail, IsMobilePhone, IsNotEmpty, IsPhoneNumber, Length, Matches } from "class-validator";
+import { alphabeticallyName } from "src/utils/regex";
 
 export class updateUserDto {
   @IsNotEmpty()
-  @Matches(new RegExp("^[A-Za-z]{3,12}$"))
+  @Matches(alphabeticallyName)
   first_name: string;
 
   @IsNotEmpty()
-  @Matches(new RegExp("^[A-Za-z]{3,12}$"))
+  @Matches(alphabeticallyName)
   last_name: string;
 
   @IsNotEmpty()
