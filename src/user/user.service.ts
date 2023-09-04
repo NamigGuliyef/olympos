@@ -4,13 +4,16 @@ import { InjectModel } from '@nestjs/mongoose';
 import { compare, hash } from 'bcrypt';
 import { Model } from 'mongoose';
 import { tokenRequestType } from 'src/middleware/tokenRequestType';
+import { Whishlist } from 'src/whishlist/whishlist.schema';
 import { updateUserDto } from './dto/updateuser.dto';
 import { User } from './schema/user.schema';
 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectModel('user') private userModel: Model<User>, @Inject(REQUEST) private readonly req: tokenRequestType) { }
+    @InjectModel('user') private userModel: Model<User>,
+    @InjectModel('whishlist') private whishListModel: Model<Whishlist>,
+    @Inject(REQUEST) private readonly req: tokenRequestType) { }
 
   // get Profile
   async getProfile(): Promise<User> {
@@ -37,7 +40,17 @@ export class UserService {
       return 'Your password has been successfully changed'
     }
   }
+
+
+  // hotel add whishlist
+  async addWhishList(): Promise<Whishlist> {
+    const add_whishlist = await this.whishListModel.create({ userEmail: this.req.user.email, hotelId: this.req.body.hotelId })
+    return add_whishlist
+  }
+
 }
+
+
 
 
 

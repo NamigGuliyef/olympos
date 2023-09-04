@@ -1,3 +1,4 @@
+import { IsOptional } from "class-validator";
 import { IsEmail, IsMobilePhone, IsNotEmpty, IsPhoneNumber, Length, Matches } from "class-validator";
 import { alphabeticallyName } from "src/utils/regex";
 
@@ -19,11 +20,11 @@ export class updateUserDto {
   @IsMobilePhone('az-AZ')
   phone_number: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @Length(8, 16)
   old_password: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @Length(8, 16)
   new_password: string;
 

@@ -11,6 +11,7 @@ export class tokenCheckMiddleware implements NestMiddleware {
       throw new HttpException('No authorization Token', HttpStatus.NOT_FOUND)
     }
     verify(token, 'jwt_olympos_2023', (err, user: User) => {
+      
       if (err) {
         throw new HttpException('Invalid Authorization Token', HttpStatus.FORBIDDEN)
       } else {
