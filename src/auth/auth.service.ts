@@ -42,7 +42,7 @@ export class AuthService {
     if (!passRight) {
       throw new UnauthorizedException()
     }
-    const token = sign({ email: user.email }, "jwt_olympos_2023", { expiresIn: '1h' })
+    const token = sign({ email: user.email, role: user.role }, "jwt_olympos_2023", { expiresIn: '1h' })
     return { token, message: "You are successfully logged in" }
 
   }
@@ -72,7 +72,7 @@ export class AuthService {
     if (!check_confirmation) {
       throw new HttpException('Verification code is incorrect', HttpStatus.UNAUTHORIZED)
     }
-    const token = sign({ email: check_confirmation.userEmail }, 'jwt_olympos_2023', { expiresIn: "5m" })
+    const token = sign({ email: check_confirmation.userEmail}, 'jwt_olympos_2023', { expiresIn: "5m" })
     return { token, message: "Verification code is correct" }
   }
 

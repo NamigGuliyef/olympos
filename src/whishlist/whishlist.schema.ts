@@ -9,7 +9,7 @@ export class Whishlist {
   hotelId: Types.ObjectId;
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'tour' })
   tourId: Types.ObjectId;
-  @Prop({ expires: 60 * 60 * 24 * 7 })
+  @Prop({ expires: 604800 })
   createdAt: Date;
 }
 

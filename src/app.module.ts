@@ -7,6 +7,8 @@ import { tokenCheckMiddleware } from './middleware/tokencheck.middleware';
 import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
 import { MailerModule } from '@nestjs-modules/mailer'
+import { AdminModule } from './admin/admin.module';
+import { AdminController } from './admin/admin.controller';
 
 
 @Module({
@@ -21,12 +23,13 @@ import { MailerModule } from '@nestjs-modules/mailer'
           pass: "jjdeczqkscvbslrf"
         },
       }
-    })],
+    }),
+    AdminModule],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(tokenCheckMiddleware).forRoutes(UserController)
+    consumer.apply(tokenCheckMiddleware).forRoutes(UserController, AdminController)
   }
 }

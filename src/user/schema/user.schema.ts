@@ -12,6 +12,8 @@ export class User {
   phone_number: string;
   @Prop({ required: true })
   password: string;
+  @Prop({ default: 'user' })
+  role: string
 }
 
 

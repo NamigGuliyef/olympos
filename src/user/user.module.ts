@@ -5,11 +5,12 @@ import { userModel } from './schema/user.schema';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { hotelModel } from 'src/hotel/hotel.schema';
+import { tourModel } from 'src/tour/tour.schema';
 
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'user', schema: userModel }, 
-  { name: "whishlist", schema: whishListModel },  { name: "hotel", schema: hotelModel }])],
+  imports: [MongooseModule.forFeature([{ name: 'user', schema: userModel },
+  { name: "whishlist", schema: whishListModel }, { name: "hotel", schema: hotelModel }, { name: "tour", schema: tourModel }])],
   controllers: [UserController],
   providers: [UserService],
 })

@@ -43,17 +43,18 @@ export class UserService {
   }
 
   // hotel and tour add whishlist
-  async addWhishList(CreateWhishListDto:createWhishListDto): Promise<Whishlist> {
-    const { hotelId,tourId } = CreateWhishListDto
-    return await this.whishListModel.create({ userEmail: this.req.user.email, hotelId,tourId })
+  async addWhishList(CreateWhishListDto: createWhishListDto): Promise<Whishlist> {
+    const { hotelId, tourId } = CreateWhishListDto
+    return await this.whishListModel.create({ userEmail: this.req.user.email, hotelId, tourId })
   }
 
   // get all whishlist
-  async getAllWhishList():Promise<Whishlist[]>{
-    return await this.whishListModel.find({userEmail:this.req.user.email}).populate([
-      { path:'hotelId' },{ path:'tourId' }
+  async getAllWhishList(): Promise<Whishlist[]> {
+    return await this.whishListModel.find({ userEmail: this.req.user.email }).populate([
+      { path: 'hotelId' }, { path: 'tourId' }
     ])
   }
+
 
 
 }
