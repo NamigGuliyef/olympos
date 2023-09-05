@@ -7,6 +7,7 @@ import { tokenRequestType } from 'src/middleware/tokenRequestType';
 import { Whishlist } from 'src/whishlist/whishlist.schema';
 import { updateUserDto } from './dto/updateuser.dto';
 import { User } from './schema/user.schema';
+import { createWhishListDto } from 'src/whishlist/createWhishList.dto';
 
 @Injectable()
 export class UserService {
@@ -41,14 +42,24 @@ export class UserService {
     }
   }
 
-
-  // hotel add whishlist
-  async addWhishList(): Promise<Whishlist> {
-    const add_whishlist = await this.whishListModel.create({ userEmail: this.req.user.email, hotelId: this.req.body.hotelId })
-    return add_whishlist
+  // hotel and tour add whishlist
+  async addWhishList(CreateWhishListDto:createWhishListDto): Promise<Whishlist> {
+    const { hotelId,tourId } = CreateWhishListDto
+    return await this.whishListModel.create({ userEmail: this.req.user.email, hotelId,tourId })
   }
 
+  // get all whishlist
+  async getAllWhishList():Promise<Whishlist[]>{
+    return await this.whishListModel.find({userEmail:this.req.user.email}).populate([
+      { path:'hotelId' },{ path:'tourId' }
+    ])
+  }
+
+
 }
+
+
+
 
 
 
