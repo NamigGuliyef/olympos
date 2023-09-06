@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 import { MailerModule } from '@nestjs-modules/mailer'
 import { AdminModule } from './admin/admin.module';
 import { AdminController } from './admin/admin.controller';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 
 @Module({
@@ -24,7 +25,8 @@ import { AdminController } from './admin/admin.controller';
         },
       }
     }),
-    AdminModule],
+    AdminModule,
+    CloudinaryModule],
   controllers: [AppController],
   providers: [AppService],
 })
