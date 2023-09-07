@@ -1,15 +1,14 @@
+import { MailerModule } from '@nestjs-modules/mailer';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { AdminController } from './admin/admin.controller';
+import { AdminModule } from './admin/admin.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { tokenCheckMiddleware } from './middleware/tokencheck.middleware';
+import { tokenCheckAdminMiddleware, tokenCheckMiddleware } from './middleware/tokencheck.middleware';
 import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
-import { MailerModule } from '@nestjs-modules/mailer'
-import { AdminModule } from './admin/admin.module';
-import { AdminController } from './admin/admin.controller';
-import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 
 @Module({
@@ -25,13 +24,13 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
         },
       }
     }),
-    AdminModule,
-    CloudinaryModule],
+    AdminModule],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(tokenCheckMiddleware).forRoutes(UserController, AdminController)
+    consumer.apply(tokenCheckMiddleware).forRoutes(UserController)
+    consumer.apply(tokenCheckAdminMiddleware).forRoutes(AdminController)
   }
 }

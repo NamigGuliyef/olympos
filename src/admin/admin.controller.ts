@@ -1,22 +1,19 @@
 import { Body, Controller, Post, UploadedFiles, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
-import upload from 'src/config/multer';
+import { multerConfig } from 'src/cloudinary/multer';
 import { createHotelDto } from 'src/hotel/createhotel.dto';
+import { Hotel } from 'src/hotel/hotel.schema';
 import { AdminService } from './admin.service';
 
 @Controller('admin')
 export class AdminController {
   constructor(private readonly adminService: AdminService) { }
 
-  @Post('create-hotel')
+  @Post('/create-hotel')
   @UsePipes(new ValidationPipe())
-  @UseInterceptors(FilesInterceptor('photos'))
-  async createHotel(@Body() CreateHotelDto: createHotelDto, @UploadedFiles() files: Array<Express.Multer.File>) {
-    const hotel = await this.adminService.createHotel(CreateHotelDto)
-
-    return hotel
+  @UseInterceptors(FilesInterceptor('photos', 10 ,multerConfig))
+  async createHotel(@Body() CreateHotelDto: createHotelDto, @UploadedFiles() files: Express.Multer.File[]):Promise<Hotel> {
+    return await this.adminService.createHotel(CreateHotelDto,files)    
   }
-
-
 
 }

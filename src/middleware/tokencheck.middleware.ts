@@ -11,7 +11,6 @@ export class tokenCheckMiddleware implements NestMiddleware {
       throw new HttpException('No authorization Token', HttpStatus.NOT_FOUND)
     }
     verify(token, 'jwt_olympos_2023', (err, user: User) => {
-
       if (err) {
         throw new HttpException('Invalid Authorization Token', HttpStatus.FORBIDDEN)
       } else if (user.role !== "user") {
@@ -20,8 +19,26 @@ export class tokenCheckMiddleware implements NestMiddleware {
         req.user = user
         next()
       }
-
     })
   }
 }
 
+// admin Middleware
+export class tokenCheckAdminMiddleware implements NestMiddleware {
+  use(req: tokenRequestType, res: Response, next: NextFunction) {
+    const token = req.headers.authorization?.split(' ')[1]
+    if (!token) {
+      throw new HttpException('No authorization Token', HttpStatus.NOT_FOUND)
+    }
+    verify(token, 'jwt_olympos_2023', (err, user: User) => {
+      if (err) {
+        throw new HttpException('Invalid Authorization Token', HttpStatus.FORBIDDEN)
+      } else if (user.role !== "admin") {
+        throw new HttpException("You are not a admin", HttpStatus.FORBIDDEN)
+      } else {
+        req.user = user
+        next()
+      }
+    })
+  }
+}

@@ -15,8 +15,8 @@ export class Hotel {
   reviews: [mongoose.Schema.Types.ObjectId];
   @Prop({ required: true })
   description: string;
-  @Prop({ required: true })
-  photos: [string];
+  @Prop()
+  photos: string[];
   @Prop({ required: true })
   map: string;
   @Prop({ required: true })

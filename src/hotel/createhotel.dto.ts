@@ -2,23 +2,21 @@ import { IsNotEmpty, IsNumber, Matches } from 'class-validator';
 
 export class createHotelDto {
   @IsNotEmpty()
-  @Matches(new RegExp('^[A-Za-z]{3,100}$'))
+  @Matches(new RegExp('^[A-Za-z əüöğıçş]{3,100}$'))
   name: string;
   @IsNotEmpty()
-  @Matches(new RegExp('^[A-Za-z0-9,.-/ ]{30,150}$'))
+  @Matches(new RegExp('^[A-Za-z0-9,./ əüöğıçş-]{30,150}$'))
   location: string;
   @IsNotEmpty()
-  @Matches(new RegExp('^[A-Za-z, ]{20,50}$'))
-  destination: string;
+  @Matches(new RegExp('^[A-Za-z,əüöğıçş ]{20,50}$'))
+  destination_country: string;
   @IsNotEmpty()
-  @IsNumber()
   price: number;
-  @IsNotEmpty()
   reviews: [string];
   @IsNotEmpty()
   description: string;
-  @IsNotEmpty()
-  photos: [string];
+  // @IsNotEmpty()
+  // photos: string[];
   @IsNotEmpty()
   map: string;
   @IsNotEmpty()
@@ -30,7 +28,7 @@ export class createHotelDto {
   @IsNotEmpty()
   wifi: boolean;
   @IsNotEmpty()
-  air: boolean;
+  air_conditioning: boolean;
   @IsNotEmpty()
   entertainment: boolean;
 }
