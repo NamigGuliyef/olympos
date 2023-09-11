@@ -1,4 +1,7 @@
-import multer from 'multer';
+import { diskStorage } from 'multer';
 
-const storage = multer.diskStorage({});
-export const multerConfig = multer({ storage });
+export const MulterOptions = {
+  storage: diskStorage({}),
+limits: { fileSize: 1024 * 1024 * 5 },
+};
+

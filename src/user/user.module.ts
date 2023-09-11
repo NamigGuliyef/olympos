@@ -6,13 +6,14 @@ import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { hotelModel } from 'src/hotel/hotel.schema';
 import { tourModel } from 'src/tour/tour.schema';
+import { reviewModel } from 'src/review/review.schema';
 
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: 'user', schema: userModel },
-  { name: "whishlist", schema: whishListModel }, { name: "hotel", schema: hotelModel }, { name: "tour", schema: tourModel }])],
+  { name: "whishlist", schema: whishListModel }, { name: "hotel", schema: hotelModel },
+  { name: "tour", schema: tourModel }, { name: 'review', schema: reviewModel },{ name: 'hotel', schema: hotelModel }])],
   controllers: [UserController],
   providers: [UserService],
 })
 export class UserModule { }
-

@@ -16,15 +16,14 @@ export class AdminService {
     if (hotelExist) {
       throw new HttpException('The hotel has already been created', HttpStatus.CONFLICT)
     }
-    console.log(hotelExist)
-    const fileUrl = await cloudinary.uploader.upload(files[0].path,{public_id:files[0].originalname});
-    console.log(fileUrl)
-    const hotel = await this.hotelModel.create({...CreateHotelDto,photos:fileUrl.url})
-    console.log(fileUrl.url)
-    console.log(hotel)
+    const fileUrls = []
+    for (let i = 0; i < files.length; i++) {
+      const fileUrl = await cloudinary.uploader.upload(files[i].path, { public_id: files[i].originalname });
+      fileUrls.push(fileUrl.url)
+    }
+    const hotel = await this.hotelModel.create({ ...CreateHotelDto, photos: fileUrls })
     return hotel
- }
-
+  }
 }
 
 

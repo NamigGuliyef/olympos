@@ -14,6 +14,8 @@ import { updateUserDto } from './dto/updateuser.dto';
 import { User } from './schema/user.schema';
 import { UserService } from './user.service';
 import { Whishlist } from 'src/whishlist/whishlist.schema';
+import { createReviewDto, updateReviewDto } from 'src/review/review.dto';
+import { Review } from 'src/review/review.schema';
 
 @Controller('user')
 export class UserController {
@@ -46,4 +48,20 @@ export class UserController {
   async getAllWhishList(): Promise<Whishlist[]> {
     return this.userService.getAllWhishList();
   }
+
+  @Post('/create-review')
+  @HttpCode(HttpStatus.CREATED)
+  @UsePipes(new ValidationPipe())
+  async createReview(@Body() CreateReviewDto: createReviewDto) {
+    return this.userService.createReview(CreateReviewDto)
+  }
+
+  @Put('/update-review')
+  @HttpCode(HttpStatus.OK)
+  @UsePipes(new ValidationPipe())
+  async updateReview(@Body() UpdateReviewDto: updateReviewDto) {
+    return await this.userService.updateReview(UpdateReviewDto)
+  }
+
+
 }

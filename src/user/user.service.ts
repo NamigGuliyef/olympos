@@ -3,17 +3,22 @@ import { REQUEST } from '@nestjs/core';
 import { InjectModel } from '@nestjs/mongoose';
 import { compare, hash } from 'bcrypt';
 import { Model } from 'mongoose';
+import { Hotel } from 'src/hotel/hotel.schema';
 import { tokenRequestType } from 'src/middleware/tokenRequestType';
+import { createReviewDto, updateReviewDto } from 'src/review/review.dto';
+import { Review } from 'src/review/review.schema';
+import { createWhishListDto } from 'src/whishlist/createWhishList.dto';
 import { Whishlist } from 'src/whishlist/whishlist.schema';
 import { updateUserDto } from './dto/updateuser.dto';
 import { User } from './schema/user.schema';
-import { createWhishListDto } from 'src/whishlist/createWhishList.dto';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel('user') private userModel: Model<User>,
     @InjectModel('whishlist') private whishListModel: Model<Whishlist>,
+    @InjectModel('review') private reviewModel: Model<Review>,
+    @InjectModel('hotel') private hotelModel: Model<Hotel>,
     @Inject(REQUEST) private readonly req: tokenRequestType) { }
 
   // get Profile
@@ -55,14 +60,20 @@ export class UserService {
     ])
   }
 
+  // create Review
+  async createReview(CreateReviewDto: createReviewDto) {
+    const { hotelId, description } = CreateReviewDto
+    const newReview = await this.reviewModel.create({ userEmail: this.req.user.email, hotelId, description })
+    return this.hotelModel.findByIdAndUpdate(newReview.hotelId, { $push: { reviews: newReview._id } }, { new: true })
+  }
 
+  // update Review
+  async updateReview(UpdateReviewDto: updateReviewDto) {
+    const { hotelId, description } = UpdateReviewDto
+    return await this.reviewModel.findOneAndUpdate({ hotelId: hotelId }, { $set: { description } }, { new: true })
+  }
 
 }
-
-
-
-
-
 
 
 

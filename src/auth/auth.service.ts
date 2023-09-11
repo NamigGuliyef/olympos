@@ -63,7 +63,6 @@ export class AuthService {
       html: `Verify code : ${verify_code}`
     })
     return 'A verification code has been sent to your email'
-
   }
 
 
@@ -96,4 +95,5 @@ export class AuthService {
     })
   }
 }
+
 

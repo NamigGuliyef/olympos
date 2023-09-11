@@ -1,14 +1,14 @@
-import { IsNotEmpty, IsNumber, Matches } from 'class-validator';
+import { IsNotEmpty, Matches } from 'class-validator';
 
 export class createHotelDto {
   @IsNotEmpty()
-  @Matches(new RegExp('^[A-Za-z əüöğıçş]{3,100}$'))
+  @Matches(new RegExp('^[A-Za-z əüöğıçşƏÜÖĞIÇŞ]{3,100}$'))
   name: string;
   @IsNotEmpty()
-  @Matches(new RegExp('^[A-Za-z0-9,./ əüöğıçş-]{30,150}$'))
+  @Matches(new RegExp('^[A-Za-z0-9əüöğıçşƏÜÖĞIÇŞ,./ ]{30,150}$'))
   location: string;
   @IsNotEmpty()
-  @Matches(new RegExp('^[A-Za-z,əüöğıçş ]{20,50}$'))
+  @Matches(new RegExp('^[A-Za-z,əüöğıçş ]{15,50}$'))
   destination_country: string;
   @IsNotEmpty()
   price: number;
