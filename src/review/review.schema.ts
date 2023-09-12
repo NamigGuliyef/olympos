@@ -1,19 +1,13 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { Types } from 'mongoose';
+import mongoose, { Schema,model } from 'mongoose';
 
-@Schema({ versionKey: false, timestamps: true })
-export class Review {
-  @Prop({ ref: 'user' })
-  userEmail: string;
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'hotel' })
-  hotelId: Types.ObjectId;
-  @Prop({ required: true })
-  description: string;
-}
 
-const reviewSchema = SchemaFactory.createForClass(Review);
+export const Review = new Schema({
+  userEmail: { type: String, ref: "user" },
+  hotelId: { type: mongoose.Schema.Types.ObjectId, ref: 'hotel' },
+  description: { type: String, required: true }
+})
 
-reviewSchema.pre('findOneAndDelete', async function (next) {
+Review.pre('findOneAndDelete', async function (next) {
   const _id = this.getFilter()._id;
   const deleteReview = await mongoose.model('review').findOne({ _id });
   await mongoose
@@ -25,4 +19,4 @@ reviewSchema.pre('findOneAndDelete', async function (next) {
   next();
 });
 
-export const reviewModel = mongoose.model('review', reviewSchema);
+export const reviewModel = model('review', Review)
