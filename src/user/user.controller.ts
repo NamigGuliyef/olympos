@@ -1,25 +1,26 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
+  Param,
   Post,
   Put,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { createReviewDto, updateReviewDto } from 'src/review/review.dto';
 import { createWhishListDto } from 'src/whishlist/createWhishList.dto';
+import { Whishlist } from 'src/whishlist/whishlist.schema';
 import { updateUserDto } from './dto/updateuser.dto';
 import { User } from './schema/user.schema';
 import { UserService } from './user.service';
-import { Whishlist } from 'src/whishlist/whishlist.schema';
-import { createReviewDto, updateReviewDto } from 'src/review/review.dto';
-import { Review } from 'src/review/review.schema';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) { }
+  constructor(private readonly userService: UserService) {}
 
   @Get('/profile')
   @HttpCode(HttpStatus.OK)
@@ -53,15 +54,19 @@ export class UserController {
   @HttpCode(HttpStatus.CREATED)
   @UsePipes(new ValidationPipe())
   async createReview(@Body() CreateReviewDto: createReviewDto) {
-    return this.userService.createReview(CreateReviewDto)
+    return this.userService.createReview(CreateReviewDto);
   }
 
   @Put('/update-review')
   @HttpCode(HttpStatus.OK)
   @UsePipes(new ValidationPipe())
   async updateReview(@Body() UpdateReviewDto: updateReviewDto) {
-    return await this.userService.updateReview(UpdateReviewDto)
+    return await this.userService.updateReview(UpdateReviewDto);
   }
 
-
+  @Delete('/delete-review/:_id')
+  @HttpCode(HttpStatus.OK)
+  async deleteReview(@Param('_id') _id: string) {
+    await this.userService.deleteReview(_id);
+  }
 }

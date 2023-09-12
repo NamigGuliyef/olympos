@@ -73,6 +73,13 @@ export class UserService {
     return await this.reviewModel.findOneAndUpdate({ hotelId: hotelId }, { $set: { description } }, { new: true })
   }
 
+  // delete Review
+  async deleteReview(_id:string):Promise<string>{
+  await this.reviewModel.findOneAndDelete({ _id:this.req.params._id })
+  return 'Your review has been deleted'
+}
+
+
 }
 
 
