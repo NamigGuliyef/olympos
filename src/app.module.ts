@@ -9,6 +9,8 @@ import { AuthModule } from './auth/auth.module';
 import { tokenCheckAdminMiddleware, tokenCheckMiddleware } from './middleware/tokencheck.middleware';
 import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
+import { GuestController } from './guest/guest.controller';
+import { GuestModule } from './guest/guest.module';
 
 
 @Module({
@@ -24,7 +26,8 @@ import { UserModule } from './user/user.module';
         },
       }
     }),
-    AdminModule],
+    AdminModule,
+    GuestModule],
   controllers: [AppController],
   providers: [AppService],
 })

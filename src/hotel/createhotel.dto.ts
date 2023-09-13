@@ -5,7 +5,7 @@ export class createHotelDto {
   @Matches(new RegExp('^[A-Za-z əüöğıçşƏÜÖĞIÇŞ]{3,100}$'))
   name: string;
   @IsNotEmpty()
-  @Matches(new RegExp('^[A-Za-z0-9əüöğıçşƏÜÖĞIÇŞ,./ ]{30,150}$'))
+  @Matches(new RegExp('^[A-Za-z0-9əüöğıçşƏÜÖĞIÇŞ,./ ]{20,150}$'))
   location: string;
   @IsNotEmpty()
   @Matches(new RegExp('^[A-Za-z,əüöğıçş ]{15,50}$'))

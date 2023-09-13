@@ -11,6 +11,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { Hotel } from 'src/hotel/hotel.schema';
 import { createReviewDto, updateReviewDto } from 'src/review/review.dto';
 import { createWhishListDto } from 'src/whishlist/createWhishList.dto';
 import { Whishlist } from 'src/whishlist/whishlist.schema';
@@ -20,7 +21,7 @@ import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
 
   @Get('/profile')
   @HttpCode(HttpStatus.OK)
@@ -48,6 +49,12 @@ export class UserController {
   @HttpCode(HttpStatus.OK)
   async getAllWhishList(): Promise<Whishlist[]> {
     return this.userService.getAllWhishList();
+  }
+
+  @Get('/hotels')
+  @HttpCode(HttpStatus.OK)
+  async getAllHotels(): Promise<Hotel[]> {
+    return await this.userService.getAllHotels()
   }
 
   @Post('/create-review')

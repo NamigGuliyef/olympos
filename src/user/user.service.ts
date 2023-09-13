@@ -61,6 +61,13 @@ export class UserService {
     ])
   }
 
+  // get all hotels
+  async getAllHotels(): Promise<Hotel[]> {
+    return await this.hotelModel.find().populate([{
+      path: "reviews", select: "description"
+    }])
+  }
+
   // create Review
   async createReview(CreateReviewDto: createReviewDto) {
     const { hotelId, description } = CreateReviewDto
@@ -75,10 +82,10 @@ export class UserService {
   }
 
   // delete Review
-  async deleteReview(_id:string):Promise<string>{
-  const deleteReview = await this.reviewModel.findOneAndDelete({ _id:this.req.params._id })
-  await this.hotelModel.findOneAndUpdate({ _id:deleteReview.hotelId },{ $pull:{reviews:deleteReview._id}})
-  return 'Your review has been deleted'
-}
+  async deleteReview(_id: string): Promise<string> {
+    const deleteReview = await this.reviewModel.findOneAndDelete({ _id: this.req.params._id })
+    await this.hotelModel.findOneAndUpdate({ _id: deleteReview.hotelId }, { $pull: { reviews: deleteReview._id } })
+    return 'Your review has been deleted'
+  }
 
 }
