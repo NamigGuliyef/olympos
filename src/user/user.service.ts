@@ -12,6 +12,7 @@ import { Whishlist } from 'src/whishlist/whishlist.schema';
 import { updateUserDto } from './dto/updateuser.dto';
 import { User } from './schema/user.schema';
 
+
 @Injectable()
 export class UserService {
   constructor(
@@ -75,12 +76,9 @@ export class UserService {
 
   // delete Review
   async deleteReview(_id:string):Promise<string>{
-  await this.reviewModel.findOneAndDelete({ _id:this.req.params._id })
+  const deleteReview = await this.reviewModel.findOneAndDelete({ _id:this.req.params._id })
+  await this.hotelModel.findOneAndUpdate({ _id:deleteReview.hotelId },{ $pull:{reviews:deleteReview._id}})
   return 'Your review has been deleted'
 }
 
-
 }
-
-
-

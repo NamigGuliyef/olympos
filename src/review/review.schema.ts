@@ -1,22 +1,29 @@
-import mongoose, { Schema,model } from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose, { Types } from 'mongoose';
+
+@Schema({ versionKey: false, timestamps: true })
+export class Review {
+  @Prop({ ref: 'user' })
+  userEmail: string;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'hotel' })
+  hotelId: Types.ObjectId;
+  @Prop({ required: true })
+  description: string;
+}
 
 
-export const Review = new Schema({
-  userEmail: { type: String, ref: "user" },
-  hotelId: { type: mongoose.Schema.Types.ObjectId, ref: 'hotel' },
-  description: { type: String, required: true }
-})
+export const reviewModel = SchemaFactory.createForClass(Review);
 
-Review.pre('findOneAndDelete', async function (next) {
-  const _id = this.getFilter()._id;
-  const deleteReview = await mongoose.model('review').findOne({ _id });
-  await mongoose
-    .model('hotel')
-    .findOneAndUpdate(
-      { _id: deleteReview.hotelId },
-      { $pull: { reviews: deleteReview._id } },
-    );
-  next();
-});
+// reviewSchema.pre('findOneAndDelete', async function (next) {
+//   const _id = this.getFilter()._id;
+//   const deleteReview = await mongoose.model('review').findOne({ _id });
+//   await mongoose
+//     .model('hotel')
+//     .findOneAndUpdate(
+//       { _id: deleteReview.hotelId },
+//       { $pull: { reviews: deleteReview._id } },
+//     );
+//   next();
+// });
 
-export const reviewModel = model('review', Review)
+// export const reviewModel = mongoose.model<Review & Document>('review',reviewSchema)

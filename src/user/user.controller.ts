@@ -67,6 +67,6 @@ export class UserController {
   @Delete('/delete-review/:_id')
   @HttpCode(HttpStatus.OK)
   async deleteReview(@Param('_id') _id: string) {
-    await this.userService.deleteReview(_id);
+    return await this.userService.deleteReview(_id);
   }
 }
