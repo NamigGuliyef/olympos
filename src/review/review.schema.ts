@@ -11,19 +11,5 @@ export class Review {
   description: string;
 }
 
-
 export const reviewModel = SchemaFactory.createForClass(Review);
 
-// reviewSchema.pre('findOneAndDelete', async function (next) {
-//   const _id = this.getFilter()._id;
-//   const deleteReview = await mongoose.model('review').findOne({ _id });
-//   await mongoose
-//     .model('hotel')
-//     .findOneAndUpdate(
-//       { _id: deleteReview.hotelId },
-//       { $pull: { reviews: deleteReview._id } },
-//     );
-//   next();
-// });
-
-// export const reviewModel = mongoose.model<Review & Document>('review',reviewSchema)
