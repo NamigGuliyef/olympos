@@ -61,13 +61,6 @@ export class UserService {
     ])
   }
 
-  // get all hotels
-  async getAllHotels(): Promise<Hotel[]> {
-    return await this.hotelModel.find().populate([{
-      path: "reviews", select: "description"
-    }])
-  }
-
   // create Review
   async createReview(CreateReviewDto: createReviewDto) {
     const { hotelId, description } = CreateReviewDto

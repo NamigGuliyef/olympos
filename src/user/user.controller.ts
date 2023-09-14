@@ -51,12 +51,6 @@ export class UserController {
     return this.userService.getAllWhishList();
   }
 
-  @Get('/hotels')
-  @HttpCode(HttpStatus.OK)
-  async getAllHotels(): Promise<Hotel[]> {
-    return await this.userService.getAllHotels()
-  }
-
   @Post('/create-review')
   @HttpCode(HttpStatus.CREATED)
   @UsePipes(new ValidationPipe())
