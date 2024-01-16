@@ -21,7 +21,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import useHomeReviews from "../../features/home/useHomeReviews";
 import { v4 as uuidv4 } from "uuid";
-import Loader from "../reusable/loader";
+import Loader from "../reusable/Loader";
 
 const data = [
   {
