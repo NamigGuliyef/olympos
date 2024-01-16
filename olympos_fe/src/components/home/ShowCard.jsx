@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 const data = [
   {
     id: 77,
-    img: "/public/assets/flight.png",
+    img: "/assets/flight.png",
     subtitle: "Search Tours & Places Hire to our most popular destinations",
     btnAction: "Show Tours",
     title: "Tours",
@@ -25,7 +25,7 @@ const data = [
   },
   {
     id: 99,
-    img: "/public/assets/hotel.png",
+    img: "/assets/hotel.png",
     subtitle: "Search Hotels & Places Hire to our most popular destinations",
     btnAction: "Show Hotels",
     title: "Hotels",
