@@ -1,0 +1,40 @@
+import { Button, Typography } from "@mui/material";
+import React from "react";
+import { FlexBetween, SectionTitle, theme } from "../../theme";
+import ReusableButton from "./ReusableButton";
+import { Link, NavLink } from "react-router-dom";
+
+const SectionHeader = ({ secTitle, btn, link }) => {
+  return (
+    <FlexBetween
+      sx={{
+        marginBottom: "2rem",
+      }}
+    >
+      <SectionTitle>{secTitle}</SectionTitle>
+      <Button>
+        <Link
+          style={{
+            padding: "8px 16px 8px 16px",
+            borderRadius: "4px",
+            border: `1px solid ${theme.palette.primary.main}`,
+            fontFamily: " Montserrat",
+            fontSize: "16px",
+            fontWeight: 500,
+            lineHeight: "17px",
+            letterSpacing: "0em",
+            textAlign: "left",
+            color: "#112211",
+            textDecoration: "none",
+            textTransform: "none",
+          }}
+          to={link}
+        >
+          {btn}
+        </Link>
+      </Button>
+    </FlexBetween>
+  );
+};
+
+export default SectionHeader;
