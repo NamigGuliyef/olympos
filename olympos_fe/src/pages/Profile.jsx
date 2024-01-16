@@ -8,7 +8,7 @@ import { deleteCookie, setCokieHandler } from "../helper/setCookie";
 import { useNavigate } from "react-router-dom";
 import { CustomContainer } from "../theme";
 import { useClientUsers } from "../features/users/useUsers";
-import Loader from "../components/reusable/loader";
+import Loader from "../components/reusable/Loader";
 import EmptyFavorite from "../components/reusable/EmptyFavorite";
 
 const Profile = () => {
