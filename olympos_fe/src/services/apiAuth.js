@@ -1,10 +1,11 @@
 import toast from "react-hot-toast";
 import { getCookie } from "../helper/setCookie";
 const token = getCookie("token");
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export const signupHandler = async (data) => {
   try {
-    const res = await fetch("http://localhost:7070/auth/sign-up", {
+    const res = await fetch(`${baseUrl}/auth/sign-up`, {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -25,7 +26,7 @@ export const signupHandler = async (data) => {
 export const loginHandler = async (data) => {
   console.log("loginHandler");
   try {
-    const res = await fetch("http://localhost:7070/auth/sign-in", {
+    const res = await fetch(`${baseUrl}/auth/sign-in`, {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -48,7 +49,7 @@ export const getUserDetails = async () => {
     console.log("running");
     const token = getCookie("token");
 
-    const res = await fetch("http://localhost:7070/user/profile", {
+    const res = await fetch(`${baseUrl}/user/profile`, {
       // method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -72,7 +73,7 @@ export const editUserProfile = async (editProfile) => {
   try {
     const token = getCookie("token");
 
-    const res = await fetch(`http://localhost:7070/user/profile/update`, {
+    const res = await fetch(`${baseUrl}/user/profile/update`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,

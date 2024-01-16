@@ -1,10 +1,10 @@
 import toast from "react-hot-toast";
 import { getCookie } from "../helper/setCookie";
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
-const token = getCookie("token");
 export async function fetchHotelsApi() {
   const token = getCookie("token");
-  const res = await fetch("http://localhost:7070/admin/hotel", {
+  const res = await fetch(`${baseUrl}/admin/hotel`, {
     headers: {
       "Content-type": "application/json; charset=UTF-8", // Indicates the content
       Authorization: "Bearer " + token,
@@ -15,7 +15,7 @@ export async function fetchHotelsApi() {
   return data;
 }
 export async function fetchClientSideHotel() {
-  const res = await fetch("http://localhost:7070/hotels");
+  const res = await fetch(`${baseUrl}/hotels`);
   let data = await res.json();
   console.log("fetching client side hotels", data);
   return data;
@@ -29,7 +29,7 @@ export async function fetchClientSideSingleHotel(url) {
 export const clientSideHotelOrder = async (newOrder) => {
   try {
     const token = getCookie("token");
-    const res = await fetch(`http://localhost:7070/user/hotel/create-reserv`, {
+    const res = await fetch(`${baseUrl}/user/hotel/create-reserv`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -49,7 +49,7 @@ export const clientSideHotelOrder = async (newOrder) => {
 
 export const deleteHotelApi = (id) => {
   const token = getCookie("token");
-  fetch(`http://localhost:7070/admin/hotel/delete/${id}`, {
+  fetch(`${baseUrl}/admin/hotel/delete/${id}`, {
     method: "DELETE",
     headers: {
       "Content-type": "application/json; charset=UTF-8", // Indicates the content
@@ -67,7 +67,7 @@ export const deleteHotelApi = (id) => {
 export const createHotelApi = (newHotel) => {
   const token = getCookie("token");
   console.log("new Hotel", newHotel);
-  fetch(`http://localhost:7070/admin/hotel/create`, {
+  fetch(`${baseUrl}/admin/hotel/create`, {
     method: "POST",
     headers: {
       // "Content-Type": "application/json; charset=utf-8",
@@ -94,11 +94,10 @@ export const createHotelApi = (newHotel) => {
 
 export const editHotelApi = (editHotel, id) => {
   const token = getCookie("token");
-  console.log("id", id, editHotel);
-  fetch(`http://localhost:7070/admin/hotel/update/${id}`, {
+
+  fetch(`${baseUrl}/admin/hotel/update/${id}`, {
     method: "PATCH",
     headers: {
-      // "Content-Type": "application/json; charset=utf-8",
       Authorization: `Bearer ${token}`,
     },
     body: editHotel,
@@ -118,7 +117,7 @@ export const editHotelApi = (editHotel, id) => {
     });
 };
 export const fetchHotelFilter = async (url) => {
-  const res = await fetch(`http://localhost:7070/hotels/filter${url}`);
+  const res = await fetch(`${baseUrl}/hotels/filter${url}`);
   let data = await res.json();
 
   return data;
@@ -126,7 +125,7 @@ export const fetchHotelFilter = async (url) => {
 
 export async function fetchHotelIncludings() {
   const token = getCookie("token");
-  const res = await fetch("http://localhost:7070/admin/hotel-specifics", {
+  const res = await fetch(`${baseUrl}/admin/hotel-specifics`, {
     headers: {
       "Content-type": "application/json; charset=UTF-8", // Indicates the content
       Authorization: "Bearer " + token,

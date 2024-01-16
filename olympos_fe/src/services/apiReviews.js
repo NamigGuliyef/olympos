@@ -1,18 +1,18 @@
 import toast from "react-hot-toast";
 import { getCookie } from "../helper/setCookie";
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
-const token = getCookie("token");
 export async function fetchReviewsApi() {
   const token = getCookie("token");
 
-  const res = await fetch("http://localhost:7070/admin/reviews", {
+  const res = await fetch(`${baseUrl}/admin/reviews`, {
     headers: {
       "Content-type": "application/json; charset=UTF-8", // Indicates the content
       Authorization: "Bearer " + token,
     },
   });
   const data = await res.json();
-  console.log("review", data);
+
   const response = data?.map(
     ({
       title,
@@ -33,7 +33,6 @@ export async function fetchReviewsApi() {
       };
     }
   );
-  console.log("response", response);
 
   return response;
 }
@@ -41,7 +40,7 @@ export async function fetchReviewsApi() {
 export const deleteReviewApi = (id) => {
   const token = getCookie("token");
 
-  fetch(`http://localhost:7070/admin/reviews/${id}`, {
+  fetch(`${baseUrl}/admin/reviews/${id}`, {
     method: "DELETE",
     headers: {
       "Content-type": "application/json; charset=UTF-8", // Indicates the content
@@ -60,11 +59,9 @@ export const deleteReviewApi = (id) => {
 export const createReviewApi = (newReview) => {
   const token = getCookie("token");
 
-  console.log("newReview", newReview);
-  fetch(`http://localhost:7070/admin/hotel/create`, {
+  fetch(`${baseUrl}/admin/hotel/create`, {
     method: "POST",
     headers: {
-      // "Content-Type": "application/json; charset=utf-8",
       Authorization: "Bearer " + token,
     },
 

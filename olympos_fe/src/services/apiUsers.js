@@ -1,11 +1,11 @@
 import { getCookie } from "../helper/setCookie";
 import toast from "react-hot-toast";
-const token = getCookie("token");
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export async function fetchUsersApi() {
   const token = getCookie("token");
 
-  const res = await fetch("http://localhost:7070/admin/users", {
+  const res = await fetch(`${baseUrl}/admin/users`, {
     headers: {
       "Content-type": "application/json; charset=UTF-8",
       Authorization: "Bearer " + token,
@@ -71,7 +71,7 @@ export const createUserReview = async (newReview) => {
 
   try {
     const token = getCookie("token");
-    const res = await fetch(`http://localhost:7070/user/create-review`, {
+    const res = await fetch(`${baseUrl}/user/create-review`, {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -90,7 +90,7 @@ export const createUserReview = async (newReview) => {
 // export const editUserReview = async (newReview) => {
 //   console.log("new review", newReview);
 //   try {
-//     const res = await fetch(`http://localhost:7070/user/update-review`, {
+//     const res = await fetch(`${baseUrl}/user/update-review`, {
 //       method: "PATCH",
 //       headers: {
 //         // "Content-type": "application/json; charset=UTF-8",
@@ -118,7 +118,7 @@ export const editUserReview = async (newReview, token) => {
   try {
     const token = getCookie("token");
 
-    const res = await fetch(`http://localhost:7070/user/update-review`, {
+    const res = await fetch(`${baseUrl}/user/update-review`, {
       method: "PATCH",
       headers: {
         "Content-type": "application/json", // Specify the content type as JSON
@@ -145,16 +145,13 @@ export const deleteUserReview = async (id) => {
   console.log("id: " + id);
   try {
     const token = getCookie("token");
-    const response = await fetch(
-      `http://localhost:7070/user/delete-review/${id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8", // Indicates the content
-          Authorization: "Bearer " + token,
-        },
-      }
-    );
+    const response = await fetch(`${baseUrl}/user/delete-review/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8", // Indicates the content
+        Authorization: "Bearer " + token,
+      },
+    });
     const data = await response.json();
 
     console.log("data", data);
@@ -177,7 +174,7 @@ export const sendUserNotification = async (notification) => {
   console.log("not", notification);
   try {
     const token = getCookie("token");
-    const res = await fetch(`http://localhost:7070/admin/notification-email`, {
+    const res = await fetch(`${baseUrl}/admin/notification-email`, {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -199,7 +196,7 @@ export const sendUserNotification = async (notification) => {
 //   console.log("not", notification);
 //   try {
 //     const token = getCookie("token");
-//     const res = await fetch(`http://localhost:7070/admin/notification-email`, {
+//     const res = await fetch(`${baseUrl}/admin/notification-email`, {
 //       method: "POST",
 //       headers: {
 //         "Content-type": "application/json; charset=UTF-8",
@@ -233,7 +230,7 @@ export const sendUserNotification = async (notification) => {
 export const sendEmailFromClient = async (email) => {
   console.log("not", email);
   try {
-    const res = await fetch(`http://localhost:7070/create-subscribe`, {
+    const res = await fetch(`${baseUrl}/create-subscribe`, {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=UTF-8",

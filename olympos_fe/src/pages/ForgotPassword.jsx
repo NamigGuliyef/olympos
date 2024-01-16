@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const defaultTheme = createTheme();
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -33,7 +34,7 @@ export default function ForgotPassword() {
     }
 
     if (email) {
-      fetch("http://localhost:7070/auth/forgetPass", {
+      fetch(`${baseUrl}/auth/forgetPass`, {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ email }),

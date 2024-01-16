@@ -22,6 +22,8 @@ function generateVerificationCode() {
   return code.toString();
 }
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 export default function VerifyCode() {
   const [userInput, setUserInput] = useState("");
   const [verificationCode, setVerificationCode] = useState(
@@ -43,7 +45,7 @@ export default function VerifyCode() {
 
     console.log("usr input", userInput);
 
-    fetch("http://localhost:7070/auth/verify_code", {
+    fetch(`${baseUrl}/auth/verify_code`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ verify_code: userInput }),

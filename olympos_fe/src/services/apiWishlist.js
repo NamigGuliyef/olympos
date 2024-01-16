@@ -1,12 +1,11 @@
 import toast from "react-hot-toast";
 import { getCookie } from "../helper/setCookie";
-
-const token = getCookie("token");
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export async function fetchUserWishlist() {
   const token = getCookie("token");
 
-  const res = await fetch("http://localhost:7070/user/profile/whishlist", {
+  const res = await fetch(`${baseUrl}/user/profile/whishlist`, {
     headers: {
       "Content-type": "application/json; charset=UTF-8",
       Authorization: "Bearer " + token,
@@ -20,7 +19,7 @@ export async function fetchUserWishlist() {
 export const createWishlist = (id) => {
   const token = getCookie("token");
 
-  fetch(`http://localhost:7070/user/create-whishlist`, {
+  fetch(`${baseUrl}/user/create-whishlist`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
@@ -42,7 +41,7 @@ export const createWishlist = (id) => {
 export const deleteWishlist = (id) => {
   const token = getCookie("token");
 
-  fetch(`http://localhost:7070/user/delete-whishlist/${id}`, {
+  fetch(`${baseUrl}/user/delete-whishlist/${id}`, {
     method: "DELETE",
     headers: {
       "Content-type": "application/json; charset=UTF-8",

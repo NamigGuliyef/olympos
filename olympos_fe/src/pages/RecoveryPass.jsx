@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { getCookie } from "../helper/setCookie";
 import toast from "react-hot-toast";
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const defaultTheme = createTheme();
 
@@ -32,7 +33,7 @@ export default function VerifyCode() {
 
     console.log("usr input", userInput);
 
-    fetch(`http://localhost:7070/auth/recovery/${token}`, {
+    fetch(`${baseUrl}/auth/recovery/${token}`, {
       method: "PATCH",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(userInput),

@@ -1,10 +1,11 @@
 import toast from "react-hot-toast";
 import { getCookie } from "../helper/setCookie";
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export async function fetchOrdersApi() {
   const token = getCookie("token");
   if (token && token.length > 1) {
-    const res = await fetch("http://localhost:7070/admin/orders", {
+    const res = await fetch(`${baseUrl}/admin/orders`, {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
         Authorization: "Bearer " + token,
@@ -18,7 +19,7 @@ export async function fetchOrdersApi() {
 
 export const deleteOrderApi = (id) => {
   const token = getCookie("token");
-  fetch(`http://localhost:7070/admin/orders/confirmation/${id}`, {
+  fetch(`${baseUrl}/admin/orders/confirmation/${id}`, {
     method: "DELETE",
     headers: {
       "Content-type": "application/json; charset=UTF-8",
@@ -36,7 +37,7 @@ export const deleteOrderApi = (id) => {
 export const createTourOrderApi = async (newOrder) => {
   const token = getCookie("token");
   try {
-    const res = await fetch(`http://localhost:7070/user/tour/create-reserv`, {
+    const res = await fetch(`${baseUrl}/user/tour/create-reserv`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -56,7 +57,7 @@ export const createTourOrderApi = async (newOrder) => {
 export const createHotelOrderApi = async (newOrder) => {
   const token = getCookie("token");
   try {
-    const res = await fetch(`http://localhost:7070/user/hotel/create-reserv`, {
+    const res = await fetch(`${baseUrl}/user/hotel/create-reserv`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -77,7 +78,7 @@ export const createHotelOrderApi = async (newOrder) => {
 export const submitOrder = (data) => {
   const token = getCookie("token");
   console.log("data", data);
-  fetch(`http://localhost:7070/admin/orders/confirmation`, {
+  fetch(`${baseUrl}/admin/orders/confirmation`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
@@ -94,7 +95,7 @@ export const submitOrder = (data) => {
 };
 export const editUserOrder = (data, id) => {
   const token = getCookie("token");
-  fetch(`http://localhost:7070/admin/orders/confirmation/${id}`, {
+  fetch(`${baseUrl}/admin/orders/confirmation/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
@@ -114,17 +115,14 @@ export const editOrderApi = async (editOrder, id) => {
   const token = getCookie("token");
   try {
     console.log("edirorder ise dusdu");
-    const data = await fetch(
-      `http://localhost:7070/admin/orders/confirmation/${id}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(editOrder),
-      }
-    );
+    const data = await fetch(`${baseUrl}/admin/orders/confirmation/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(editOrder),
+    });
     const res = await data.json();
     if (res.statusCode === 400) {
       throw new Error(res.message);

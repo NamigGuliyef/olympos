@@ -1,9 +1,10 @@
 import toast from "react-hot-toast";
 import { getCookie } from "../helper/setCookie";
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export async function fetchToursApi() {
   const token = getCookie("token");
-  const res = await fetch("http://localhost:7070/admin/tour", {
+  const res = await fetch(`${baseUrl}/admin/tour`, {
     headers: {
       "Content-type": "application/json; charset=UTF-8",
       Authorization: "Bearer " + token,
@@ -15,20 +16,20 @@ export async function fetchToursApi() {
 }
 
 export async function fetchClientSideToursApi() {
-  const res = await fetch("http://localhost:7070/tour");
+  const res = await fetch(`${baseUrl}/tour`);
   let data = await res.json();
   return data;
 }
 
 export async function fetchClientSingleTour(id) {
-  const res = await fetch(`http://localhost:7070/tour/${id}`);
+  const res = await fetch(`${baseUrl}/tour/${id}`);
   let data = await res.json();
   return data;
 }
 
 export const fetchTourFilter = async (url) => {
   console.log("url: " + url);
-  const res = await fetch(`http://localhost:7070/tours/filter${url}`);
+  const res = await fetch(`${baseUrl}/tours/filter${url}`);
   let data = await res.json();
 
   console.log("flter", data);
@@ -37,14 +38,14 @@ export const fetchTourFilter = async (url) => {
 };
 
 export async function fetchClientSideToursCategory() {
-  const res = await fetch("http://localhost:7070/tourcategory");
+  const res = await fetch(`${baseUrl}/tourcategory`);
   let data = await res.json();
   return data;
 }
 
 // export const clientSideTourOrder = async (newOrder) => {
 //   try {
-//     const res = await fetch(`http://localhost:7070/user/tour/create-reserv`, {
+//     const res = await fetch(`${baseUrl}/user/tour/create-reserv`, {
 //       method: "POST",
 //       headers: {
 //         "Content-Type": "application/json; charset=utf-8",
@@ -63,7 +64,7 @@ export async function fetchClientSideToursCategory() {
 
 export const deleteTourApi = (id) => {
   const token = getCookie("token");
-  fetch(`http://localhost:7070/admin/tour/delete/${id}`, {
+  fetch(`${baseUrl}/admin/tour/delete/${id}`, {
     method: "DELETE",
     headers: {
       "Content-type": "application/json; charset=UTF-8", // Indicates the content
@@ -81,7 +82,7 @@ export const deleteTourApi = (id) => {
 export const createTourApi = (newTour) => {
   const token = getCookie("token");
   console.log("new TourApi", newTour);
-  fetch(`http://localhost:7070/admin/tour/create`, {
+  fetch(`${baseUrl}/admin/tour/create`, {
     method: "POST",
     headers: {
       // "Content-Type": "application/json; charset=utf-8",
@@ -108,7 +109,7 @@ export const createTourApi = (newTour) => {
 
 export const editTourApi = (editTour, id) => {
   const token = getCookie("token");
-  fetch(`http://localhost:7070/admin/tour/update/${id}`, {
+  fetch(`${baseUrl}/admin/tour/update/${id}`, {
     method: "PATCH",
     headers: {
       Authorization: "Bearer " + token,
@@ -125,7 +126,7 @@ export const editTourApi = (editTour, id) => {
 
 export async function fetchTourCategory() {
   const token = getCookie("token");
-  const res = await fetch("http://localhost:7070/admin/tourcategory", {
+  const res = await fetch(`${baseUrl}/admin/tourcategory`, {
     headers: {
       "Content-type": "application/json; charset=UTF-8",
       Authorization: "Bearer " + token,
@@ -137,7 +138,7 @@ export async function fetchTourCategory() {
 }
 
 export async function fetchClientTourCategory() {
-  const res = await fetch("http://localhost:7070/tourcategory", {
+  const res = await fetch(`${baseUrl}/tourcategory`, {
     headers: {
       "Content-type": "application/json; charset=UTF-8",
     },
@@ -149,8 +150,8 @@ export async function fetchClientTourCategory() {
 
 export const createTourCategory = (newTour) => {
   const token = getCookie("token");
-  console.log("new TourApi", newTour);
-  fetch(`http://localhost:7070/admin/tourcategory/create`, {
+
+  fetch(`${baseUrl}/admin/tourcategory/create`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
