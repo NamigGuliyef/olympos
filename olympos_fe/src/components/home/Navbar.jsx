@@ -253,7 +253,7 @@ const Navbar = () => {
               >
                 <FavoriteIcon />
                 <NavLink style={navLinkStyle} to="/seçdiklərim">
-                  <Typography>SeÇilmişlər</Typography>
+                  <Typography>Seçilmişlər</Typography>
                 </NavLink>
               </Box>
             )}
