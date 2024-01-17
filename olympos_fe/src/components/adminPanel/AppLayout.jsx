@@ -79,7 +79,7 @@ export default function AppLayout() {
             { name: "Hotels", url: "admin-hotels" },
             { name: "Users", url: "admin-users" },
             { name: "Reviews", url: "admin-reviews" },
-            { name: "Tour category & hotel specifics", url: "admin-tur-category" },
+            { name: "Category & Specifics", url: "admin-tur-category" },
           ].map((text, index) => (
             <ListItem key={text.name} disablePadding>
               <ListItemButton>
