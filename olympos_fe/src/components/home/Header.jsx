@@ -126,7 +126,7 @@ const Header = ({ months, typeOfTours }) => {
               sm: "35px",
               md: "60px",
               lg: "80px",
-              xl: "100px",
+              xl: "90px",
             },
           }}
         >
@@ -144,7 +144,7 @@ const Header = ({ months, typeOfTours }) => {
               sm: "28px",
               md: "35px",
               lg: "40",
-              xl: "50px",
+              xl: "42px",
             },
           }}
         >
