@@ -30,7 +30,6 @@ const AdminTours = () => {
       })
       .then((data) => {
         if (data.length > 1) {
-          console.log("admin cat", data);
           setTourCategory(data);
         }
       })
@@ -41,8 +40,6 @@ const AdminTours = () => {
   if (!tourCategory.length) {
     return;
   }
-
-  console.log("tourCategory: " + tourCategory);
 
   const handleOpenModal = (data = null) => {
     if (data) {

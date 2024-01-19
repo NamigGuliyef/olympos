@@ -79,7 +79,7 @@ export default function AppLayout() {
             { name: "Hotels", url: "admin-hotels" },
             { name: "Users", url: "admin-users" },
             { name: "Reviews", url: "admin-reviews" },
-            { name: "Kateqoriya yarat", url: "admin-tur-category" },
+            { name: "Category&Specifics", url: "admin-tur-category" },
           ].map((text, index) => (
             <ListItem key={text.name} disablePadding>
               <ListItemButton>
@@ -101,6 +101,9 @@ export default function AppLayout() {
         sx={{
           flexGrow: 1,
           bgcolor: "background.default",
+
+          maxWidth: "100%",
+          overflowX: "hidden",
           p: 1,
         }}
       >

@@ -32,7 +32,6 @@ export default function Auth({ isRememberMe, setIsRememberMe }) {
       email: data.get("email"),
       password: data.get("password"),
     };
-    console.log("form data", data);
     if (isRememberMe) {
       loginData = {
         email: data.get("email"),
@@ -40,12 +39,10 @@ export default function Auth({ isRememberMe, setIsRememberMe }) {
         isRememberMe: isRememberMe,
       };
     }
-    console.log("login data", loginData);
     loginHandler(loginData).then((data) => {
       // if (data.role === "user") {
       //   dispatch(login())
       // }
-      console.log("Data", data);
 
       if (data?.token) {
         setCokieHandler("token", data.token);
@@ -59,7 +56,6 @@ export default function Auth({ isRememberMe, setIsRememberMe }) {
         //     : "/login"
         // );
         if (data.token && data.token.length && data.role === "admin") {
-          console.log("auth");
           navigate("/admin-panel");
         } else if (data && data.role === "user") {
           navigate("/account");
@@ -76,7 +72,6 @@ export default function Auth({ isRememberMe, setIsRememberMe }) {
   };
 
   const handleCheckboxChange = (event) => {
-    console.log("event: " + event.target.checked);
     setIsRememberMe(event.target.checked);
   };
 
@@ -189,7 +184,7 @@ export default function Auth({ isRememberMe, setIsRememberMe }) {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url("/assets/loginImg.svg")',
+            backgroundImage: 'url("public/assets/loginImg.svg")',
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center",

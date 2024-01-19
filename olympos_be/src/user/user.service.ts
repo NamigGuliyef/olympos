@@ -36,21 +36,33 @@ export class UserService {
   // get Profile
   async getProfile(): Promise<User> {
     const user = await this.userModel
-      .findOne({ email: this.req.user.email })
+
+      .findOne({ email: this.req.user.email }).populate([{ path:'user_orders', populate:[{ path:'tourId', select:['name','photo']}, { path:'hotelId', select:['name','photos']}]}])
+
       .select(['-password', '-role']);
     return user;
   }
 
   // update profile
-  async updateProfile(UpdateUserDto: updateUserDto, file: Express.Multer.File): Promise<MessageResponse> {
-    const userExist = await this.userModel.findOne({ email: this.req.user.email });
+  async updateProfile(
+    UpdateUserDto: updateUserDto,
+    file: Express.Multer.File,
+  ): Promise<MessageResponse> {
+    const userExist = await this.userModel.findOne({
+      email: this.req.user.email,
+    });
     if (!userExist) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
     if (file) {
-      const data = await cloudinary.uploader.upload(file.path, { public_id: file.originalname })
-      await this.userModel.findOneAndUpdate({ email: this.req.user.email }, { $set: { profile_photo: data.url } })
-      return { message: 'Changed profile photo', statusCode: 200 }
+      const data = await cloudinary.uploader.upload(file.path, {
+        public_id: file.originalname,
+      });
+      await this.userModel.findOneAndUpdate(
+        { email: this.req.user.email },
+        { $set: { profile_photo: data.url } },
+      );
+      return { message: 'Changed profile photo', statusCode: 200 };
     }
     if (!UpdateUserDto.old_password) {
       await this.userModel.findOneAndUpdate(
@@ -226,7 +238,7 @@ export class UserService {
       });
       await this.userModel.findOneAndUpdate(
         { email: this.req.user.email },
-        { $push: { user_orders: reserv.hotelId } },
+        { $push: { user_orders: reserv._id } },
         { new: true },
       );
       return { message: 'Your selection has been reserved', statusCode: 201 };
@@ -248,7 +260,7 @@ export class UserService {
         });
         await this.userModel.findOneAndUpdate(
           { email: this.req.user.email },
-          { $pull: { user_orders: deleteOrderTour.tourId } },
+          { $pull: { user_orders: deleteOrderTour._id } },
           { new: true },
         );
         return {
@@ -264,7 +276,7 @@ export class UserService {
     }
     await this.userModel.findOneAndUpdate(
       { email: this.req.user.email },
-      { $pull: { user_orders: deleteOrderHotel.hotelId } },
+      { $pull: { user_orders: deleteOrderHotel._id } },
       { new: true },
     );
     return {
@@ -291,7 +303,7 @@ export class UserService {
       });
       await this.userModel.findOneAndUpdate(
         { email: this.req.user.email },
-        { $push: { user_orders: reserv.tourId } },
+        { $push: { user_orders: reserv._id } },
         { new: true },
       );
       return { message: 'Your selection has been reserved', statusCode: 201 };
@@ -306,5 +318,4 @@ export class UserService {
       .select('-userId')
       .populate([{ path: 'hotelId' }, { path: 'tourId' }]);
   }
-
 }

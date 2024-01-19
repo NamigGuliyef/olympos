@@ -28,7 +28,11 @@ const EachUserTableRow = ({
           }}
         >
           {/* <Button onClick={() => handleOpenModal(table)}>Edit</Button> */}
-          <Button onClick={() => deleteData(table.id)} disabled={deleteLoading}>
+
+          <Button
+            onClick={() => deleteData(table._id)}
+            disabled={deleteLoading}
+          >
             Delete
           </Button>
         </Box>

@@ -36,6 +36,7 @@ const Header = ({ list }) => {
   );
 };
 const Body = ({ data, render }) => {
+  console.log("body tour", data);
   if (!data.length) return <Box>No data to show at the moment</Box>;
 
   return <TableBody>{data.map(render)}</TableBody>;

@@ -14,7 +14,7 @@ import { setType } from "../../store/slices/tourSlice";
 import { setCity as HotelCity } from "../../store/slices/hotelSlice";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { format } from "date-fns";
+
 import SelectComponent from "../SelectComponent";
 import { motion } from "framer-motion";
 

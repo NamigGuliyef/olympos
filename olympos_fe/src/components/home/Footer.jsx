@@ -138,7 +138,7 @@ const Footer = () => {
           }}
         >
           <img
-            src="/assets/footer-img.png"
+            src="/public/assets/footer-img.png"
             alt=""
             style={{ bottom: 0 }}
 

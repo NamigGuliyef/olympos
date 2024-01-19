@@ -10,19 +10,17 @@ import { CustomContainer } from "../theme";
 import { useClientUsers } from "../features/users/useUsers";
 import Loader from "../components/reusable/Loader";
 import EmptyFavorite from "../components/reusable/EmptyFavorite";
+import UserOrders from "../components/userAccount/UserOrders";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const { isClientUsersLoading, clientUsers } = useClientUsers();
 
-  console.log("isClientUsersLoading", isClientUsersLoading);
-  console.log("clientUsers", clientUsers);
-
   useEffect(() => {
     // getUserData();
     // getUserDetails().then((data) => {
-    //   console.log("data", data.first_name);
+    //
     //   if (data?.statusCode === 403) {
     //     // deleteCookie(["token", "role", "name"]);
     //     navigate("/admin-panel");
@@ -33,7 +31,6 @@ const Profile = () => {
     // });
     getUserDetails().then((data) => {
       if (data.first_name) {
-        console.log("data", data.first_name);
         setUser(data);
       }
     });
@@ -56,7 +53,7 @@ const Profile = () => {
               label: "Sifarişlərim",
               content: (
                 // <div>{user?.user_orders.length || "user order is empty"}</div>
-                <div>{user?.user_orders.length || <EmptyFavorite />}</div>
+                <div>{<UserOrders orders={user} /> || <EmptyFavorite />}</div>
               ),
             },
           ]}

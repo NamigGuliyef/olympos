@@ -27,8 +27,6 @@ export default function ForgotPassword() {
 
     setEmailError(false);
 
-    console.log("email", email);
-
     if (email === "") {
       setEmailError(true);
     }
@@ -40,11 +38,9 @@ export default function ForgotPassword() {
         body: JSON.stringify({ email }),
       })
         .then((res) => {
-          console.log("res", res);
           return res.json(); // Parse the response data as JSON
         })
         .then((data) => {
-          console.log("data", data);
           if (data?.statusCode === 200) {
             toast.success(data?.message);
             navigate("/verifyCode");
@@ -219,7 +215,7 @@ export default function ForgotPassword() {
           md={6}
           lg={6}
           sx={{
-            backgroundImage: 'url("/assets/loginImg.svg")',
+            backgroundImage: 'url("public/assets/loginImg.svg")',
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center",

@@ -14,9 +14,6 @@ const AddReviews = ({
   staleEditVal,
   setCrudEventHappened,
 }) => {
-  console.log("stale", staleEditVal);
-  console.log("staleEditVal", staleEditVal);
-  console.log("review id", id);
   const { register, formState, handleSubmit, control, reset } = useForm({
     defaultValues:
       editOrCreate === "create"
@@ -45,7 +42,6 @@ const AddReviews = ({
       [`${type === "tour" ? "tourId" : "hotelId"}`]: id,
       ...data,
     };
-    console.log(obj);
     if (editOrCreate === "create") {
       createUserReview(obj).then((res) => {
         // setCrudEventHappened((prev) => !prev);
@@ -59,8 +55,6 @@ const AddReviews = ({
     }
     // reset();
   };
-
-  console.log("id", id);
 
   return (
     <Box

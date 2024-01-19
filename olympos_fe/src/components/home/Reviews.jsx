@@ -21,7 +21,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import useHomeReviews from "../../features/home/useHomeReviews";
 import { v4 as uuidv4 } from "uuid";
-import Loader from "../reusable/Loader";
+import Loader from "../reusable/loader";
 
 const data = [
   {
@@ -64,7 +64,6 @@ export default function Reviews() {
   if (isReviewLoading) {
     return <Loader />;
   }
-  console.log("reviews", homeReviews);
 
   return (
     <CustomContainer
@@ -87,12 +86,11 @@ export default function Reviews() {
         navigation
         pagination={{ clickable: true }}
         // scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
+        // onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log("slide change")}
       >
         {homeReviews?.map((box) => (
           <SwiperSlide key={uuidv4()}>
-            {console.log("box", box.id)}
             <Box
               gridColumn={tablet ? "span 6" : laptop ? "span 3" : "span 2"}
               sx={{

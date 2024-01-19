@@ -59,12 +59,6 @@ const Inputs = ({
     fetchClientTourCategory().then((category) => setCatList(category));
   }, []);
 
-  console.log("selectedImg 1", selectedImages[0]);
-
-  console.log("spesific", spesifics);
-
-  console.log();
-
   const { register, handleSubmit, reset, formState, getValues, control } =
     useForm({
       defaultValues: tableData ? tableData : "",
@@ -72,7 +66,6 @@ const Inputs = ({
   const { errors } = formState;
 
   function onSubmit(data) {
-    console.log("submit data", data);
     if (data.confirmed_person_count) {
       const Obj = { ...data };
     }
@@ -85,7 +78,6 @@ const Inputs = ({
       ...rest,
       price,
     };
-    console.log("description", data);
 
     // create tour object
     if (cat) {
@@ -125,23 +117,20 @@ const Inputs = ({
     delete newObj.updatedAt;
     delete newObj.reviews;
 
-    console.log("newObj", newObj);
-
     const formData = new FormData();
 
     for (let [key, values] of Object.entries(newObj)) {
       if (key === "photos" && values) {
         values.forEach((img) => formData.append("photos", img));
       } else if (key === "photo" && values) {
-        console.log("photo:", values);
         formData.append("photo", values);
       } else {
         formData.append(key, values);
       }
     }
 
-    for (const [key, value] of Object.entries(formData)) {
-      console.log("key value:"`${key}: ${value}`);
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ": " + pair[1]);
     }
 
     tableData
@@ -464,10 +453,7 @@ const Belongings = ({ listToMap, name }) => {
 const TourCategory = ({ categories }) => {
   const { cat, setCat } = useContext(InputContext);
 
-  console.log("cat", cat);
-
   const handleCat = (event) => {
-    console.log("event: " + event.target.value);
     setCat(event.target.value);
   };
   return (
@@ -493,41 +479,16 @@ const TourCategory = ({ categories }) => {
   );
 };
 
-// const Photos = ({ type = 1 }) => {
-//   const { setSelectedImages, selectedImages, control } =
-//     useContext(InputContext);
-
-//   console.log("selectedImages: " + selectedImages);
-
-//   return (
-//     <Box border={`1px solid black`} borderRadius="5px" mt="1rem" p="1rem">
-//       <Controller
-//         control={control}
-//         name="photos"
-//         render={({ field: { onChange, onBlur, value, ref } }) => (
-//           <DropzoneComponent
-//             // defaultValue={value}
-//             maxFiles={type}
-//             initialFiles={value}
-//             // selectedImages={value}
-//             selectedImages={selectedImages}
-//             setSelectedImages={setSelectedImages}
-//             onChange={onChange} // send value to hook form
-//             onBlur={onBlur} // notify when input is touched/blur
-//             selected={value}
-//           />
-//         )}
-//       />
-//     </Box>
-//   );
-// };
-
 const Photos = ({ type = 1 }) => {
   const { setSelectedImages, selectedImages, control, tableData } =
     useContext(InputContext);
 
-  const images = tableData.photo ? tableData.photo : tableData.photos;
-  console.log("photos: " + images, tableData);
+  console.log("tableData: " + tableData);
+  // let images;
+
+  // if (tableData) {
+  //   images = tableData.photo ? tableData.photo : tableData.photos;
+  // }
 
   return (
     <Box border="1px solid black" borderRadius="5px" mt="1rem" p="1rem">
@@ -546,7 +507,7 @@ const Photos = ({ type = 1 }) => {
           />
         )}
       /> */}
-      {tableData.photo ? (
+      {tableData?.photo ? (
         <div>
           <img
             style={{ width: "130px", height: "100px", objectFit: "cover" }}
@@ -554,7 +515,7 @@ const Photos = ({ type = 1 }) => {
             alt="tour foto"
           />
         </div>
-      ) : tableData.photos ? (
+      ) : tableData?.photos ? (
         <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
           {tableData.photos.slice(0, 5).map((photo) => (
             <img

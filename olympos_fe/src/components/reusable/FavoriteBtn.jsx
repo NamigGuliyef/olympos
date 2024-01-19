@@ -9,7 +9,6 @@ import useUserWishlist from "../../features/wishlist/useUserWishlist";
 
 const FavoriteBtn = ({ favoriteClicked, onClick }) => {
   const role = useMemo(() => getCookie("role"), []);
-  console.log("role: " + role);
   return (
     <IconButton
       disabled={role === "admin"}

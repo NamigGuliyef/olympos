@@ -16,8 +16,12 @@ import ReusableButton from "../reusable/ReusableButton";
 import { useEffect, useState } from "react";
 import CheckListHotelTest from "../CheckListHotelTest";
 import { usePrevNextButtons } from "../../hooks/usePrevNextButtons";
+import {
+  fetchHotelIncludings,
+  fetchHotelIncludingsClient,
+} from "../../services/apiHotels";
 
-const freebies = ["Breakfast", "Pool", "Wifi"];
+const freebies = ["Breakfast", "Pool", "Wifi", "SAEAE"];
 
 const amenities = ["24hr front desk", "Air condition", "fitness", "pool"];
 
@@ -42,6 +46,7 @@ const HotelListing = ({
   newPrice,
   setNewPrice,
 }) => {
+  const [hotelIncludings, setHotelIncludings] = useState([]);
   const { PrevNextButtons, postsToShow } = usePrevNextButtons(
     next,
     setNext,
@@ -49,11 +54,21 @@ const HotelListing = ({
     data
   );
 
-  console.log("listing data", data);
-  console.log("listing postToShow", postsToShow);
-
   const theme = useTheme();
   const isDesktop = useMediaQuery("(max-width: 1350px");
+
+  // get hotel specifics
+
+  useEffect(() => {
+    fetchHotelIncludingsClient().then((res) => {
+      setHotelIncludings(res.map((r) => r.name));
+    });
+  }, []);
+
+  console.log("hotel INlcuded", hotelIncludings);
+  if (!hotelIncludings?.length) {
+    return;
+  }
 
   return (
     <CustomContainer>
@@ -86,7 +101,8 @@ const HotelListing = ({
             <CheckListHotelTest
               checked={checked}
               setChecked={setChecked}
-              data={freebies}
+              // data={freebies}
+              data={hotelIncludings}
               sx={{ display: "flex", justifyContent: "flex-start" }}
             />
           </Stack>

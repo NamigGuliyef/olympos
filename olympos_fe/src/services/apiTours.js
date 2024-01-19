@@ -28,11 +28,8 @@ export async function fetchClientSingleTour(id) {
 }
 
 export const fetchTourFilter = async (url) => {
-  console.log("url: " + url);
   const res = await fetch(`${baseUrl}/tours/filter${url}`);
   let data = await res.json();
-
-  console.log("flter", data);
 
   return data;
 };
@@ -72,7 +69,7 @@ export const deleteTourApi = (id) => {
     },
   })
     .then((res) => res.json())
-    .then((data) => console.log(data))
+    .then((data) => data)
     .catch((err) => {
       console.log(err);
       return err;
@@ -81,11 +78,9 @@ export const deleteTourApi = (id) => {
 
 export const createTourApi = (newTour) => {
   const token = getCookie("token");
-  console.log("new TourApi", newTour);
   fetch(`${baseUrl}/admin/tour/create`, {
     method: "POST",
     headers: {
-      // "Content-Type": "application/json; charset=utf-8",
       Authorization: "Bearer " + token,
     },
 
@@ -93,10 +88,11 @@ export const createTourApi = (newTour) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log("data api", data);
+      console.log("create tour data", data);
       if (data?.statusCode && data?.statusCode?.toString().startsWith("4")) {
         throw new Error(`Couldn't create: ${data.message} `);
       } else {
+        window.location.reload();
         toast.success("Yeni  tur yaradıldı");
       }
     })
@@ -117,7 +113,14 @@ export const editTourApi = (editTour, id) => {
     body: editTour,
   })
     .then((response) => response.json())
-    .then((data) => console.log(data))
+    .then((data) => {
+      console.log("data edjt", data);
+      if (data.statusCode === 200) {
+        window.location.reload();
+        toast.success(data.message);
+      }
+      return data;
+    })
     .catch((err) => {
       console.log(err);
       return err;
@@ -161,16 +164,14 @@ export const createTourCategory = (newTour) => {
     body: JSON.stringify(newTour),
   })
     .then((res) => {
-      console.log("res", res);
       if (res.ok) {
-        console.log("kateqoriya data", res);
         toast.success("Yeni  tur kateqoriyası yaradıldı");
         window.location.reload();
       }
       return res;
     })
     .catch((err) => {
-      console.log("api erroru", err);
+      console.log(err.message);
       toast.error(err.message);
       return err;
     });

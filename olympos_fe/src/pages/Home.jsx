@@ -20,7 +20,6 @@ const Home = ({ months, typeOfTours }) => {
     return <Loader />;
   }
 
-  // console.log("hotels", hotels);
   const hotelData = hotels?.slice(0, 12);
   const tourData = tours?.slice(0, 12);
 

@@ -3,31 +3,21 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { theme } from "../theme";
 import { createTourCategory } from "../services/apiTours";
-import AdminCreateTourSpesific from "../components/adminPanel/AdminCreateTourSpesific";
+import AdminCreateHotelSpesific from "../components/adminPanel/AdminCreateHotelSpesific";
+import { createHotelSpecific } from "../services/apiHotels";
 
 const AdminCategory = () => {
   const { register, handleSubmit, formState, reset } = useForm();
   const { errors } = formState;
 
   const handleTourCategory = (obj) => {
-    console.log("kat obj", obj);
     reset();
     createTourCategory(obj);
-    // createTourCategory(obj).then((res) => {
-    //   if (res.ok) {
-    //     console.log("Res", res);
-    //   }
-    // });
   };
-  const handleTourSpesific = (obj) => {
-    console.log("spesific obj", obj);
-    reset();
-    // createTourCategory(obj);
-    // createTourCategory(obj).then((res) => {
-    //   if (res.ok) {
-    //     console.log("Res", res);
-    //   }
-    // });
+  const handleHotelSpesific = (obj) => {
+    console.log("hotelSpesific", obj);
+    createHotelSpecific(obj);
+    // reset();
   };
 
   return (
@@ -64,7 +54,7 @@ const AdminCategory = () => {
           </Button>
         </Box>
       </form>
-      <AdminCreateTourSpesific />
+      <AdminCreateHotelSpesific handleHotelSpesific={handleHotelSpesific} />
     </div>
   );
 };

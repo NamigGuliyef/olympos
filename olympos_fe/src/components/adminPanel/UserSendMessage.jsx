@@ -13,12 +13,9 @@ const UserSendMessage = ({ setSend }) => {
     msg: "",
   });
   const handleSendMessage = (e) => {
-    console.log("e", e);
     const newObj = { ...e, ["text"]: e["react-quill"] };
     delete newObj["react-quill"];
-    console.log("newObj", newObj);
     sendUserNotification(newObj).then((res) => {
-      console.log("notify", res);
       setSend((prev) => !prev);
     });
 

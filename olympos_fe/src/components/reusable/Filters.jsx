@@ -1,6 +1,6 @@
 import { Box, Divider, Typography, Slider, Stack } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { FlexBetween } from "../../theme";
+import { FlexBetween, theme } from "../../theme";
 import { useEffect, useState } from "react";
 
 const Filters = ({ priceValue, setNewPrice, newPrice }) => {
@@ -43,6 +43,11 @@ const Filters = ({ priceValue, setNewPrice, newPrice }) => {
             //   getAriaValueText={valuetext}
             min={priceValue[0]}
             max={priceValue[1]}
+            sx={{
+              "&.MuiSlider-root": {
+                color: `${theme.palette.primary.main}`,
+              },
+            }}
           />
           <FlexBetween>
             <Typography variant="subtitle2">₼ {newPrice[0]}</Typography>

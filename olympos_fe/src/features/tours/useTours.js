@@ -6,10 +6,10 @@ import {
 } from "../../services/apiTours";
 
 const useTours = (role) => {
-  const { isLoading: isToursLoading, data: tours } = useQuery(
-    ["tours"],
-    role === "admin" ? fetchToursApi : fetchClientSideToursApi
-  );
+  const { isLoading: isToursLoading, data: tours } = useQuery({
+    queryKey: ["tours"],
+    queryFn: role === "admin" ? fetchToursApi : fetchClientSideToursApi,
+  });
 
   return {
     isToursLoading,

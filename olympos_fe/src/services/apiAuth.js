@@ -24,7 +24,6 @@ export const signupHandler = async (data) => {
 };
 
 export const loginHandler = async (data) => {
-  console.log("loginHandler");
   try {
     const res = await fetch(`${baseUrl}/auth/sign-in`, {
       method: "POST",
@@ -46,7 +45,6 @@ export const loginHandler = async (data) => {
 
 export const getUserDetails = async () => {
   try {
-    console.log("running");
     const token = getCookie("token");
 
     const res = await fetch(`${baseUrl}/user/profile`, {
@@ -59,7 +57,6 @@ export const getUserDetails = async () => {
     });
 
     const respData = await res.json();
-    console.log("respdata: ", respData);
     return respData;
   } catch (error) {
     toast.error(error.message);
@@ -69,7 +66,7 @@ export const getUserDetails = async () => {
 };
 
 export const editUserProfile = async (editProfile) => {
-  console.log("editProfile: ", editProfile);
+  console.log("editUserProfile", editProfile);
   try {
     const token = getCookie("token");
 
@@ -77,13 +74,20 @@ export const editUserProfile = async (editProfile) => {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-        "Content-Type": "application/json",
       },
-      body: JSON.stringify(editProfile),
+      body: editProfile,
     });
+    console.log("resp", res);
     const data = await res.json();
-    console.log("profile data", data);
+    console.log("update profile photo data", data);
+    if (data.statusCode === 200) {
+      location.reload();
+
+      toast.success("Profil məlumatları dəyişdirildi");
+    }
+    if (data.statusCode === 404 || data.statusCode === 400) {
+      toast.error(data.message);
+    }
     return data;
   } catch (error) {
     toast.error(error.message);

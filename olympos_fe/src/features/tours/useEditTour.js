@@ -13,7 +13,7 @@ function useEditTour() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tours"] });
-      toast.success("Tour successfully edited");
+
       // navigate(0);
     },
     onError: (err) => toast.error(err.message),

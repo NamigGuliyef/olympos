@@ -74,11 +74,9 @@ function App() {
   useEffect(() => {
     fetchClientTourCategory()
       .then((res) => {
-        console.log("category", res);
         return res;
       })
       .then((data) => {
-        console.log("data");
         if (data.length) {
           settypeOfTours(data);
         }

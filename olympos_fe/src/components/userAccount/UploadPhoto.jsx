@@ -12,28 +12,30 @@ const UploadAndDisplayImage = ({ user }) => {
 
   const [selectedImages, setSelectedImages] = useState([]);
 
+  // const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
+  //   console.log("accepted files: " + acceptedFiles);
+  //   acceptedFiles.forEach((file) => {
+  //     setSelectedImages((prevState) => [...prevState, file]);
+  //   });
+  // }, []);
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
-    acceptedFiles.forEach((file) => {
-      setSelectedImages((prevState) => [...prevState, file]);
-    });
+    console.log("accepted files: " + acceptedFiles);
+
+    setSelectedImages(acceptedFiles);
   }, []);
 
-  const {
-    getRootProps,
-    getInputProps,
-    isDragActive,
-    isDragAccept,
-    isDragReject,
-  } = useDropzone({ onDrop });
+  console.log("selected images: " + selectedImages);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   useEffect(() => {
     const getUser = async () => {
       try {
         const user = await getUserDetails();
-        console.log("user", user);
 
         if (user.profile_photo) {
           setSelectedFile(user.profile_photo);
+          console.log("user profile photo", user?.profile_photo);
           setImgIsFileFormat(false);
         }
       } catch (error) {
@@ -56,15 +58,22 @@ const UploadAndDisplayImage = ({ user }) => {
     setSelectedImages([]);
   };
 
+  console.log("user", user);
   const handleSendImg = () => {
-    // console.log("uploadUser", user);
-    // console.log("selectedFile", selectedFile);
-    const obj = { profile_photo: selectedFile, ...user };
-    delete obj.old_password;
-    delete obj.new_password;
-    console.log("upload obj", obj);
+    const formData = new FormData();
+    formData.append("first_name", user.first_name);
+    formData.append("last_name", user.last_name);
+    formData.append("email", user.email);
+    formData.append("phone_number", user.phone_number);
+    formData.append("profile_photo", selectedImages[0]);
 
-    editUserProfile(obj);
+    // const obj = { profile_photo: selectedFile, ...user };
+    // delete obj.old_password;
+    // delete obj.new_password;
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ": " + pair[1]);
+    }
+    // editUserProfile(formData);
   };
 
   return (
@@ -90,13 +99,14 @@ const UploadAndDisplayImage = ({ user }) => {
                 style={{
                   border: "1px solid",
                   borderRadius: "50%",
-                  width: "200px",
+                  width: "130px",
+                  marginBottom: "1rem",
 
                   objectFit: "cover",
-                  height: "200px",
+                  height: "130px",
                 }}
               />
-              <button
+              {/* <button
                 style={{
                   background: "transparent",
                   border: "none",
@@ -105,9 +115,9 @@ const UploadAndDisplayImage = ({ user }) => {
                 }}
                 onClick={handleRemoveFile}
               >
-                Şəkli sil
-              </button>
-              {selectedFile && imgIsFileFormat && (
+                Şəkli dəyiş 1
+              </button> */}
+              {selectedImages && imgIsFileFormat && (
                 <button onClick={handleSendImg}>Təsdiq</button>
               )}
             </Box>
@@ -123,29 +133,25 @@ const UploadAndDisplayImage = ({ user }) => {
                   <PersonIcon sx={{ width: "200px", height: "200px" }} />
                 </Box>
               </label>
-              <input
+              {/* <input
                 type="file"
                 id="fileInput"
                 onChange={handleFileChange}
                 style={{ display: "none" }}
-              />
+              /> */}
             </div>
           )}
-          {!selectedFile && (
+          {/* {!selectedFile && (
             <Typography
               sx={{ textAlign: "center", color: "black", fontSize: "18px" }}
             >
               Şəkil yüklə
             </Typography>
-          )}
+          )} */}
         </div>
       )}
       <div>
         <div>
-          {/* {selectedImages.length > 0 &&
-            selectedImages.map((image, index) => (
-              <img src={`${URL.createObjectURL(image)}`} key={index} alt="" />
-            ))} */}
           {selectedImages.length > 0 && (
             <img
               alt="Selected file preview"
@@ -162,16 +168,18 @@ const UploadAndDisplayImage = ({ user }) => {
               )}`}
             />
           )}
-          {selectedImages.length && (
+          {selectedImages.length ? (
             <button onClick={handleSendImg}>Təsdiq</button>
+          ) : (
+            <span></span>
           )}
-          <button onClick={handleRemoveChoosenImg}>Sekli sil</button>
-        </div>
-        <div {...getRootProps()}>
-          <input {...getInputProps()} />
-          {isDragActive ? <p>Drop file(s) here ...</p> : <div>Sec</div>}
+          {/* <button onClick={handleRemoveChoosenImg}>Sekli sil</button> */}
         </div>
       </div>
+      {/* <div {...getRootProps()}>
+        <input {...getInputProps()} />
+        {isDragActive ? <p>Drop file(s) here ...</p> : <div>Şekil seç</div>}
+      </div> */}
     </>
   );
 };

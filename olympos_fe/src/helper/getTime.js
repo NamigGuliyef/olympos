@@ -20,4 +20,4 @@ export const getTime = (timeRange) => {
 // };
 
 // const AzerbaijaniDateTime = date.toLocaleString("az-AZ", options);
-// console.log("az", AzerbaijaniDateTime);
+//

@@ -29,7 +29,7 @@ export async function fetchReviewsApi() {
         _id,
         rating,
         name: first_name + " " + last_name,
-        tourOrHotelName: hotelId ? hotelId.name : tourId.name,
+        tourOrHotelName: hotelId ? hotelId?.name : tourId?.name,
       };
     }
   );
@@ -68,7 +68,7 @@ export const createReviewApi = (newReview) => {
     body: newReview,
   })
     .then((res) => res.json())
-    .then((data) => console.log("gelen", data))
+    .then((data) => data)
     .catch((err) => {
       console.log("rev err", err);
       return err;

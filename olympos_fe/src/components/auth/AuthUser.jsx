@@ -5,15 +5,12 @@ import UserMenu from "./UserMenu";
 import { memo, useMemo } from "react";
 
 const AuthUser = ({ user, isMobile }) => {
-  console.log("auth user run oldu");
   function navLinkStyle(isActive) {
     return {
       color: "black",
       textDecoration: "none",
     };
   }
-
-  console.log("user: " + user.profile_photo);
 
   return (
     <Stack direction="row" spacing={2}>

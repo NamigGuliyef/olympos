@@ -8,8 +8,9 @@ import AdminModal from "./reusable/AdminModal";
 import Inputs from "../components/adminPanel/Inputs";
 import { editUserOrder, submitOrder } from "../services/apiOrders";
 import ReusableButton from "../components/reusable/ReusableButton";
+import { useNavigate } from "react-router-dom";
 
-const OrderComponent = ({ data, ordered }) => {
+const OrderComponent = ({ data, ordered, label = "confirmed" }) => {
   const {
     isOrderEditing,
     editOrder,
@@ -21,13 +22,16 @@ const OrderComponent = ({ data, ordered }) => {
   const [tableData, setTableData] = useState(null);
   const [count, setCount] = useState();
 
+  const navigate = useNavigate();
+
   // tesdiqleye basanda run olan funksiya
   const handleSubmitOrder = (id, count) => {
     submitOrder({
       _id: id,
-    });
+    }).then((res) => console.log("post message", res));
 
     toast.success("Sifariş təsdiqləndi");
+    window.location.reload();
   };
 
   //duzelish et-e basanda run olan funksiya
@@ -48,9 +52,6 @@ const OrderComponent = ({ data, ordered }) => {
     // const [order] = orders.filter((order) => order.id === index);
     deleteOrder(index);
   };
-
-  console.log("isError", isError);
-  console.log("editError", editError);
 
   if (isError) {
     return <div>{editError.message}</div>;
@@ -131,9 +132,9 @@ const OrderComponent = ({ data, ordered }) => {
                 {/* {item.userId?.first_name || item.user} adlı istifadəçi{" "}
                 {item.orderDate.split("T")[0]} tarixində {item.count} ədəd{" "}
                 {item.city} turunu sifariş etdi */}
-                {console.log("item", item)}
                 {item.userId?.first_name} {item.userId?.last_name} adlı
-                istifadəçi {item?.confirmed_person_count} yerlik{" "}
+                istifadəçi {item?.confirmed_person_count}{" "}
+                {item.tourId ? "yerlik " : ""}
                 {item?.tourId?.name || item?.hotelId?.name} sifariş etdi
               </Typography>
               <Box
@@ -144,11 +145,11 @@ const OrderComponent = ({ data, ordered }) => {
                 // }
                 sx={{ display: "flex", gap: "1rem", alignItems: "center" }}
               >
-                {!ordered && (
-                  <Box
-                    sx={{ display: "flex", alignItems: "center", gap: "1rem" }}
-                  >
-                    <Typography>{item?.userId?.phone_number}</Typography>
+                <Box
+                  sx={{ display: "flex", alignItems: "center", gap: "1rem" }}
+                >
+                  <Typography>{item?.userId?.phone_number}</Typography>
+                  {label === "unconfirmed" && (
                     <Button
                       sx={{
                         backgroundColor: "#59A96A",
@@ -165,22 +166,25 @@ const OrderComponent = ({ data, ordered }) => {
                     >
                       Təsdiqlə
                     </Button>
-                  </Box>
-                )}
-                <Button
-                  sx={{
-                    backgroundColor: theme.palette.primary.dark,
-                    color: "white",
-                    textTransform: "capitalize",
+                  )}
+                </Box>
 
-                    "&:hover": {
+                {item?.tourId && (
+                  <Button
+                    sx={{
                       backgroundColor: theme.palette.primary.dark,
-                    },
-                  }}
-                  onClick={() => handleOpenModal(item)}
-                >
-                  Düzəliş et
-                </Button>
+                      color: "white",
+                      textTransform: "capitalize",
+
+                      "&:hover": {
+                        backgroundColor: theme.palette.primary.dark,
+                      },
+                    }}
+                    onClick={() => handleOpenModal(item)}
+                  >
+                    Düzəliş et
+                  </Button>
+                )}
                 <Button
                   sx={{
                     backgroundColor: theme.palette.error.main,

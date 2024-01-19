@@ -23,15 +23,13 @@ export default function DropzoneComponent({
     setSelectedImages((prevState) => [...prevState, ...acceptedFiles]);
   };
 
-  console.log("selectedimg", selected);
-
   const renderSelectedImages = () => {
     return selectedImages.map((image, index) => (
       <Box
         key={index}
         sx={{
-          width: "100px",
-          height: "100px",
+          width: "50px",
+          height: "50px",
         }}
       >
         <img
@@ -62,14 +60,17 @@ export default function DropzoneComponent({
     >
       <div className="dropzone" {...getRootProps()}>
         <input {...getInputProps({ onChange })} />
-        {isDragActive ? (
-          <p>Drop file(s) here ...</p>
-        ) : (
-          <p>Drag and drop file(s) here, or click to select files</p>
-        )}
+        {isDragActive ? <p>Drop file(s) here ...</p> : <p>Şəkil yüklə</p>}
       </div>
       <FlexBetween>
-        <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            flexFlow: "wrap",
+          }}
+        >
           {selectedImages.length > 0 && renderSelectedImages()}
         </Box>
         {selectedImages.length > 0 && (

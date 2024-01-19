@@ -178,9 +178,7 @@ const HotelDetailTest = () => {
     "hotel"
   );
 
-  useEffect(() => {
-    console.log("crud changed");
-  }, [crudEventHappened]);
+  useEffect(() => {}, [crudEventHappened]);
 
   const userInUserSlice = useSelector((state) => state.user.user);
 
@@ -284,7 +282,7 @@ const HotelDetailTest = () => {
                   {singleHotel.name}
                 </Typography>
               </Box>
-              {/* {console.log("singleHotel", singleHotel.rating)} */}
+
               <RatingComponent>
                 {getUserAverageRating(singleHotel?.reviews)}
               </RatingComponent>
@@ -350,7 +348,7 @@ const HotelDetailTest = () => {
                           }}
                           variant="body"
                         >
-                          {singleHotel?.name} Hotel
+                          {singleHotel?.name}
                         </Typography>
                       </FlexBetween>
 
@@ -402,7 +400,7 @@ const HotelDetailTest = () => {
             singleHotel={singleHotel}
             reviews={singleHotel.reviews}
           />
-          {console.log("singleHotel: ", singleHotel)}
+
           {token && role === "user" && (
             <AddReviews
               setCrudEventHappened={setCrudEventHappened}

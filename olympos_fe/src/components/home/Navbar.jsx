@@ -36,7 +36,6 @@ const Navbar = () => {
   /// detecting token expiration
   useEffect(() => {
     if (token) {
-      console.log("navbar");
       const tokenCheckInterval = setInterval(() => {
         const token = getCookie("token");
         // Check token expiration
@@ -76,8 +75,6 @@ const Navbar = () => {
   }, []);
 
   const isMobile = useMediaQuery("(max-width: 600px)");
-
-  console.log("role: " + role);
 
   function navLinkStyle(isActive) {
     return {

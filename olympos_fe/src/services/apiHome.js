@@ -11,6 +11,5 @@ export async function fetchHomeReview() {
     },
   });
   const data = await res.json();
-  console.log("home reviews", data);
   return data;
 }

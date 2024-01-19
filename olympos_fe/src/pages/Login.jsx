@@ -12,8 +12,6 @@ const Login = () => {
   const token = getCookie("token");
   const role = getCookie("role");
 
-  console.log("token", !!token);
-
   // useEffect(() => {
   //   if (token !== "null" && role) {
   //     navigate("/");

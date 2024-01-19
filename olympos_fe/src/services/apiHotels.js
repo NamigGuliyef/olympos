@@ -11,13 +11,11 @@ export async function fetchHotelsApi() {
     },
   });
   const data = await res.json();
-  console.log("fetchHotels", data);
   return data;
 }
 export async function fetchClientSideHotel() {
   const res = await fetch(`${baseUrl}/hotels`);
   let data = await res.json();
-  console.log("fetching client side hotels", data);
   return data;
 }
 export async function fetchClientSideSingleHotel(url) {
@@ -66,7 +64,6 @@ export const deleteHotelApi = (id) => {
 
 export const createHotelApi = (newHotel) => {
   const token = getCookie("token");
-  console.log("new Hotel", newHotel);
   fetch(`${baseUrl}/admin/hotel/create`, {
     method: "POST",
     headers: {
@@ -78,7 +75,6 @@ export const createHotelApi = (newHotel) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log("data", data);
       if (data?.statusCode && data?.statusCode?.toString().startsWith("4")) {
         throw new Error(`Couldn't create: ${data.message} `);
       } else {
@@ -86,7 +82,6 @@ export const createHotelApi = (newHotel) => {
       }
     })
     .catch((err) => {
-      console.log("api erroru", err);
       toast.error(err.message);
       return err;
     });
@@ -123,6 +118,7 @@ export const fetchHotelFilter = async (url) => {
   return data;
 };
 
+// Admin side fetch hotel includings
 export async function fetchHotelIncludings() {
   const token = getCookie("token");
   const res = await fetch(`${baseUrl}/admin/hotel-specifics`, {
@@ -134,3 +130,40 @@ export async function fetchHotelIncludings() {
   const data = await res.json();
   return data;
 }
+
+// User side fetch hotel includings
+export async function fetchHotelIncludingsClient() {
+  const res = await fetch(`${baseUrl}/specifics`, {
+    headers: {
+      "Content-type": "application/json; charset=UTF-8", // Indicates the content
+    },
+  });
+  const data = await res.json();
+  return data;
+}
+
+export const createHotelSpecific = (specific) => {
+  const token = getCookie("token");
+
+  fetch(`${baseUrl}/admin/hotel-specifics`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      Authorization: "Bearer " + token,
+    },
+
+    body: JSON.stringify(specific),
+  })
+    .then((res) => {
+      if (res.ok) {
+        toast.success("Yeni  otel xüsusiyyətləri yaradıldı");
+        window.location.reload();
+      }
+      return res;
+    })
+    .catch((err) => {
+      console.log(err.message);
+      toast.error(err.message);
+      return err;
+    });
+};

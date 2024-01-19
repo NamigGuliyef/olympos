@@ -13,7 +13,7 @@ export class User {
   phone_number: string;
   @Prop({ required: true })
   password: string;
-  @Prop({ required: true, ref: 'hotel' })
+  @Prop({ required: true, ref: 'order' })
   user_orders: [mongoose.Schema.Types.ObjectId];
   @Prop({ required: true, ref: 'whishlist' })
   user_whishlist: [mongoose.Schema.Types.ObjectId];

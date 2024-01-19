@@ -9,9 +9,7 @@ const SendEmailFromClient = ({ sxButtonSubscribe }) => {
   const { errors } = formState;
 
   const handleSendMessage = (obj) => {
-    console.log("obj", obj);
     sendEmailFromClient(obj).then((res) => {
-      console.log("email res", res);
       if ((res.statusCode + "").startsWith("4")) {
         toast.error(res.message);
       } else {

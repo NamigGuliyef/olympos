@@ -237,10 +237,14 @@ const TourDetails = () => {
                           }}
                           variant="body"
                         >
-                          {data?.name} Turu
+                          {data?.name}
                         </Typography>
-                        <Typography>
-                          Bu tur üçün boş yerlərin sayı:{" "}
+                        <Typography
+                          sx={{
+                            ml: "1rem",
+                          }}
+                        >
+                          boş yerlərin sayı:{" "}
                           {data?.person_count - data?.confirmed_person_count}
                         </Typography>
                       </FlexBetween>
@@ -310,7 +314,6 @@ const TourDetails = () => {
           <Box sx={{}}>
             <SectionTitle>Overview</SectionTitle>
             <Typography sx={{ margin: "1rem 0" }} variant="body1">
-              {console.log("tour data: " + data.description)}
               <IframeWrapper
                 dangerouslySetInnerHTML={{ __html: data?.description }}
               />

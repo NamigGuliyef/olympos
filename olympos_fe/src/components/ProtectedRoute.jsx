@@ -9,7 +9,6 @@ const ProtectedRoute = ({ children }) => {
 
   useEffect(() => {
     if (token && token.length && role === "admin") {
-      console.log("protected route");
       navigate("/admin-panel/orders");
     } else if (token && role === "user") {
       // deleteCookie(["token", "role", "name"]);

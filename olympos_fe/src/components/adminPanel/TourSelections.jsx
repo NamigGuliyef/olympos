@@ -21,7 +21,6 @@ const MenuProps = {
 // const names = ["Breakfast", "Pool", "Parking"];
 
 function getStyles(name, spesifics, theme) {
-  console.log("spesifics: " + spesifics);
   return {
     fontWeight:
       spesifics?.indexOf(name) === -1

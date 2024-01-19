@@ -9,7 +9,6 @@ export function useEditHotel() {
 
   const { mutate: editHotel, isLoading: isHotelEditing } = useMutation({
     mutationFn: (prop) => {
-      console.log("prop", prop.formData.get("id"));
       editHotelApi(prop.formData, prop.formData.get("id"));
     },
     onSuccess: () => {

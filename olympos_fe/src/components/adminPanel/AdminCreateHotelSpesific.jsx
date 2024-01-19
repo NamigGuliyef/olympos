@@ -1,26 +1,15 @@
 import { Box, Button, TextField } from "@mui/material";
-import React from "react";
+
 import { useForm } from "react-hook-form";
 import { theme } from "../../theme";
 
-const AdminCategory = () => {
+const AdminHotelCreateSpesific = ({ handleHotelSpesific }) => {
   const { register, handleSubmit, formState, reset } = useForm();
   const { errors } = formState;
 
-  const handleTourSpesific = (obj) => {
-    console.log("spesific obj", obj);
-    // reset();
-    // createTourCategory(obj);
-    // createTourCategory(obj).then((res) => {
-    //   if (res.ok) {
-    //     console.log("Res", res);
-    //   }
-    // });
-  };
-
   return (
     <div>
-      <form onSubmit={handleSubmit(handleTourSpesific)}>
+      <form onSubmit={handleSubmit(handleHotelSpesific)}>
         <Box
           sx={{
             display: "flex",
@@ -34,11 +23,11 @@ const AdminCategory = () => {
           }}
         >
           <TextField
-            id="tour-spesific"
-            label="tour-spesific"
-            error={!!errors["tour-spesific"]}
-            helperText={errors["tour-spesific"]?.message}
-            {...register("tour-spesific", {
+            id="name"
+            label="name"
+            error={!!errors["name"]}
+            helperText={errors["name"]?.message}
+            {...register("name", {
               required: "xana boş ola bilməz",
             })}
           />
@@ -56,4 +45,4 @@ const AdminCategory = () => {
   );
 };
 
-export default AdminCategory;
+export default AdminHotelCreateSpesific;

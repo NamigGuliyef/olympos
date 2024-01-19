@@ -123,6 +123,8 @@ const DateRangePicker = ({ type }) => {
       >
         {open && (
           <DateRange
+            format="yyyy-MM-dd HH:mm:ss"
+            timeFor
             locale={az}
             // onChange={(e) => dispatch(setTime([e.selection]))}
             onChange={handleTimeChange}

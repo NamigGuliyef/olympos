@@ -6,7 +6,7 @@ import {
   HttpStatus,
   Param,
   Post,
-  Query
+  Query,
 } from '@nestjs/common';
 import { Hotel } from 'src/hotel/hotel.schema';
 import { Review } from 'src/review/review.schema';
@@ -14,10 +14,11 @@ import { CreateSubscribeDto } from 'src/subscribe/dto/subscribe.dto';
 import { Subscribe } from 'src/subscribe/model/subscribe.schema';
 import { GuestService } from './guest.service';
 import { FilterDto, TourFilterDto } from './query.type';
+import { HotelSpecific } from 'src/hotel-specifics/hotelspecific.schema';
 
 @Controller()
 export class GuestController {
-  constructor(private readonly guestService: GuestService) { }
+  constructor(private readonly guestService: GuestService) {}
 
   @Get('/hotels')
   @HttpCode(HttpStatus.OK)
@@ -69,15 +70,21 @@ export class GuestController {
 
   @Post('/create-subscribe')
   @HttpCode(HttpStatus.CREATED)
-  async createSubscribe(@Body() createSubscribeDto: CreateSubscribeDto): Promise<Subscribe> {
-    return await this.guestService.createSubscribe(createSubscribeDto)
+  async createSubscribe(
+    @Body() createSubscribeDto: CreateSubscribeDto,
+  ): Promise<Subscribe> {
+    return await this.guestService.createSubscribe(createSubscribeDto);
   }
-
 
   @Get('/reviews')
   @HttpCode(HttpStatus.OK)
   async latestReviews(): Promise<Review[]> {
-    return await this.guestService.latestReviews()
+    return await this.guestService.latestReviews();
   }
 
+  @Get('/specifics')
+  @HttpCode(HttpStatus.OK)
+  async getAllHotelSpecific(): Promise<HotelSpecific[]> {
+    return await this.guestService.getAllHotelSpecific();
+  }
 }

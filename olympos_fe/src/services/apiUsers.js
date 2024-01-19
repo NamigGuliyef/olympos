@@ -16,14 +16,19 @@ export async function fetchUsersApi() {
 }
 
 export const deleteUserApi = (id) => {
-  fetch(`http://localhost:3000/users/${id}`, {
+  console.log("user id", id);
+  const token = getCookie("token");
+
+  console.log("baseUrl", baseUrl);
+  fetch(`${baseUrl}/admin/users/${id}`, {
     method: "DELETE",
     headers: {
-      "Content-type": "application/json; charset=UTF-8", // Indicates the content
+      "Content-type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${token}`, // Indicates the content
     },
   })
     .then((res) => res.json())
-    .then((data) => console.log(data))
+    .then((data) => console.log("delete data", data))
     .catch((err) => {
       // toast.error(err.message);
       console.log(err);

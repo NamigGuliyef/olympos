@@ -26,7 +26,9 @@ import Navbar from "./Navbar";
 import FormSelections from "../reusable/FormSelections";
 import { useSelector } from "react-redux";
 import { format } from "date-fns";
+import az from "date-fns/locale/az";
 import { getTime } from "../../helper/getTime";
+import toast from "react-hot-toast";
 
 const linkStyle = (isActive) => {
   return {
@@ -46,10 +48,12 @@ const Header = ({ months, typeOfTours }) => {
   const timeRange = useSelector((store) => store.tour.timeRange);
   const selectedTourType = useSelector((store) => store.tour.type);
 
-  // const checkIn = format(timeRange[0].startDate, "dd-MM-yyyy");
-  // const checkOut = format(timeRange[0].endDate, "dd-MM-yyyy");
+  const timeSTART = format(timeRange[0].startDate, "yyyy-MM-dd", {
+    locale: az,
+  });
+  const timeEND = format(timeRange[0].endDate, "yyyy-MM-dd", { locale: az });
   const month = timeRange;
-  const { timeEND, timeSTART } = useMemo(() => getTime(timeRange), [timeRange]);
+  // const { timeEND, timeSTART } = useMemo(() => getTime(timeRange), [timeRange]);
 
   const handleNavigate = () => {
     if (selectedTourType) {
@@ -59,8 +63,10 @@ const Header = ({ months, typeOfTours }) => {
         month,
       });
       navigate(
-        `/turlar?category=${selectedTourType}&start_date=${timeSTART}&end_date=${timeEND}`
+        `/turlar?category=${selectedTourType}&start_date=${timeSTART}`
       );
+    } else {
+      toast.error("Tarix aralığı və kateqoriya seçin");
     }
   };
 
@@ -80,7 +86,7 @@ const Header = ({ months, typeOfTours }) => {
     <Stack sx={{ position: "relative", margin: "15px", height: "500px" }}>
       <CssBaseline />
       <img
-        src="/assets/main-img.png"
+        src="/public/assets/main-img.png"
         alt="main-img"
         width="100%"
         height="100%"
@@ -112,8 +118,7 @@ const Header = ({ months, typeOfTours }) => {
               xl: "35px",
             },
           }}
-        >
-        </Typography>
+        ></Typography>
         <Typography
           component={motion.h3}
           initial={{ opacity: 0 }}
@@ -148,7 +153,7 @@ const Header = ({ months, typeOfTours }) => {
             },
           }}
         >
-        Xəyal etdiyiniz yerlərə səyahət edin!
+          Xəyal etdiyiniz yerlərə səyahət edin!
         </Typography>
       </Box>
       <CustomContainer

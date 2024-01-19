@@ -43,19 +43,15 @@ export default function VerifyCode() {
       // setVerificationCodeError(true);
     }
 
-    console.log("usr input", userInput);
-
     fetch(`${baseUrl}/auth/verify_code`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ verify_code: userInput }),
     })
       .then((res) => {
-        console.log("res", res);
         return res.json(); // Parse the response data as JSON
       })
       .then((data) => {
-        console.log("data", data);
         if (data?.token?.length) {
           toast.success(data?.message);
           setCokieHandler("token", data?.token);

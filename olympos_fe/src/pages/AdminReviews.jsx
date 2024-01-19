@@ -14,23 +14,21 @@ import { fetchHotelIncludings } from "../services/apiHotels";
 import useReviews from "../features/reviews/useReviews";
 import useDeleteReview from "../features/reviews/useDeleteReview";
 
-const AdminHotels = () => {
+const AdminReviews = () => {
   const columns = [
     // { field: "_id", headerName: "ID", width: 70 },
-    { field: "name", headerName: "Username", width: 300 },
+    { field: "name", headerName: "Username", width: 180 },
     {
       field: "hotelId",
       headerName: "Tour or Hotel",
-      width: 300,
+      width: 180,
       renderCell: ({ row }) => {
-        console.log("row: tr  " + Object.keys(row));
-
         return <span>{row?.tourOrHotelName}</span>;
       },
     },
     // { field: "tour", headerName: "tour", width: 300 },
+    { field: "title", headerName: "Title", width: 200 },
     { field: "description", headerName: "Description", width: 300 },
-    { field: "title", headerName: "Title", width: 300 },
     { field: "rating", headerName: "Rating", width: 100 },
 
     {
@@ -47,9 +45,10 @@ const AdminHotels = () => {
   const { isReviewsLoading, reviews } = useReviews();
   const { deleteReview, reviewDeleteLoading } = useDeleteReview();
 
-  console.log("reviews admin", reviews);
-
   if (isReviewsLoading) return <Loader />;
+  if (!reviews.length) {
+    return <Box>No reviews yet</Box>;
+  }
 
   return (
     <Box>
@@ -58,4 +57,4 @@ const AdminHotels = () => {
   );
 };
 
-export default AdminHotels;
+export default AdminReviews;

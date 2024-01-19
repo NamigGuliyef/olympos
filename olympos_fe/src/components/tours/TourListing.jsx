@@ -268,8 +268,6 @@ const TourListing = ({
   //   }
   // };
 
-  console.log("data", data);
-
   const handleViaDayToggle = (value) => () => {
     if (chooseViaDay.includes(value)) {
       setChooseViaDay([]);
@@ -500,10 +498,10 @@ const TourListing = ({
           />
           <Box sx={{ width: "100%" }}>
             <TourList
-              length={dataToShow.length}
+              length={dataToShow?.length}
               // data={postsToShow.length > 0 ? postsToShow : data.slice(0, 3)}
               data={
-                postsToShow.length > 0 ? postsToShow : dataToShow.slice(0, 3)
+                postsToShow?.length > 0 ? postsToShow : dataToShow.slice(0, 3)
               }
               compareData={data}
               isLoading={isLoading}

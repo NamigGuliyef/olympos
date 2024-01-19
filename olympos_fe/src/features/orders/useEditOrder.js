@@ -13,13 +13,10 @@ export function useEditOrder() {
       editOrderApi(prop.newObj, prop.newObj._id);
     },
     onSuccess: (data) => {
-      toast.success("Order successfully edited");
-      navigate(0);
       queryClient.invalidateQueries(["orders"]);
     },
     // onSuccess: (data) => console.log("succesful data", data),
     onError: (err) => {
-      console.log("err", err);
       toast.error(err.message);
       // navigate(0);
     },

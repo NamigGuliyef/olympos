@@ -20,7 +20,6 @@ const TourList = ({
 }) => {
   const isDesktop = useMediaQuery("(max-width:1350px)");
 
-  console.log("data tur", data, compareData);
   return (
     <Box
       sx={{

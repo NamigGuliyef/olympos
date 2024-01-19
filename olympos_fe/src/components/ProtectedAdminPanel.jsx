@@ -9,7 +9,6 @@ const ProtectedAdminPanel = ({ children }) => {
 
   useEffect(() => {
     if (token && token.length && role === "admin") {
-      console.log("protected admin panel");
       navigate("/admin-panel");
     }
   }, [role, token]);

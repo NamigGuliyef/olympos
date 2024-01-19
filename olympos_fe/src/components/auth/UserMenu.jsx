@@ -23,7 +23,6 @@ const UserMenu = ({ user }) => {
     // navigate("/");
   };
 
-  console.log("user menu run oldu");
   const handleLogout = () => {
     deleteCookie(["token", "role", "name"]);
     window.location.reload();
@@ -44,6 +43,8 @@ const UserMenu = ({ user }) => {
     };
   }
 
+  console.log("username", username);
+
   return (
     <div>
       <Button
@@ -52,7 +53,7 @@ const UserMenu = ({ user }) => {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        sx={{ color: "black" }}
+        sx={{ color: "black", textTransform: "capitalize" }}
       >
         {username}
       </Button>

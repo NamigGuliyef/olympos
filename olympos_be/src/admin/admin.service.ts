@@ -173,7 +173,7 @@ export class AdminService {
     id: string,
     UpdateTourDto: updateTourDto,
     file: Express.Multer.File,
-  ): Promise<Tour> {
+  ): Promise<MessageResponse> {
     const tourExist = await this.tourModel.findById(id);
     if (!tourExist) {
       throw new HttpException(
@@ -191,12 +191,16 @@ export class AdminService {
         { new: true },
       );
     } else {
-      return await this.tourModel.findByIdAndUpdate(
+      await this.tourModel.findByIdAndUpdate(
         id,
         { $set: { ...UpdateTourDto } },
         { new: true },
       );
     }
+    return {
+      message: 'The tour has been updated successfully',
+      statusCode: 200,
+    };
   }
 
   // delete tour

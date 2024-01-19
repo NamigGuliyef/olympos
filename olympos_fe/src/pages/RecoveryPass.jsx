@@ -31,16 +31,12 @@ export default function VerifyCode() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("usr input", userInput);
-
     fetch(`${baseUrl}/auth/recovery/${token}`, {
       method: "PATCH",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(userInput),
     })
       .then((res) => {
-        console.log("res", res);
-
         if (res.status === 200) {
           toast.success("Parol uğurla dəyişildi");
           navigate("/login");
@@ -49,9 +45,7 @@ export default function VerifyCode() {
         }
         return res.json(); // Parse the response data as JSON
       })
-      .then((data) => {
-        console.log("data", data);
-      })
+      .then((data) => {})
       .catch((err) => {
         console.log(err);
         // Handle errors here

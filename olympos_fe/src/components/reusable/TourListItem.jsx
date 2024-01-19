@@ -49,17 +49,7 @@ const TourListItem = ({ item, favorite, isFavorite, compareData }) => {
     type
   );
 
-  console.log("item", item, compareData);
-
   const ratingData = compareData?.find((el) => el._id === item?._id);
-  console.log(
-    "ratingData",
-    getStarRating(getUserAverageRating(ratingData?.reviews))
-  );
-  console.log(
-    "ratingData",
-    getStarRating(getUserAverageRating(ratingData?.reviews))
-  );
 
   let imageUrl;
 
@@ -80,8 +70,6 @@ const TourListItem = ({ item, favorite, isFavorite, compareData }) => {
       imageUrl = item?.photos[0];
     }
   }
-
-  console.log("item: " + item);
 
   const isTablet = useMediaQuery("(max-width: 600px)");
   const path = isFavorite
@@ -239,7 +227,6 @@ const TourListItem = ({ item, favorite, isFavorite, compareData }) => {
                   sx={{ alignItems: "center" }}
                 >
                   <RatingComponent>
-                    {console.log("item reviews", item?.reviews)}
                     {getUserAverageRating(ratingData?.reviews) || 0}
                   </RatingComponent>
                   <Typography>{item.reviews.length} reviews</Typography>

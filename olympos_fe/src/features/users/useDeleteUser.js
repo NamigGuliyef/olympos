@@ -10,8 +10,9 @@ const useDeleteUser = () => {
 
   const { isLoading: userDeleteLoading, mutate: deleteUser } = useMutation({
     mutationFn: deleteUserApi,
-    onSuccess: () => {
-      toast.success("User silindi");
+    onSuccess: (data) => {
+      console.log("silinen data", data);
+      toast.success(data.message);
       navigate(0);
       //   queryClient.invalidateQueries(["hotels"]);
       queryClient.invalidateQueries({

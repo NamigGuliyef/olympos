@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import useTours from "../features/tours/useTours";
 import useHotels from "../features/hotels/useHotels";
 import EmptyFavorite from "../components/reusable/EmptyFavorite";
+import { useWishlistBtn } from "../hooks/useWishlistBtn";
 
 const linkStyle = {
   textDecoration: "none",
@@ -29,7 +30,6 @@ const linkStyle = {
 };
 
 const FavoriteTours = () => {
-  console.log("salam");
   let favs = useSelector((store) => store.favorite.favorites);
   const user = useSelector((store) => store.user.user);
   const [favorites, setFavorites] = useState([]);
@@ -48,11 +48,9 @@ const FavoriteTours = () => {
   const { isToursLoading, tours } = useTours("user");
   const { isHotelsLoading, hotels, error: hotelError } = useHotels("user");
 
-  // console.log("isWishlistLoading", isWishlistLoading);
-
   // useEffect(() => {
   //   const fetchData = async () => {
-  //     console.log("run oldu");
+  //
   //     try {
   //       const [tours, hotels] = await Promise.all([
   //         fetchClientSideToursApi(),
@@ -84,7 +82,6 @@ const FavoriteTours = () => {
         !isWishlistLoading &&
         Array.isArray(wishlist)
       ) {
-        console.log("wishlist", wishlist);
         const arr = allDataTogether?.filter((obj1) => {
           return wishlist?.some(
             (obj2) =>
@@ -127,9 +124,9 @@ const FavoriteTours = () => {
               <TourListItem
                 isFavorite={true}
                 favorite
-                sx={{}}
                 key={item._id}
                 item={item}
+                compareData={tours}
               />
             ))
           ) : (

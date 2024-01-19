@@ -15,6 +15,7 @@ import useHotels, { useFilterHotel } from "../features/hotels/useHotels";
 import Loader from "../components/reusable/Loader";
 import { baseUrl } from "./Tours";
 import { fetchHotelFilter } from "../services/apiHotels";
+import az from "date-fns/locale/az";
 
 const HotelTest = () => {
   const [data, setData] = useState([]);
@@ -38,16 +39,16 @@ const HotelTest = () => {
   const timeRange = useSelector((store) => store.hotel.timeRange);
 
   // const startDate = useMemo(() => {
-  //   console.log("startdate run oldu");
+  //
   //   format(timeRange[0].startDate, "yyyy-MM-dd");
   // }, [timeRange]);
   // const endDate = useMemo(() => {
   //   format(timeRange[0].endDate, "yyyy-MM-dd");
   // }, [timeRange]);
-  const startDate = format(timeRange[0].startDate, "yyyy-MM-dd");
-  const endDate = format(timeRange[0].endDate, "yyyy-MM-dd");
-
-  console.log("startDate: " + timeRange[0].startDate);
+  const startDate = format(timeRange[0].startDate, "yyyy-MM-dd", {
+    locale: az,
+  });
+  const endDate = format(timeRange[0].endDate, "yyyy-MM-dd", { locale: az });
 
   useEffect(() => {
     const minPrice = hotels
@@ -127,7 +128,6 @@ const HotelTest = () => {
   useEffect(() => {
     const cities = hotels?.map((hotel) => {
       if (country) {
-        console.log("country: " + country);
         if (hotel.country === country) {
           return hotel.city;
         }
@@ -138,8 +138,6 @@ const HotelTest = () => {
 
     setCities(cities);
   }, [country, hotels]);
-
-  console.log("cities", cities);
 
   const countries = useMemo(
     () => hotels?.map((hotel) => hotel.country),
@@ -165,8 +163,6 @@ const HotelTest = () => {
       return b.price - a.price;
     }
   });
-
-  console.log("hotels", hotels);
 
   return (
     <Box>

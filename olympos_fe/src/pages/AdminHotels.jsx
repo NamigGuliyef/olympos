@@ -20,7 +20,6 @@ const AdminHotels = () => {
       headerName: "Photos",
       width: 110,
       renderCell: ({ row }) => {
-        console.log("row: " + row.photos[0]);
         return <img src={row.photos[0]} />;
       },
     },
@@ -88,8 +87,6 @@ const AdminHotels = () => {
   const { createHotel, isHotelCreating } = useCreateHotel();
   const { editHotel, isHotelEditing } = useEditHotel();
   const [hotelIncludings, setHotelIncludings] = useState([]);
-
-  console.log("hotels", hotels);
 
   useEffect(() => {
     if (!isHotelsLoading) {

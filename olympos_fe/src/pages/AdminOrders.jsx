@@ -24,7 +24,6 @@ const Orders = () => {
   // const orders = useSelector((state) => state.order.orders);
   const { isOrdersLoading, orders } = useOrders();
 
-  console.log("orders", orders);
   const [sort, setSort] = useState("");
 
   const handleSortOrder = (event) => {
@@ -67,7 +66,9 @@ const Orders = () => {
             },
             {
               label: "Təsdiq olunmayanlar",
-              content: <OrderComponent data={unConfirmedOrders} />,
+              content: (
+                <OrderComponent label="unconfirmed" data={unConfirmedOrders} />
+              ),
             },
           ]}
         >

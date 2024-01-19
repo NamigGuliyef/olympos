@@ -9,12 +9,13 @@ import ReusableButton from "../components/reusable/ReusableButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { useDispatch, useSelector } from "react-redux";
 import { setTime, setType } from "../store/slices/tourSlice";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import useTours from "../features/tours/useTours";
 import Loader from "../components/reusable/Loader";
 import { fetchTourFilter } from "../services/apiTours";
 import { format } from "date-fns";
+import az from "date-fns/locale/az";
 
 export const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -39,19 +40,15 @@ const Tours = ({ months, typeOfTours }) => {
     refetch,
   } = useTours(`${baseUrl}/tour`);
   const location = useLocation();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const tourType = useSelector((store) => store.tour.type);
   const timeRange = useSelector((store) => store.tour.timeRange);
-
-  console.log("datatoshwo", dataToShow);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const { tours: queryTours, isToursLoading: isFirstLoading } = useTours(
     `${baseUrl}/tour` + location.search
   );
-
-  console.log("queryTours", queryTours);
-  console.log("firstdata", firstData);
 
   useEffect(() => {
     const minPrice = queryTours
@@ -77,7 +74,7 @@ const Tours = ({ months, typeOfTours }) => {
     fetchTourFilter(location.search).then((res) => {
       setDataToShow(res);
     });
-  }, [location.search]);
+  }, [location]);
 
   if (isLoading || isFirstLoading) return <Loader />;
 
@@ -100,8 +97,12 @@ const Tours = ({ months, typeOfTours }) => {
   }
 
   if (timeRange[0]) {
-    const startDate = format(timeRange?.[0].startDate, "yyyy-MM-dd");
-    const endDate = format(timeRange?.[0].endDate, "yyyy-MM-dd");
+    const startDate = format(timeRange?.[0].startDate, "yyyy-MM-dd", {
+      locale: az,
+    });
+    const endDate = format(timeRange?.[0].endDate, "yyyy-MM-dd", {
+      locale: az,
+    });
 
     searchObj.start_date = startDate;
     if (startDate !== endDate) {
@@ -129,7 +130,10 @@ const Tours = ({ months, typeOfTours }) => {
     setNext(0);
     dispatch(setType(""));
     setNewPrice(priceValue);
+    setDataToShow([]);
+
     toast.success("Filter təmizləndi");
+    navigate(0);
     // setData([]);
     // // setChecked([]);
     // setChooseTour(null);

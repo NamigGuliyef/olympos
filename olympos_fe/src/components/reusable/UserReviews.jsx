@@ -35,17 +35,11 @@ const UserReviews = ({ reviews, singleHotel, setCrudEventHappened }) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  console.log("token: " + token);
-  console.log("token: " + role);
   const [page, setPage] = useState(1);
   const [modalOpen, setModalOpen] = useState(false);
   const [editVal, setEditVal] = useState(null);
 
   const user = useSelector((state) => state.user.user);
-  console.log("reviews", reviews);
-  // console.log("reviews", reviews[0].userId?._id);
-
-  console.log("singleHotel", singleHotel);
 
   // per page showing data
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -68,26 +62,20 @@ const UserReviews = ({ reviews, singleHotel, setCrudEventHappened }) => {
   }
 
   function handleOpenReviewEdit(review) {
-    console.log("review: ised usdu" + review);
     setEditVal(review);
     setModalOpen(true);
   }
   function handleDeleteReview(id) {
-    console.log("del id: " + id);
     deleteUserReview(id).then((res) => {
-      console.log("res", res);
       navigate(0);
     });
   }
-
-  console.log("reviews", reviews);
 
   const range = (page - 1) * perPage;
   const data = getDataByRange(reviews, range, range + perPage);
 
   // const btnCount = Math.ceil(reviews?.length / perPage);
 
-  // console.log("average rating", averagReview, reviews);
   return (
     <Box
       sx={{
@@ -158,7 +146,6 @@ const UserReviews = ({ reviews, singleHotel, setCrudEventHappened }) => {
                   <Typography>{review?.description}</Typography>
                 </Stack>
               </Box>
-              {console.log("user", user[0]?._id === review?.userId?._id)}
               {/* {user[0]?._id === review?.userId?._id && ( */}
               <Stack
                 sx={{

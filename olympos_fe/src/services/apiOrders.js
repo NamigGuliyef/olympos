@@ -77,7 +77,6 @@ export const createHotelOrderApi = async (newOrder) => {
 
 export const submitOrder = (data) => {
   const token = getCookie("token");
-  console.log("data", data);
   fetch(`${baseUrl}/admin/orders/confirmation`, {
     method: "POST",
     headers: {
@@ -87,7 +86,18 @@ export const submitOrder = (data) => {
     body: JSON.stringify(data),
   })
     .then((res) => res.json())
-    .then((data) => console.log(data))
+    .then((data) => {
+      if (data.statusCode === 200) {
+        toast.success(data.message);
+        window.location.reload();
+      }
+      if (data.statusCode === 400) {
+        toast.error(data.message);
+        // window.location.reload();
+      }
+      console.log(data);
+      return data;
+    })
     .catch((err) => {
       console.log(err);
       return err;
@@ -114,7 +124,6 @@ export const editUserOrder = (data, id) => {
 export const editOrderApi = async (editOrder, id) => {
   const token = getCookie("token");
   try {
-    console.log("edirorder ise dusdu");
     const data = await fetch(`${baseUrl}/admin/orders/confirmation/${id}`, {
       method: "PATCH",
       headers: {
@@ -125,12 +134,17 @@ export const editOrderApi = async (editOrder, id) => {
     });
     const res = await data.json();
     if (res.statusCode === 400) {
+      toast.error(res.message);
       throw new Error(res.message);
     }
-    console.log("res", res);
+    if (res.statusCode === 200) {
+      toast.success(res.message);
+      window.location.reload();
+    }
+
     return res;
   } catch (error) {
-    console.log("edit order erroru", error);
+    console.log(error.message);
     return error;
   }
 };
