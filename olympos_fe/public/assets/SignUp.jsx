@@ -25,10 +25,10 @@ export default function SignUp() {
 
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
- const [lastnameError, setLastnameError] = useState(false)
- const [firstnameError, setFirstnameError] = useState(false)
- const [phoneNumberError, setPhoneNumberError] = useState(false)
- const [confirmPasswordError, setConfirmPasswordError] = useState(false);
+  const [lastnameError, setLastnameError] = useState(false)
+  const [firstnameError, setFirstnameError] = useState(false)
+  const [phoneNumberError, setPhoneNumberError] = useState(false)
+  const [confirmPasswordError, setConfirmPasswordError] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -46,7 +46,7 @@ export default function SignUp() {
     if (password === "") {
       setPasswordError(true);
     }
-  
+
     if (confirmPassword === "") {
       setConfirmPasswordError(true);
     }
@@ -59,13 +59,13 @@ export default function SignUp() {
     if (phoneNumber === "") {
       setPhoneNumberError(true);
     }
-   
-   
+
+
     if (email && password && lastname && firstname) {
       fetch("http://localhost:3000/signup", {
         method: "POST",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ email, password,firstname,lastname,confirmPassword,phoneNumber }),
+        body: JSON.stringify({ email, password, firstname, lastname, confirmPassword, phoneNumber }),
       });
     }
   };
@@ -77,7 +77,7 @@ export default function SignUp() {
         container
         gap={"16px"}
         component="main"
-        // sx={{ height: "90vh" }}
+      // sx={{ height: "90vh" }}
       >
         <CssBaseline />
         <Grid
@@ -86,7 +86,7 @@ export default function SignUp() {
           md={6}
           sx={{
             // borderRadius:'.5rem',
-             
+
             backgroundImage: 'url("/images/loginImg.svg")',
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
@@ -94,26 +94,27 @@ export default function SignUp() {
           }}
         />
 
-        <Grid item  sm={7} md={6} component={Paper} elevation={6} square>
+        <Grid item sm={7} md={6} component={Paper} elevation={6} square>
           <Box
             sx={{
               my: 4,
               mx: 4,
             }}
           >
-            <Box
-              sx={{
-                alignSelf: "start",
-                width: "60px",
-                height: "15px",
-                marginBottom: "10px",
-                backgroundImage: 'url("/images/logo.svg")',
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            />
-
+            <RouterLink to="/">
+              <Box
+                sx={{
+                  alignSelf: "start",
+                  width: "60px",
+                  height: "15px",
+                  marginBottom: "10px",
+                  backgroundImage: 'url("/images/logo.svg")',
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              />
+            </RouterLink>
             <Typography component="h1" variant="h5" sx={{ alignSelf: "start" }}>
               Sign Up
             </Typography>
@@ -158,7 +159,7 @@ export default function SignUp() {
                     label="Last Name"
                     id="lastName"
                     size="small"
-                    // autoComplete="current-password"
+                  // autoComplete="current-password"
                   />
                 </Grid>
                 {/* </Box> */}
@@ -229,31 +230,31 @@ export default function SignUp() {
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label={
-                  <Typography sx={{fontSize:"12px"}}>
-                    "I agree to all the <span style={{color:'red'}}>Terms</span> and <span style={{color:'red'}}>Privacy Policies</span>"
+                  <Typography sx={{ fontSize: "12px" }}>
+                    "I agree to all the <span style={{ color: 'red' }}>Terms</span> and <span style={{ color: 'red' }}>Privacy Policies</span>"
                   </Typography>
                 }
-                
+
               />
               <Button
                 type="submit"
                 fullWidth
-                
+
                 variant="contained"
-                sx={{ mt: 3, mb: 0, backgroundColor: "#8DD3BB", color: "#121", marginBottom:'1rem' }}
+                sx={{ mt: 3, mb: 0, backgroundColor: "#8DD3BB", color: "#121", marginBottom: '1rem' }}
               >
-                <Typography sx={{ fontSize: "0.7rem" ,fontWeight:'500'}}> Create Account</Typography>
+                <Typography sx={{ fontSize: "0.7rem", fontWeight: '500' }}> Create Account</Typography>
               </Button>
               <Typography
-              sx={{fontSize:"12px", textAlign:'center', marginRight:'0.5rem'}}>
-              Already have an account? 
-              <Box sx={{color:'red',display:'inline-block'}}>
-                Login
+                sx={{ fontSize: "12px", textAlign: 'center', marginRight: '0.5rem' }}>
+                Already have an account?
+                <Box sx={{ color: 'red', display: 'inline-block' }}>
+                  Login
 
-              </Box>
+                </Box>
               </Typography>
               <Grid container>
-               
+
 
                 <Box
                   sx={{
