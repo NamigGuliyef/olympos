@@ -519,7 +519,7 @@ const Photos = ({ type = 1 }) => {
         <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
           {tableData.photos.slice(0, 5).map((photo) => (
             <img
-              style={{ width: "130px", height: "100px", objectFit: "cover" }}
+              style={{ width: "50px", height: "50px", objectFit: "cover" }}
               key={photo}
               src={photo}
               alt="hotel photo"
