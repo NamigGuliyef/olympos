@@ -96,7 +96,6 @@ export default function Auth({ isRememberMe, setIsRememberMe }) {
               alignItems: "start",
             }}
           >
-            <RouterLink to="/">
               <Box
                 sx={{
                   alignSelf: "start",
@@ -110,7 +109,6 @@ export default function Auth({ isRememberMe, setIsRememberMe }) {
                   backgroundPosition: "center",
                 }}
               />
-            </RouterLink>
 
             <Typography component="h1" variant="h5" sx={{ alignSelf: "start" }}>
               Log In
