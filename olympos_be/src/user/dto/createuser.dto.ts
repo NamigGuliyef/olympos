@@ -1,5 +1,5 @@
 import { IsEmail, IsMobilePhone, IsNotEmpty, IsPhoneNumber, Length, Matches } from "class-validator";
-import { alphabeticallyName } from "../utils/regex";
+import { alphabeticallyName } from "../../utils/regex";
 
 export class createUserDto {
   @IsNotEmpty()
