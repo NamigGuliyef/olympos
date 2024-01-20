@@ -191,7 +191,7 @@ const Navbar = () => {
                   >
                     <FavoriteIcon />
                     <NavLink style={navLinkStyle} to="/seçdiklərim">
-                      <Typography sx={{ color: "black" }}>Seçilmişlər</Typography>
+                      <Typography sx={{ color: "black" }}>Favorites</Typography>
                     </NavLink>
                   </Box>
                 )}
