@@ -86,7 +86,7 @@ const Header = ({ months, typeOfTours }) => {
     <Stack sx={{ position: "relative", margin: "15px", height: "500px" }}>
       <CssBaseline />
       <img
-        src="/public/assets/olympos_home_page.jpg"
+        src="/assets/olympos_home_page.jpg"
         alt="main-img"
         width="100%"
         height="100%"
