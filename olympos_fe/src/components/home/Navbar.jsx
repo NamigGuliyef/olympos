@@ -191,7 +191,7 @@ const Navbar = () => {
                   >
                     <FavoriteIcon />
                     <NavLink style={navLinkStyle} to="/seçdiklərim">
-                      <Typography sx={{ color: "black" }}>Favorites</Typography>
+                      <Typography sx={{ color: "black" }}>Seçilmişlər</Typography>
                     </NavLink>
                   </Box>
                 )}
@@ -215,7 +215,7 @@ const Navbar = () => {
                           textDecoration: "none",
                         }}
                       >
-                        Login
+                        Giriş
                       </NavLink>
                     </Typography>
 
@@ -236,7 +236,7 @@ const Navbar = () => {
                         }}
                         to="/signup"
                       >
-                        Sign up
+                        Qeydiyyat
                       </NavLink>
                     </Typography>
                   </Box>
