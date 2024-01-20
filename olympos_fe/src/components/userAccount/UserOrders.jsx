@@ -62,7 +62,7 @@ const UserOrders = ({ orders }) => {
         console.log("row", row);
         if (!row.ordered) {
           return (
-            <Button
+            <button
               style={{
                 width: "100px",
                 height: "2rem",
@@ -82,7 +82,7 @@ const UserOrders = ({ orders }) => {
               }
             >
               Sil
-            </Button>
+            </button>
           );
         } else {
           return <span></span>;
