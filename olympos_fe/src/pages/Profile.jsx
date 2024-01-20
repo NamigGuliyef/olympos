@@ -52,8 +52,14 @@ const Profile = () => {
             {
               label: "Sifarişlərim",
               content: (
-                // <div>{user?.user_orders.length || "user order is empty"}</div>
-                <div>{<UserOrders orders={user} /> || <EmptyFavorite />}</div>
+                <div>
+                  {console.log("user", user?.user_orders)}
+                  {user?.user_orders.length ? (
+                    <UserOrders orders={user} />
+                  ) : (
+                    <EmptyFavorite />
+                  )}
+                </div>
               ),
             },
           ]}

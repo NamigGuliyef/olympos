@@ -37,7 +37,16 @@ export class UserService {
   async getProfile(): Promise<User> {
     const user = await this.userModel
 
-      .findOne({ email: this.req.user.email }).populate([{ path:'user_orders', populate:[{ path:'tourId', select:['name','photo']}, { path:'hotelId', select:['name','photos']}]}])
+      .findOne({ email: this.req.user.email })
+      .populate([
+        {
+          path: 'user_orders',
+          populate: [
+            { path: 'tourId', select: ['name', 'photo'] },
+            { path: 'hotelId', select: ['name', 'photos'] },
+          ],
+        },
+      ])
 
       .select(['-password', '-role']);
     return user;
@@ -177,6 +186,9 @@ export class UserService {
   // update hotel and tour Review
   async updateReview(UpdateReviewDto: updateReviewDto) {
     const { hotelId, tourId, title, description, rating } = UpdateReviewDto;
+    console.log(UpdateReviewDto);
+    console.log(hotelId);
+    console.log(tourId);
 
     if (hotelId) {
       return await this.reviewModel.findByIdAndUpdate(

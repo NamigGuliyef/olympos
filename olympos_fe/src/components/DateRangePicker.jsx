@@ -13,6 +13,8 @@ import { setTime } from "../store/slices/hotelSlice";
 import { setTime as setTourTime } from "../store/slices/tourSlice";
 import { getTime } from "../helper/getTime";
 
+const isStyleEnabled = false;
+
 const DateRangePicker = ({ type }) => {
   const dispatch = useDispatch();
   const timeRange = useSelector((store) =>
@@ -55,6 +57,9 @@ const DateRangePicker = ({ type }) => {
 
   return (
     <Box
+      className={
+        isStyleEnabled ? "css-1koo2zv-MuiInputBase-root-MuiInput-root" : ""
+      }
       sx={{
         display: "inline-block",
         position: "relative",
@@ -62,9 +67,21 @@ const DateRangePicker = ({ type }) => {
           xs: "300px",
           sm: "400px",
         },
-        "&:MuiInput-root:before": {
+        "&.css-1koo2zv-MuiInputBase-root-MuiInput-root": {
           borderBottom: "5px solid red ",
         },
+        // "&:MuiInput-root:before": {
+        //   borderBottom: "5px solid red ",
+        // },
+        // "&:.css-1koo2zv-MuiInputBase-root-MuiInput-root:hover:not(.Mui-disabled, .Mui-error):before":
+        //   {
+        //     borderBottom: "5px solid red ",
+        //   },
+        // "&.css-1koo2zv-MuiInputBase-root-MuiInput-root": {
+        //   "&:hover": {
+        //     borderBottom: "5px solid red ",
+        //   },
+        // },
       }}
     >
       <Input
@@ -77,14 +94,11 @@ const DateRangePicker = ({ type }) => {
             xs: "11px 50px 11px 50px",
             sm: "11px 80px 11px 80px",
           },
-          // padding: "4px 30px 4px",
 
           borderRadius: "3px",
           border: "1px solid #D3D3D3",
           color: "black !important",
           opacity: 1,
-          // zIndex: 100,
-          // background: "red",
           width: "100%",
           minWidth: 0,
           textAlign: "center",
@@ -94,14 +108,6 @@ const DateRangePicker = ({ type }) => {
               sm: "4px 30px 4px",
             },
           },
-          // "&::placeholder": {
-          //   textAlign: "center",
-          //   backgroundColor: "red !important",
-          //   color: "black !important",
-          //   opacity: 1,
-          //   // width: "100%",
-          //   // marginRight: "2rem",
-          // },
         }}
         onClick={() => setOpen((open) => !open)}
       />

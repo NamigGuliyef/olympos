@@ -129,9 +129,9 @@ const Inputs = ({
       }
     }
 
-    for (var pair of formData.entries()) {
-      console.log(pair[0] + ": " + pair[1]);
-    }
+    // for (var pair of formData.entries()) {
+    //   console.log(pair[0] + ": " + pair[1]);
+    // }
 
     tableData
       ? edit(
@@ -483,7 +483,6 @@ const Photos = ({ type = 1 }) => {
   const { setSelectedImages, selectedImages, control, tableData } =
     useContext(InputContext);
 
-  console.log("tableData: " + tableData);
   // let images;
 
   // if (tableData) {

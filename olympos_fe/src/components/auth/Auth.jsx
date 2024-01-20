@@ -96,6 +96,7 @@ export default function Auth({ isRememberMe, setIsRememberMe }) {
               alignItems: "start",
             }}
           >
+            <RouterLink to="/">
               <Box
                 sx={{
                   alignSelf: "start",
@@ -109,6 +110,7 @@ export default function Auth({ isRememberMe, setIsRememberMe }) {
                   backgroundPosition: "center",
                 }}
               />
+            </RouterLink>
 
             <Typography component="h1" variant="h5" sx={{ alignSelf: "start" }}>
               Log In
@@ -182,7 +184,7 @@ export default function Auth({ isRememberMe, setIsRememberMe }) {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url("/assets/loginImg.svg")',
+            backgroundImage: 'url("public/assets/loginImg.svg")',
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center",

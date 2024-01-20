@@ -68,7 +68,7 @@ const FormSelections = ({
         <SelectComponent onChange={setCity} value={city} list={cities} />
       )}
 
-      <FormControl sx={{ m: 1, width: { xs: 300, sm: 300 } }}>
+      <FormControl sx={{ m: 1, width: { xs: 300, sm: 300 }, outline: "none" }}>
         <InputLabel id="demo-simple-select-label">
           {forType === "tour" ? "Kateqoriya seç" : "Ölkə seç"}
         </InputLabel>

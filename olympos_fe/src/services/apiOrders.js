@@ -148,3 +148,23 @@ export const editOrderApi = async (editOrder, id) => {
     return error;
   }
 };
+
+export const deleteUserOrder = (id) => {
+  const token = getCookie("token");
+  fetch(`${baseUrl}/user/profile/myorders/delete-reserv/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8", // Indicates the content
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("silinen data: ", data);
+      return data;
+    })
+    .catch((err) => {
+      console.log(err);
+      return err;
+    });
+};

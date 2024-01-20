@@ -74,6 +74,11 @@ const Navbar = () => {
     setRole(userRole);
   }, []);
 
+  // location deyisende mobile sheet baglansin
+  useEffect(() => {
+    setToggle(false);
+  }, [location]);
+
   const isMobile = useMediaQuery("(max-width: 600px)");
 
   function navLinkStyle(isActive) {
@@ -86,7 +91,7 @@ const Navbar = () => {
   const handleToggleMobile = () => {
     setToggle((curr) => !curr);
   };
-
+  console.log("role ", role);
   return (
     <Box
       sx={{
@@ -190,7 +195,7 @@ const Navbar = () => {
                     </NavLink>
                   </Box>
                 )}
-                {role === "null" || role === null ? (
+                {role === "null" || !role ? (
                   <Box
                     sx={{
                       display: "flex",
@@ -236,7 +241,8 @@ const Navbar = () => {
                     </Typography>
                   </Box>
                 ) : (
-                  <AuthUser user={account ? account : "admin"} isMobile />
+                  <span>5</span>
+                  // <AuthUser user={account ? account : "admin"} isMobile />
                 )}
               </Box>
             </Slide>
@@ -250,7 +256,7 @@ const Navbar = () => {
               >
                 <FavoriteIcon />
                 <NavLink style={navLinkStyle} to="/seçdiklərim">
-                  <Typography>Seçilmişlər</Typography>
+                  <Typography>Favorites</Typography>
                 </NavLink>
               </Box>
             )}
@@ -267,7 +273,7 @@ const Navbar = () => {
                       textDecoration: "none",
                     }}
                   >
-                    Giriş
+                    Login
                   </NavLink>
                 </Typography>
 
@@ -288,7 +294,7 @@ const Navbar = () => {
                     }}
                     to="/signup"
                   >
-                    Qeydiyyat
+                    Sign up
                   </NavLink>
                 </Typography>
               </Box>

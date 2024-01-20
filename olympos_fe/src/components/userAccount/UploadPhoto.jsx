@@ -35,7 +35,6 @@ const UploadAndDisplayImage = ({ user }) => {
 
         if (user.profile_photo) {
           setSelectedFile(user.profile_photo);
-          console.log("user profile photo", user?.profile_photo);
           setImgIsFileFormat(false);
         }
       } catch (error) {
@@ -58,7 +57,6 @@ const UploadAndDisplayImage = ({ user }) => {
     setSelectedImages([]);
   };
 
-  console.log("user", user);
   const handleSendImg = () => {
     const formData = new FormData();
     formData.append("first_name", user.first_name);

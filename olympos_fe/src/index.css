@@ -12,6 +12,16 @@
   width: 100%; */
 }
 
+.css-1koo2zv-MuiInputBase-root-MuiInput-root:hover:not(
+    .Mui-disabled,
+    .Mui-error
+  ):before {
+  border: none !important;
+}
+.css-1koo2zv-MuiInputBase-root-MuiInput-root:after {
+  border-bottom: 2px solid #8dd3bb !important;
+}
+
 .gallery {
   -webkit-column-count: 5;
   -moz-column-count: 5;
