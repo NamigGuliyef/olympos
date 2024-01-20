@@ -177,9 +177,6 @@ export class UserService {
   // update hotel and tour Review
   async updateReview(UpdateReviewDto: updateReviewDto) {
     const { hotelId, tourId, title, description, rating } = UpdateReviewDto;
-    console.log(UpdateReviewDto);
-    console.log(hotelId);
-    console.log(tourId);
 
     if (hotelId) {
       return await this.reviewModel.findByIdAndUpdate(

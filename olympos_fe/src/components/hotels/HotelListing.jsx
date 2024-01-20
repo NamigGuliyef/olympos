@@ -65,7 +65,6 @@ const HotelListing = ({
     });
   }, []);
 
-  console.log("hotel INlcuded", hotelIncludings);
   if (!hotelIncludings?.length) {
     return;
   }

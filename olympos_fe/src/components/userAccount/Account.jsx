@@ -142,7 +142,7 @@ const Account = ({ user }) => {
   const handleAccountModal = (field) => {
     setOpenModal(true);
   };
-  console.log("user profile", user.profile_photo);
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -161,7 +161,7 @@ const Account = ({ user }) => {
     formData.append("phone_number", user.phone_number);
     formData.append("profile_photo", selectedImages[0]);
     for (var pair of formData.entries()) {
-      console.log(pair[0] + ": " + pair[1]);
+      // console.log(pair[0] + ": " + pair[1]);
     }
     editUserProfile(formData).then((data) =>
       console.log("data: " + data.statusCode)
