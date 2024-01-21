@@ -249,7 +249,7 @@ const TourDetails = () => {
                         </Typography>
                       </FlexBetween>
                       <FlexBetween>
-                        <Typography>Turun sayını daxil edin</Typography>
+                        <Typography>Nəfər sayını daxil edin</Typography>
                         <Box>
                           <span
                             style={operationStyle}
