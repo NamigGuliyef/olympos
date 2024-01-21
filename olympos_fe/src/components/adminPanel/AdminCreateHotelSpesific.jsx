@@ -24,7 +24,7 @@ const AdminHotelCreateSpesific = ({ handleHotelSpesific }) => {
         >
           <TextField
             id="name"
-            label="name"
+            label="Hotel spesifikasiya"
             error={!!errors["name"]}
             helperText={errors["name"]?.message}
             {...register("name", {

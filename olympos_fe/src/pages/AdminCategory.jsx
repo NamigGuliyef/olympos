@@ -37,7 +37,7 @@ const AdminCategory = () => {
         >
           <TextField
             id="name"
-            label="Kateqoriya"
+            label="Tur kateqoriya"
             error={!!errors.name}
             helperText={errors.name?.message}
             {...register("name", {
