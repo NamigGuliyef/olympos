@@ -100,8 +100,8 @@ export default function Auth({ isRememberMe, setIsRememberMe }) {
               <Box
                 sx={{
                   alignSelf: "start",
-                  width: "100px",
-                  height: "35px",
+                  width: "60px",
+                  height: "15px",
                   marginBottom: "30px",
                   backgroundImage: 'url("/assets/olympos_logo.png")',
                   backgroundRepeat: "no-repeat",
@@ -184,7 +184,7 @@ export default function Auth({ isRememberMe, setIsRememberMe }) {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url("/assets/olympos_logo.png")',
+            backgroundImage: 'url("/assets/loginImg.svg")',
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center",

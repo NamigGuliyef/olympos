@@ -87,7 +87,7 @@ export default function SignUp() {
           sx={{
             // borderRadius:'.5rem',
              
-            backgroundImage: 'url("/images/olympos_logo.png")',
+            backgroundImage: 'url("/images/loginImg.svg")',
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center",
@@ -107,7 +107,7 @@ export default function SignUp() {
                 width: "60px",
                 height: "15px",
                 marginBottom: "10px",
-                backgroundImage: 'url("/images/olympos_logo.png")',
+                backgroundImage: 'url("/images/logo.svg")',
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 backgroundPosition: "center",

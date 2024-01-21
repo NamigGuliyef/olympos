@@ -82,7 +82,7 @@ export default function ForgotPassword() {
                 width: "60px",
                 height: "15px",
                 marginBottom: "10px",
-                backgroundImage: 'url("/images/olympos_logo.png")',
+                backgroundImage: 'url("/images/logo.svg")',
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
@@ -215,7 +215,7 @@ export default function ForgotPassword() {
           md={6}
           lg={6}
           sx={{
-            backgroundImage: 'url("/assets/olympos_logo.png")',
+            backgroundImage: 'url("/assets/loginImg.svg")',
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center",

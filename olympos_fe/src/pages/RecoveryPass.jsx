@@ -77,7 +77,7 @@ export default function VerifyCode() {
                   width: "60px",
                   height: "15px",
                   marginBottom: "10px",
-                  backgroundImage: 'url("/assets/olympos_logo.png")',
+                  backgroundImage: 'url("/assets/logo.svg")',
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
@@ -181,7 +181,7 @@ export default function VerifyCode() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url("/assets/olympos_logo.png")',
+            backgroundImage: 'url("/assets/loginImg.svg")',
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center",

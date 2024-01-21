@@ -118,7 +118,7 @@ export default function SignUp() {
                 width: "60px",
                 height: "15px",
                 marginBottom: "10px",
-                backgroundImage: 'url("/assets/olympos_logo.png")',
+                backgroundImage: 'url("/assets/logo.svg")',
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
