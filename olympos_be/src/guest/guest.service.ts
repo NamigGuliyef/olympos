@@ -1,13 +1,13 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { HotelSpecific } from 'src/hotel-specifics/hotelspecific.schema';
-import { Hotel } from 'src/hotel/hotel.schema';
-import { Review } from 'src/review/review.schema';
-import { CreateSubscribeDto } from 'src/subscribe/dto/subscribe.dto';
-import { Subscribe } from 'src/subscribe/model/subscribe.schema';
-import { Tour } from 'src/tour/tour.schema';
-import { tourCategory } from 'src/tourCategory/tourcategory.schema';
+import { HotelSpecific } from '../hotel-specifics/hotelspecific.schema';
+import { Hotel } from '../hotel/hotel.schema';
+import { Review } from '../review/review.schema';
+import { CreateSubscribeDto } from '../subscribe/dto/subscribe.dto';
+import { Subscribe } from '../subscribe/model/subscribe.schema';
+import { Tour } from '../tour/tour.schema';
+import { tourCategory } from '../tourCategory/tourcategory.schema';
 import { FilterDto, TourFilterDto } from './query.type';
 
 @Injectable()

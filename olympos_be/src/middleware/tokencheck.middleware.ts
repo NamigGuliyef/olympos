@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, NestMiddleware } from '@nestjs/common'
 import { NextFunction, Response } from 'express'
 import { verify } from 'jsonwebtoken'
-import { User } from 'src/user/schema/user.schema'
+import { User } from '../user/schema/user.schema'
 import { tokenRequestType } from './tokenRequestType'
 
 export class tokenCheckMiddleware implements NestMiddleware {

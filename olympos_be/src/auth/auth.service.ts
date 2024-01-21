@@ -5,12 +5,12 @@ import { InjectModel } from '@nestjs/mongoose';
 import { compare, hash } from 'bcrypt';
 import { sign, verify } from 'jsonwebtoken';
 import { Model } from 'mongoose';
-import { MessageResponse } from 'src/admin/message.type';
-import { tokenRequestType } from 'src/middleware/tokenRequestType';
-import { createUserDto } from 'src/user/dto/createuser.dto';
-import { recoveryPasswordDto } from 'src/user/dto/recoveryPassword.dto';
-import { User } from 'src/user/schema/user.schema';
-import { Verify } from 'src/verify/verify_code.schema';
+import { MessageResponse } from '../admin/message.type';
+import { tokenRequestType } from '../middleware/tokenRequestType';
+import { createUserDto } from '../user/dto/createuser.dto';
+import { recoveryPasswordDto } from '../user/dto/recoveryPassword.dto';
+import { User } from '../user/schema/user.schema';
+import { Verify } from '../verify/verify_code.schema';
 import { userSignInResponse, userSignUpResponse, userTokenResponse, verifyTokenResponse } from './auth.types';
 
 

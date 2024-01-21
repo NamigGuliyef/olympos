@@ -3,23 +3,23 @@ import { REQUEST } from '@nestjs/core';
 import { InjectModel } from '@nestjs/mongoose';
 import { compare, hash } from 'bcrypt';
 import mongoose, { Model } from 'mongoose';
-import { MessageResponse } from 'src/admin/message.type';
-import { Hotel } from 'src/hotel/hotel.schema';
-import { tokenRequestType } from 'src/middleware/tokenRequestType';
-import { CreateOrderDto } from 'src/order/order.dto';
-import { Order } from 'src/order/order.schema';
+import { MessageResponse } from '../admin/message.type';
+import { Hotel } from '../hotel/hotel.schema';
+import { tokenRequestType } from '../middleware/tokenRequestType';
+import { CreateOrderDto } from '../order/order.dto';
+import { Order } from '../order/order.schema';
 import {
   createReviewDto,
   deleteReviewDto,
   updateReviewDto,
-} from 'src/review/review.dto';
-import { Review } from 'src/review/review.schema';
-import { Tour } from 'src/tour/tour.schema';
-import { createWhishListDto } from 'src/whishlist/createWhishList.dto';
-import { Whishlist } from 'src/whishlist/whishlist.schema';
+} from '../review/review.dto';
+import { Review } from '../review/review.schema';
+import { Tour } from '../tour/tour.schema';
+import { createWhishListDto } from '../whishlist/createWhishList.dto';
+import { Whishlist } from '../whishlist/whishlist.schema';
 import { updateUserDto } from './dto/updateuser.dto';
 import { User } from './schema/user.schema';
-import cloudinary from 'src/cloudinary/cloudinary';
+import cloudinary from '../cloudinary/cloudinary';
 
 @Injectable()
 export class UserService {
