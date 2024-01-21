@@ -184,7 +184,7 @@ export default function Auth({ isRememberMe, setIsRememberMe }) {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url("/assets/loginImg.svg")',
+            backgroundImage: 'url("/assets/olympos_logo.png")',
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center",
