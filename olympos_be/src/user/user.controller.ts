@@ -10,17 +10,17 @@ import {
   Post, UploadedFile, UseInterceptors, UsePipes,
   ValidationPipe
 } from '@nestjs/common';
-import { MessageResponse } from '../admin/message.type';
-import { CreateOrderDto } from '../order/order.dto';
-import { Order } from '../order/order.schema';
-import { createReviewDto, deleteReviewDto, updateReviewDto } from '../review/review.dto';
-import { createWhishListDto } from '../whishlist/createWhishList.dto';
-import { Whishlist } from '../whishlist/whishlist.schema';
+import { MessageResponse } from 'src/admin/message.type';
+import { CreateOrderDto } from 'src/order/order.dto';
+import { Order } from 'src/order/order.schema';
+import { createReviewDto, deleteReviewDto, updateReviewDto } from 'src/review/review.dto';
+import { createWhishListDto } from 'src/whishlist/createWhishList.dto';
+import { Whishlist } from 'src/whishlist/whishlist.schema';
 import { updateUserDto } from './dto/updateuser.dto';
 import { User } from './schema/user.schema';
 import { UserService } from './user.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { MulterOptions } from '../cloudinary/multer';
+import { MulterOptions } from 'src/cloudinary/multer';
 
 @Controller('user')
 export class UserController {

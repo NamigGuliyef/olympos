@@ -1,6 +1,6 @@
 import { IsOptional } from "class-validator";
 import { IsEmail, IsMobilePhone, IsNotEmpty, IsPhoneNumber, Length, Matches } from "class-validator";
-import { alphabeticallyName } from "../../utils/regex";
+import { alphabeticallyName } from "src/utils/regex";
 
 export class updateUserDto {
   @IsNotEmpty()

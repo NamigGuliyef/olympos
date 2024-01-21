@@ -8,13 +8,13 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { Hotel } from '../hotel/hotel.schema';
-import { Review } from '../review/review.schema';
-import { CreateSubscribeDto } from '../subscribe/dto/subscribe.dto';
-import { Subscribe } from '../subscribe/model/subscribe.schema';
+import { Hotel } from 'src/hotel/hotel.schema';
+import { Review } from 'src/review/review.schema';
+import { CreateSubscribeDto } from 'src/subscribe/dto/subscribe.dto';
+import { Subscribe } from 'src/subscribe/model/subscribe.schema';
 import { GuestService } from './guest.service';
 import { FilterDto, TourFilterDto } from './query.type';
-import { HotelSpecific } from '../hotel-specifics/hotelspecific.schema';
+import { HotelSpecific } from 'src/hotel-specifics/hotelspecific.schema';
 
 @Controller()
 export class GuestController {

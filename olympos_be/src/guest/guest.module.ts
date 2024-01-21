@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { hotelModel } from '../hotel/hotel.schema';
-import { tourModel } from '../tour/tour.schema';
-import { tourCategoryModel } from '../tourCategory/tourcategory.schema';
+import { hotelModel } from 'src/hotel/hotel.schema';
+import { tourModel } from 'src/tour/tour.schema';
+import { tourCategoryModel } from 'src/tourCategory/tourcategory.schema';
 import { GuestController } from './guest.controller';
 import { GuestService } from './guest.service';
-import { hotelSpecificModel } from '../hotel-specifics/hotelspecific.schema';
-import { subscribeModel } from '../subscribe/model/subscribe.schema';
-import { reviewModel } from '../review/review.schema';
+import { hotelSpecificModel } from 'src/hotel-specifics/hotelspecific.schema';
+import { subscribeModel } from 'src/subscribe/model/subscribe.schema';
+import { reviewModel } from 'src/review/review.schema';
 
 @Module({
   imports: [

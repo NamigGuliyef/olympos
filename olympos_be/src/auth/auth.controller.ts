@@ -1,6 +1,6 @@
 import { Body, Controller, HttpCode, HttpStatus, Param, Patch, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
-import { createUserDto } from '../user/dto/createuser.dto';
-import { recoveryPasswordDto } from '../user/dto/recoveryPassword.dto';
+import { createUserDto } from 'src/user/dto/createuser.dto';
+import { recoveryPasswordDto } from 'src/user/dto/recoveryPassword.dto';
 import { AuthService } from './auth.service';
 import { forgetPassResponse, userSignInResponse, verifyCodeResponse } from './auth.types';
 

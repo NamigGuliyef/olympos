@@ -3,23 +3,23 @@ import { REQUEST } from '@nestjs/core';
 import { InjectModel } from '@nestjs/mongoose';
 import { compare, hash } from 'bcrypt';
 import mongoose, { Model } from 'mongoose';
-import { MessageResponse } from '../admin/message.type';
-import { Hotel } from '../hotel/hotel.schema';
-import { tokenRequestType } from '../middleware/tokenRequestType';
-import { CreateOrderDto } from '../order/order.dto';
-import { Order } from '../order/order.schema';
+import { MessageResponse } from 'src/admin/message.type';
+import { Hotel } from 'src/hotel/hotel.schema';
+import { tokenRequestType } from 'src/middleware/tokenRequestType';
+import { CreateOrderDto } from 'src/order/order.dto';
+import { Order } from 'src/order/order.schema';
 import {
   createReviewDto,
   deleteReviewDto,
   updateReviewDto,
-} from '../review/review.dto';
-import { Review } from '../review/review.schema';
-import { Tour } from '../tour/tour.schema';
-import { createWhishListDto } from '../whishlist/createWhishList.dto';
-import { Whishlist } from '../whishlist/whishlist.schema';
+} from 'src/review/review.dto';
+import { Review } from 'src/review/review.schema';
+import { Tour } from 'src/tour/tour.schema';
+import { createWhishListDto } from 'src/whishlist/createWhishList.dto';
+import { Whishlist } from 'src/whishlist/whishlist.schema';
 import { updateUserDto } from './dto/updateuser.dto';
 import { User } from './schema/user.schema';
-import cloudinary from '../cloudinary/cloudinary';
+import cloudinary from 'src/cloudinary/cloudinary';
 
 @Injectable()
 export class UserService {
@@ -31,7 +31,7 @@ export class UserService {
     @InjectModel('order') private orderModel: Model<Order>,
     @InjectModel('tour') private tourModel: Model<Tour>,
     @Inject(REQUEST) private readonly req: tokenRequestType,
-  ) {}
+  ) { }
 
   // get Profile
   async getProfile(): Promise<User> {
@@ -238,7 +238,9 @@ export class UserService {
     const userExist = await this.userModel.findOne({
       email: this.req.user.email,
     });
-    if (userExist.user_orders.includes(hotelId)) {
+    const orderExist = await this.orderModel.findOne({ userId: userExist._id, hotelId })
+    console.log(orderExist);
+    if (orderExist && orderExist.ordered === false) {
       throw new HttpException('You have already booked', HttpStatus.FORBIDDEN);
     } else {
       const reserv = await this.orderModel.create({
@@ -302,7 +304,10 @@ export class UserService {
     const userExist = await this.userModel.findOne({
       email: this.req.user.email,
     });
-    if (userExist.user_orders.includes(tourId)) {
+    const orderExist = await this.orderModel.findOne({ userId: userExist._id, tourId })
+    console.log(orderExist);
+  
+    if (orderExist && orderExist.ordered === false) {
       throw new HttpException('You have already booked', HttpStatus.FORBIDDEN);
     } else {
       const reserv = await this.orderModel.create({

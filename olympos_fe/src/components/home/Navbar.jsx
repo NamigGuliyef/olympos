@@ -256,7 +256,7 @@ const Navbar = () => {
               >
                 <FavoriteIcon />
                 <NavLink style={navLinkStyle} to="/seçdiklərim">
-                  <Typography>Seçdiklərim</Typography>
+                  <Typography>Favorites</Typography>
                 </NavLink>
               </Box>
             )}
@@ -273,7 +273,7 @@ const Navbar = () => {
                       textDecoration: "none",
                     }}
                   >
-                    Giriş
+                    Login
                   </NavLink>
                 </Typography>
 
@@ -294,7 +294,7 @@ const Navbar = () => {
                     }}
                     to="/signup"
                   >
-                    Qeydiyyat
+                    Sign up
                   </NavLink>
                 </Typography>
               </Box>
