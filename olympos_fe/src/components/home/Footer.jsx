@@ -160,7 +160,7 @@ const Footer = () => {
           }}
         >
           <Typography variant="h6" gutterBottom>
-            Logo
+            Olympos travel
           </Typography>
           <Box>
             <IconButton sx={{ padding: "0", marginRight: "0.5rem" }}>

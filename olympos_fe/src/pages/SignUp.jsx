@@ -115,10 +115,10 @@ export default function SignUp() {
             <Box
               sx={{
                 alignSelf: "start",
-                width: "60px",
-                height: "15px",
+                width: "100px",
+                height: "35px",
                 marginBottom: "10px",
-                backgroundImage: 'url("/assets/logo.svg")',
+                backgroundImage: 'url("/assets/olympos_logo.png")',
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 backgroundPosition: "center",

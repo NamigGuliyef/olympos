@@ -13,7 +13,7 @@ const Logo = () => {
   return (
     <div>
       <NavLink style={navLinkStyle} to="/">
-        Logo
+        Olympos travel
       </NavLink>
     </div>
   );
