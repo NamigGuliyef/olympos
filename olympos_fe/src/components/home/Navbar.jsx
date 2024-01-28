@@ -31,7 +31,7 @@ import { ColorModeContext } from "../../App";
 
 import logo from "../../../public/Logo.jpeg";
 
-const Navbar = ({}) => {
+const Navbar = ({ }) => {
   const dispatch = useDispatch();
   const [toggle, setToggle] = useState(false);
   const [account, setAccount] = useState(null);
@@ -68,7 +68,7 @@ const Navbar = ({}) => {
           // deleteCookie(["token", "role"]);
           // navigate("/login");
           const obj = {
-            profile_photo: "../../../public/Logo.jpeg",
+            profile_photo: "../../../Logo.jpeg",
             // profile_photo:
             //   "https://res.cloudinary.com/daxy3ke6i/image/upload/v1705745977/olympos_logo.ico.ico",
             user: "Admin",
@@ -196,7 +196,7 @@ const Navbar = ({}) => {
                 }}
               />
             ) : (
-              <MenuIcon sx={{color:"black"}}/>
+              <MenuIcon sx={{ color: "black" }} />
             )}
           </div>
         )}
@@ -234,7 +234,7 @@ const Navbar = ({}) => {
                   >
                     <FavoriteIcon />
                     <NavLink style={navLinkStyle} to="/seçdiklərim">
-                      <Typography sx={{ color: "black" }}>Favorites</Typography>
+                      <Typography sx={{ color: "black" }}>Seçilmişlər</Typography>
                     </NavLink>
                   </Box>
                 )}
@@ -258,7 +258,7 @@ const Navbar = ({}) => {
                           textDecoration: "none",
                         }}
                       >
-                        Login
+                        Giriş
                       </NavLink>
                     </Typography>
 
@@ -279,7 +279,7 @@ const Navbar = ({}) => {
                         }}
                         to="/signup"
                       >
-                        Sign up
+                        Qeydiyyat
                       </NavLink>
                     </Typography>
                   </Box>
@@ -296,7 +296,7 @@ const Navbar = ({}) => {
               <Box
                 sx={{ display: "flex", alignItems: "center", gap: "0.3rem" }}
               >
-                <FavoriteIcon />
+                <FavoriteIcon sx={{ color: "black" }} />
                 <NavLink style={navLinkStyle} to="/seçdiklərim">
                   <Typography>Seçilmişlər</Typography>
                 </NavLink>

@@ -184,7 +184,7 @@ const UserReviews = ({ reviews, singleHotel, setCrudEventHappened }) => {
                     </Button>
                   </>
                 )}
-                {token?.length && role === "admin" && (
+                {/* {token?.length && role === "admin" && (
                   <>
                     <Button onClick={() => handleOpenReviewEdit(review)}>
                     Düzəliş et
@@ -193,7 +193,7 @@ const UserReviews = ({ reviews, singleHotel, setCrudEventHappened }) => {
                     Sil
                     </Button>
                   </>
-                )}
+                )} */}
               </Stack>
               {/* )} */}
               {modalOpen && (
