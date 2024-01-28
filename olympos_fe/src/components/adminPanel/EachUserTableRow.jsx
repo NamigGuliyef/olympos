@@ -33,7 +33,7 @@ const EachUserTableRow = ({
             onClick={() => deleteData(table._id)}
             disabled={deleteLoading}
           >
-            Delete
+            Sil
           </Button>
         </Box>
       </TableCell>

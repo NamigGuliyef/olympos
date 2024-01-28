@@ -1,8 +1,7 @@
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
@@ -79,10 +78,10 @@ export default function ForgotPassword() {
             <Box
               sx={{
                 alignSelf: "start",
-                width: "100px",
-                height: "35px",
+                width: "60px",
+                height: "15px",
                 marginBottom: "10px",
-                backgroundImage: 'url("/images/olympos_logo.png")',
+                backgroundImage: 'url("/images/logo.svg")',
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
@@ -215,7 +214,7 @@ export default function ForgotPassword() {
           md={6}
           lg={6}
           sx={{
-            backgroundImage: 'url("/assets/loginImg.svg")',
+            backgroundImage: 'url("public/assets/loginImg.svg")',
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center",

@@ -3,8 +3,10 @@ import React from "react";
 import { FlexBetween, SectionTitle, theme } from "../../theme";
 import ReusableButton from "./ReusableButton";
 import { Link, NavLink } from "react-router-dom";
+import { useTheme } from "@emotion/react";
 
 const SectionHeader = ({ secTitle, btn, link }) => {
+  const theme = useTheme();
   return (
     <FlexBetween
       sx={{
@@ -24,7 +26,7 @@ const SectionHeader = ({ secTitle, btn, link }) => {
             lineHeight: "17px",
             letterSpacing: "0em",
             textAlign: "left",
-            color: "#112211",
+            color: theme.palette.mode === "dark" ? "white" : "#112211",
             textDecoration: "none",
             textTransform: "none",
           }}

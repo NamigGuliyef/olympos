@@ -14,6 +14,8 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { getCookie } from "../helper/setCookie";
 import toast from "react-hot-toast";
 const baseUrl = import.meta.env.VITE_BASE_URL;
+import Logo from "../components/home/Logo"
+
 
 const defaultTheme = createTheme();
 
@@ -71,18 +73,7 @@ export default function VerifyCode() {
             }}
           >
             <RouterLink to="/">
-              <Box
-                sx={{
-                  alignSelf: "start",
-                  width: "100px",
-                  height: "35px",
-                  marginBottom: "10px",
-                  backgroundImage: 'url("/assets/olympos_logo.png")',
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              />
+             <Logo />
             </RouterLink>
 
             <Typography component="h1" variant="h5" sx={{ alignSelf: "start" }}>
@@ -147,7 +138,7 @@ export default function VerifyCode() {
                 </Grid>
                 <Grid item>
                   <RouterLink to="/signup">
-                    {"Don't have an account? Sign Up"}
+                    {"Hesabınız yoxdur? Qeydiyyat edin"}
                   </RouterLink>
                 </Grid>
 

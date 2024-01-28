@@ -21,49 +21,22 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import useHomeReviews from "../../features/home/useHomeReviews";
 import { v4 as uuidv4 } from "uuid";
-import Loader from "../reusable/Loader";
-
-const data = [
-  {
-    id: 4,
-    title: "A real sense of community, nurtured",
-    subtitle:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis repellendus exercitationem, perspiciatis expedita aliquam accusantium quia dolorum quam enim consequatur distinctio cupiditate doloremque velit a sequi tempora eos, amet ipsa.,",
-    name: "Olga",
-    job: "Weave studios- Kai Tai",
-    star: 4,
-    img: "../assets/reviewFirst.png",
-  },
-  {
-    id: 5,
-    title: "A real sense of community, nurtured",
-    subtitle:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis repellendus exercitationem, perspiciatis expedita aliquam accusantium quia dolorum quam enim consequatur distinctio cupiditate doloremque velit a sequi tempora eos, amet ipsa.,",
-    name: "Olga",
-    job: "Weave studios- Kai Tai",
-    star: 6,
-    img: "../assets/reviewSecond.png",
-  },
-  {
-    id: 3,
-    title: "A real sense of community, nurtured",
-    subtitle:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis repellendus exercitationem, perspiciatis expedita aliquam accusantium quia dolorum quam enim consequatur distinctio cupiditate doloremque velit a sequi tempora eos, amet ipsa.,",
-    name: "Olga",
-    job: "Weave studios- Kai Tai",
-    star: 5,
-    img: "../assets/reviewThird.png",
-  },
-];
+import Loader from "../reusable/loader";
+import { useTheme } from "@emotion/react";
 
 export default function Reviews() {
   const { isReviewLoading, homeReviews } = useHomeReviews();
   const isMobile = useMediaQuery("(max-width: 600px)");
   const tablet = useMediaQuery("(max-width: 900px)");
   const laptop = useMediaQuery("(max-width: 1200px)");
+  const modeTheme = useTheme();
   if (isReviewLoading) {
     return <Loader />;
   }
+
+  const darkOrLight = modeTheme.palette.mode;
+
+  console.log("modeTheme", darkOrLight);
 
   return (
     <CustomContainer
@@ -112,7 +85,6 @@ export default function Reviews() {
                   backgroundColor: `${theme.palette.primary.main}`,
                   borderRadius: "1rem",
                   zIndex: -1,
-                  /* Other styles for the pseudo-element */
                 },
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                 transition: "transform 0.3s, box-shadow 0.3s",
@@ -130,7 +102,14 @@ export default function Reviews() {
               }}
             >
               <CardContent sx={{ zIndex: 1500 }}>
-                <Typography gutterBottom variant="h5" sx={{ marginTop: "0" }}>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  sx={{
+                    marginTop: "0",
+                    color: "black",
+                  }}
+                >
                   {box?.title}
                 </Typography>
 
@@ -138,17 +117,24 @@ export default function Reviews() {
 
                 <Box sx={{ display: "flex", gap: "0.5rem", marginTop: "1rem" }}>
                   {Array.from({ length: box?.rating }).map((star) => (
-                    <Star key={box.id} sx={{ color: "#FFC107" }} />
+                    <Star key={uuidv4()} sx={{ color: "#FFC107" }} />
                   ))}
                 </Box>
                 <Box sx={{ marginTop: "1rem" }}>
-                  <Typography variant="subtitle1">
+                  <Typography
+                    sx={{
+                      color: "black",
+                    }}
+                    variant="subtitle1"
+                  >
                     {box?.userId?.first_name + " " + box?.userId.last_name}
                   </Typography>
-                  <Typography variant="subtitle1">{box.job}</Typography>
+                  <Typography variant="subtitle1" sx={{ color: "black" }}>
+                    {box.job}
+                  </Typography>
                 </Box>
                 <Box sx={{ marginTop: "1rem" }}>
-                  <Typography variant="subtitle1">
+                  <Typography variant="subtitle1" sx={{ color: "black" }}>
                     {box?.hotelId ? box?.hotelId?.name : box?.tourId?.name}
                   </Typography>
                 </Box>
@@ -183,6 +169,7 @@ function ReviewSubtitle({ children }) {
           letterSpacing: "0em",
           textAlign: "left",
           marginTop: "2rem",
+          color: "#111111",
         }}
         variant="body2"
         color="text.secondary"

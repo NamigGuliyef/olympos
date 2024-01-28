@@ -29,7 +29,21 @@ export default function CheckListHotelTest({ data, checked, setChecked }) {
   };
 
   const customList = (items) => (
-    <List dense component="div" role="list">
+    <List
+      sx={{
+        maxWidth: "100%",
+        // maxWidth: 360,
+        bgcolor: "background.paper",
+        position: "relative",
+        overflow: "auto",
+
+        maxHeight: "220px",
+        "& ul": { padding: 0 },
+      }}
+      dense
+      component="div"
+      role="list"
+    >
       {items.map((value) => {
         const labelId = `transfer-list-item-${value}-label`;
 
@@ -76,6 +90,7 @@ export default function CheckListHotelTest({ data, checked, setChecked }) {
           "&.MuiGrid-root": {
             paddingLeft: "0",
             paddingTop: "0",
+            width: "100%",
           },
         }}
       >

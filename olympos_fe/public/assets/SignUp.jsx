@@ -115,10 +115,10 @@ export default function SignUp() {
             />
 
             <Typography component="h1" variant="h5" sx={{ alignSelf: "start" }}>
-              Sign Up
+              Qeydiyyat
             </Typography>
             <Typography sx={{ fontSize: "0.7rem" }}>
-              Let’s get you all st up so you can access your personal account.
+              Şəxsi hesaba malik olmaq və yeniliklərdən xəbərdar olmaq üçün qeydiyyat edin.
             </Typography>
             <Box
               component="form"

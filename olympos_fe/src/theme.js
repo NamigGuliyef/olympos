@@ -32,7 +32,7 @@ export const RatingComponent = styled(Typography)({
   fontWeight: 400,
   lineHeight: 1.75,
   letterSpacing: "0.00938em",
-  color: `black`,
+  // color: `black`,
   fontSize: "1.2rem",
   width: "40px",
   height: "32px",
@@ -50,7 +50,7 @@ export const SectionTitle = styled(Typography)({
   // margin: "1rem 0",
 });
 
-export const IframeWrapper = styled("div")({
+export const IframeWrapper = styled(Typography)({
   width: "100%",
   "& iframe": {
     width: "100%",

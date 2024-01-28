@@ -10,7 +10,7 @@ const ReviewPagination = memo(({ page, setPage, btnCount }) => {
 
   return (
     <Stack spacing={2} sx={{ alignItems: "center", margin: "1rem 0" }}>
-      <Typography>Page: {page}</Typography>
+      <Typography>Səhifə: {page}</Typography>
       <Pagination count={btnCount} page={page} onChange={handleChange} />
     </Stack>
   );

@@ -425,7 +425,8 @@ const TourListing = ({
                     bgcolor: "background.paper",
                     position: "relative",
                     overflow: "auto",
-                    maxHeight: 300,
+
+                    maxHeight: "220px",
                     "& ul": { padding: 0 },
                   }}
                   dense

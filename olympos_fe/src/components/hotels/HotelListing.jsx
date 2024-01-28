@@ -102,7 +102,6 @@ const HotelListing = ({
               setChecked={setChecked}
               // data={freebies}
               data={hotelIncludings}
-              sx={{ display: "flex", justifyContent: "flex-start" }}
             />
           </Stack>
           <Divider />

@@ -1,5 +1,5 @@
 import { Box, Button, TextField } from "@mui/material";
-import React from "react";
+
 import { useForm } from "react-hook-form";
 import { theme } from "../theme";
 import { createTourCategory } from "../services/apiTours";
@@ -47,6 +47,7 @@ const AdminCategory = () => {
           <Button
             sx={{
               backgroundColor: `${theme.palette.primary.main}`,
+              color: "white",
             }}
             type="submit"
           >

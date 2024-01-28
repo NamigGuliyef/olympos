@@ -1,27 +1,13 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Typography,
-} from "@mui/material";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteOrder } from "../store/slices/ordersSlice";
-import toast from "react-hot-toast";
-import { theme } from "../theme";
+import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { useState } from "react";
+
 import useOrders from "../features/orders/useOrder";
 import Loader from "../components/reusable/Loader";
 import UserProfile from "../components/reusable/UserProfile";
 
 import OrderComponent from "../components/OrderComponent";
 
-// import BookingTable from "../components/Table";
-
 const Orders = () => {
-  // const orders = useSelector((state) => state.order.orders);
   const { isOrdersLoading, orders } = useOrders();
 
   const [sort, setSort] = useState("");

@@ -4,8 +4,10 @@ import { CustomContainer, FlexBetween } from "../../theme";
 import { Link } from "react-router-dom";
 import ReusableButton from "../reusable/ReusableButton";
 import SectionHeader from "../reusable/SectionHeader";
+import { useTheme } from "@emotion/react";
 
 const SelectFromHome = ({ data, title, link }) => {
+  const theme = useTheme();
   return (
     <CustomContainer
       sx={{
@@ -69,6 +71,7 @@ const SelectFromHome = ({ data, title, link }) => {
                     lineHeight: "20px",
                     letterSpacing: "0em",
                     textAlign: "left",
+                    color: theme.palette.mode === "dark" ? "white" : "black",
                   }}
                   variant="h5"
                 >

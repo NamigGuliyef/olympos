@@ -24,7 +24,7 @@ const UserSendMessage = ({ setSend }) => {
   return (
     <form onSubmit={handleSubmit(handleSendMessage)}>
       <Typography sx={{ textAlign: "center", mb: "1rem" }}>
-        Send message to users
+      Bütün istifadəçilərə mesaj göndər
       </Typography>
 
       <TextField

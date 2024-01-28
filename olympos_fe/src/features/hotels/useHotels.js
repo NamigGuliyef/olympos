@@ -11,10 +11,10 @@ const useHotels = (role) => {
     isLoading: isHotelsLoading,
     data: hotels,
     error,
-  } = useQuery(
-    ["hotels"],
-    role === "user" ? fetchClientSideHotel : fetchHotelsApi
-  );
+  } = useQuery({
+    queryKey: ["hotels"],
+    queryFn: role === "user" ? fetchClientSideHotel : fetchHotelsApi,
+  });
 
   return {
     isHotelsLoading,
@@ -43,10 +43,10 @@ export const useFilterHotel = (url) => {
     isLoading: hotelFilterLoading,
     data: hotelFilter,
     error,
-  } = useQuery(
-    ["hotels", url], // Include role as part of the query key
-    () => fetchHotelFilter(url) // Fetch function without role argument
-  );
+  } = useQuery({
+    queryKey: ["hotels", url],
+    queryFn: () => fetchHotelFilter(url),
+  });
 
   return {
     hotelFilterLoading,

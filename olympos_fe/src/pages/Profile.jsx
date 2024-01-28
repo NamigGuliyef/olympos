@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
-import Navbar from "../components/home/Navbar";
-import Footer from "../components/home/Footer";
+import { useEffect, useState } from "react";
+
 import Account from "../components/userAccount/Account";
 import UserProfile from "../components/reusable/UserProfile";
 import { getUserDetails } from "../services/apiAuth";
-import { deleteCookie, setCokieHandler } from "../helper/setCookie";
-import { useNavigate } from "react-router-dom";
 import { CustomContainer } from "../theme";
 import { useClientUsers } from "../features/users/useUsers";
 import Loader from "../components/reusable/Loader";
@@ -14,21 +11,10 @@ import UserOrders from "../components/userAccount/UserOrders";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
-  const { isClientUsersLoading, clientUsers } = useClientUsers();
+
+  const { isClientUsersLoading } = useClientUsers();
 
   useEffect(() => {
-    // getUserData();
-    // getUserDetails().then((data) => {
-    //
-    //   if (data?.statusCode === 403) {
-    //     // deleteCookie(["token", "role", "name"]);
-    //     navigate("/admin-panel");
-    //   } else {
-    //     setUser(data);
-    //     setCokieHandler("name", data.first_name);
-    //   }
-    // });
     getUserDetails().then((data) => {
       if (data.first_name) {
         setUser(data);
@@ -53,7 +39,6 @@ const Profile = () => {
               label: "Sifarişlərim",
               content: (
                 <div>
-                  {console.log("user", user?.user_orders)}
                   {user?.user_orders.length ? (
                     <UserOrders orders={user} />
                   ) : (

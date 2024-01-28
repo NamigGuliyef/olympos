@@ -1,9 +1,6 @@
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-// import Link from "@mui/material/Link";
 import { Link } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
@@ -14,6 +11,7 @@ import { useState } from "react";
 import { signupHandler } from "../services/apiAuth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import Logo from "../components/home/Logo"
 
 const defaultTheme = createTheme();
 
@@ -112,24 +110,25 @@ export default function SignUp() {
               mx: 4,
             }}
           >
-            <Box
+            {/* <Box
               sx={{
                 alignSelf: "start",
-                width: "100px",
-                height: "35px",
+                width: "60px",
+                height: "15px",
                 marginBottom: "10px",
-                backgroundImage: 'url("/assets/olympos_logo.png")',
+                backgroundImage: 'url("/assets/logo.svg")',
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
-            />
+            /> */}
+            <Logo />
 
             <Typography component="h1" variant="h5" sx={{ alignSelf: "start" }}>
-              Sign Up
+            Qeydiyyat
             </Typography>
             <Typography sx={{ fontSize: "0.7rem" }}>
-              Let’s get you all st up so you can access your personal account.
+            Şəxsi hesaba malik olmaq və yeniliklərdən xəbərdar olmaq üçün qeydiyyat edin.
             </Typography>
             <Box
               component="form"
@@ -260,7 +259,7 @@ export default function SignUp() {
                 }}
               >
                 <Typography sx={{ fontSize: "0.7rem", fontWeight: "500" }}>
-                  Create Account
+                  Hesab yarat
                 </Typography>
               </Button>
               <Typography
@@ -270,7 +269,7 @@ export default function SignUp() {
                   marginRight: "0.5rem",
                 }}
               >
-                Already have an account?
+                Artıq olympos travel da hesabınız var?
                 <Box
                   sx={{
                     // color: "red",
@@ -281,7 +280,7 @@ export default function SignUp() {
                   }}
                 >
                   <Link style={{ color: "red" }} to="/login">
-                    Login
+                    Giriş
                   </Link>
                 </Box>
               </Typography>

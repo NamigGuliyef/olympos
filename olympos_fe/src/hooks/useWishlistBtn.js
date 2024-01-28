@@ -6,7 +6,6 @@ import {
 } from "../store/slices/favoritesSlice";
 import { toast } from "react-hot-toast";
 import { getCookie } from "../helper/setCookie";
-import { createWishlist, deleteWishlist } from "../services/apiWishlist";
 import { useEffect, useMemo, useState } from "react";
 import useUserWishlist from "../features/wishlist/useUserWishlist";
 import useCreateWishlist from "../features/wishlist/useCreateWishlist";

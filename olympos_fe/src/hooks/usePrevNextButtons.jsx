@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FlexBetween } from "../theme";
 import ReusableButton from "../components/reusable/ReusableButton";
 import { useMediaQuery } from "@mui/material";
@@ -54,7 +54,7 @@ export const usePrevNextButtons = (next, setNext, postsPerPage, data) => {
               color="white"
               type="prevNextBtn"
             >
-              Prev
+              Əvvəlki
             </ReusableButton>
             <ReusableButton
               width={isMobile && 100}
@@ -64,7 +64,7 @@ export const usePrevNextButtons = (next, setNext, postsPerPage, data) => {
               color="white"
               type="prevNextBtn"
             >
-              Next
+              Növbəti
             </ReusableButton>
           </FlexBetween>
         ) : (

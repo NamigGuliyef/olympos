@@ -1,9 +1,7 @@
 import { Box, Button } from "@mui/material";
 import useHotels from "../features/hotels/useHotels";
 import useDeleteHotel from "../features/hotels/useDeleteHotel";
-import ReusableTable from "../components/adminPanel/ReusableTable";
 import { useEffect, useState } from "react";
-import EachTourTableRow from "../components/adminPanel/EachTourTableRow";
 import Loader from "../components/reusable/Loader";
 import AdminModal from "../components/reusable/AdminModal";
 import Inputs from "../components/adminPanel/Inputs";
@@ -14,7 +12,6 @@ import { fetchHotelIncludings } from "../services/apiHotels";
 
 const AdminHotels = () => {
   const columns = [
-    // { field: "_id", headerName: "ID", width: 70 },
     {
       field: "photos",
       headerName: "Photos",
@@ -66,7 +63,7 @@ const AdminHotels = () => {
       align: "center",
       width: 100,
       renderCell: ({ row: { id } }) => {
-        return <Button onClick={() => deleteHotel(id)}>Delete</Button>;
+        return <Button onClick={() => deleteHotel(id)}>Sil</Button>;
       },
     },
     {
@@ -75,7 +72,7 @@ const AdminHotels = () => {
       align: "center",
       width: 100,
       renderCell: ({ row }) => {
-        return <Button onClick={() => handleOpenModal(row)}>Edit</Button>;
+        return <Button onClick={() => handleOpenModal(row)}>Düzəliş et</Button>;
       },
     },
   ];
@@ -109,7 +106,7 @@ const AdminHotels = () => {
 
   return (
     <Box>
-      <Button onClick={() => handleOpenModal()}>Create New Hotel</Button>
+      <Button onClick={() => handleOpenModal()}>Yeni otel yarat</Button>
       {showInput && (
         <AdminModal
           openOrClose={showInput}

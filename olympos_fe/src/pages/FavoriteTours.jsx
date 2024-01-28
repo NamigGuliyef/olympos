@@ -3,31 +3,13 @@ import { useSelector } from "react-redux";
 import TourListItem from "../components/reusable/TourListItem";
 import { CustomContainer, theme } from "../theme";
 import useUserWishlist from "../features/wishlist/useUserWishlist";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getCookie } from "../helper/setCookie";
-import { fetchClientSideToursApi, fetchToursApi } from "../services/apiTours";
-import { fetchClientSideHotel } from "../services/apiHotels";
 import Loader from "../components/reusable/Loader";
-import { Link } from "react-router-dom";
+
 import useTours from "../features/tours/useTours";
 import useHotels from "../features/hotels/useHotels";
 import EmptyFavorite from "../components/reusable/EmptyFavorite";
-import { useWishlistBtn } from "../hooks/useWishlistBtn";
-
-const linkStyle = {
-  textDecoration: "none",
-  fontSize: "18px",
-  fontStyle: "italic",
-  backgroundColor: `${theme.palette.primary.main}`,
-  color: "white",
-  padding: "0.5rem",
-  borderRadius: "10px",
-  transition: "transform 0.3s, box-shadow 0.3s",
-  "&:hover": {
-    transform: "scale(1.3)",
-    boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-  },
-};
 
 const FavoriteTours = () => {
   let favs = useSelector((store) => store.favorite.favorites);
@@ -46,7 +28,7 @@ const FavoriteTours = () => {
     error: wishlistError,
   } = useUserWishlist();
   const { isToursLoading, tours } = useTours("user");
-  const { isHotelsLoading, hotels, error: hotelError } = useHotels("user");
+  const { isHotelsLoading, hotels } = useHotels("user");
 
   // useEffect(() => {
   //   const fetchData = async () => {

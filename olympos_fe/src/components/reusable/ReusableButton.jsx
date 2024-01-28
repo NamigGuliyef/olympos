@@ -1,4 +1,6 @@
+import { useTheme } from "@emotion/react";
 import { Button, useMediaQuery } from "@mui/material";
+import { theme } from "../../theme";
 
 const ReusableButton = ({
   link,
@@ -14,6 +16,7 @@ const ReusableButton = ({
   type,
 }) => {
   const isMobile = useMediaQuery("(max-width: 600px)");
+  const modeTheme = useTheme();
 
   return (
     <Button
@@ -33,7 +36,8 @@ const ReusableButton = ({
         padding: "8px 16px",
         fontSize: size,
         fontWeight: 600,
-        color: color,
+
+        color: color ? color : `${theme.palette.primary.main}`,
         textTransform: "none",
 
         "&:hover": {

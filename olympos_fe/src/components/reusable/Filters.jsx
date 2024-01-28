@@ -27,11 +27,11 @@ const Filters = ({ priceValue, setNewPrice, newPrice }) => {
           textAlign: "left",
         }}
       >
-        Filters
+        Filtrlər
       </Typography>
       <Stack>
         <FlexBetween>
-          <Typography variant="subtitle1">Price</Typography>
+          <Typography variant="subtitle1">Qiymət aralığı</Typography>
           <KeyboardArrowDownIcon />
         </FlexBetween>
         <Box>

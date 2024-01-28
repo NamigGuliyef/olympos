@@ -14,15 +14,14 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import FavoriteBtn from "../components/reusable/FavoriteBtn";
 import ReusableButton from "../components/reusable/ReusableButton";
 import UserReviews from "../components/reusable/UserReviews";
-import Footer from "../components/home/Footer";
-import Navbar from "../components/home/Navbar";
+
 import AdminModal from "../components/reusable/AdminModal";
-import Map from "../components/reusable/Map";
+
 import { useDispatch, useSelector } from "react-redux";
-import { addOrder } from "../store/slices/ordersSlice";
+
 import toast from "react-hot-toast";
-import { useEffect, useMemo, useState } from "react";
-import { StringToHtml } from "../components/StringToHtml";
+import { useMemo, useState } from "react";
+
 import { useCreateOrder } from "../features/orders/useCreateOrder";
 import { useWishlistBtn } from "../hooks/useWishlistBtn";
 import { createTourOrderApi } from "../services/apiOrders";
@@ -51,17 +50,13 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 const TourDetails = () => {
   const [openBronModal, setOpenBronModal] = useState(false);
   const [bronCounter, setBronCounter] = useState(1);
-  const { isOrderCreating, createOrder } = useCreateOrder();
-  // const favorites = useSelector((store) => store.favorite.favorites);
 
   const params = useParams();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { tourId } = params;
   const token = useMemo(() => getCookie("token"), []);
   const role = useMemo(() => getCookie("role"), []);
 
-  // const isInFavorite = favorites.find((favor) => favor._id === tourId);
   const { data, isLoading, error } = useFetch(`${baseUrl}/tour/${tourId}`);
   const { isInFavorite, handleFavoriteClick } = useWishlistBtn(
     data,
@@ -70,7 +65,6 @@ const TourDetails = () => {
   );
 
   const userInUserSlice = useSelector((state) => state.user.user);
-  const currentUser = userInUserSlice[0];
 
   const handleOpenBronModal = (tour) => {
     if (userInUserSlice?.[0]?.first_name) {
@@ -249,7 +243,7 @@ const TourDetails = () => {
                         </Typography>
                       </FlexBetween>
                       <FlexBetween>
-                        <Typography>Nəfər sayını daxil edin</Typography>
+                        <Typography>Turun sayını daxil edin</Typography>
                         <Box>
                           <span
                             style={operationStyle}
@@ -312,9 +306,10 @@ const TourDetails = () => {
           </Stack>
           <Divider sx={{ margin: "3rem 0" }} />
           <Box sx={{}}>
-            <SectionTitle>Overview</SectionTitle>
+            <SectionTitle>Məlumat</SectionTitle>
             <Typography sx={{ margin: "1rem 0" }} variant="body1">
               <IframeWrapper
+                color={"red"}
                 dangerouslySetInnerHTML={{ __html: data?.description }}
               />
             </Typography>

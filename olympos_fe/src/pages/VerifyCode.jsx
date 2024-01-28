@@ -13,6 +13,8 @@ import { useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { setCokieHandler } from "../helper/setCookie";
+import Logo from "../components/home/Logo"
+
 
 const defaultTheme = createTheme();
 
@@ -85,18 +87,19 @@ export default function VerifyCode() {
             }}
           >
             <RouterLink to="/">
-              <Box
+              {/* <Box
                 sx={{
                   alignSelf: "start",
                   width: "60px",
                   height: "15px",
                   marginBottom: "10px",
-                  backgroundImage: 'url("/assets/olympos_logo.png")',
+                  backgroundImage: 'url("/assets/logo.svg")',
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
-              />
+              /> */}
+              <Logo />
             </RouterLink>
 
             <Typography component="h1" variant="h5" sx={{ alignSelf: "start" }}>
@@ -143,7 +146,7 @@ export default function VerifyCode() {
                 </Grid>
                 <Grid item>
                   <RouterLink to="/signup">
-                    {"Don't have an account? Sign Up"}
+                    {"Hesabınız yoxdur? Qeydiyyat edin"}
                   </RouterLink>
                 </Grid>
 

@@ -13,16 +13,8 @@ import { Button } from "@mui/material";
 import { deleteCookie } from "../../helper/setCookie";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/slices/userSlice";
+import { useTheme } from "@emotion/react";
 const drawerWidth = 240;
-
-const navLinkStyle = () => {
-  return {
-    color: "black",
-    textDecoration: "none",
-    fontSize: "22px",
-    width: "100%",
-  };
-};
 
 export default function AppLayout() {
   const dispatch = useDispatch();
@@ -30,6 +22,17 @@ export default function AppLayout() {
     deleteCookie(["token", "role", "name"]);
     window.location.reload();
     dispatch(logout());
+  };
+
+  const theme = useTheme();
+
+  const navLinkStyle = () => {
+    return {
+      color: theme.palette.mode === "dark" ? "white" : "black",
+      textDecoration: "none",
+      fontSize: "22px",
+      width: "100%",
+    };
   };
 
   return (
@@ -74,12 +77,12 @@ export default function AppLayout() {
         {/* <Divider /> */}
         <List>
           {[
-            { name: "Orders", url: "orders" },
-            { name: "Tours", url: "admin-tours" },
-            { name: "Hotels", url: "admin-hotels" },
-            { name: "Users", url: "admin-users" },
-            { name: "Reviews", url: "admin-reviews" },
-            { name: "Category&Specifics", url: "admin-tur-category" },
+            { name: "Sifarişlər", url: "orders" },
+            { name: "Turlar", url: "admin-tours" },
+            { name: "Otellər", url: "admin-hotels" },
+            { name: "İstifadəçilər", url: "admin-users" },
+            { name: "Rəylər", url: "admin-reviews" },
+            { name: "Kateqori&Spesifikasiya", url: "admin-tur-category" },
           ].map((text, index) => (
             <ListItem key={text.name} disablePadding>
               <ListItemButton>
@@ -94,7 +97,7 @@ export default function AppLayout() {
             </ListItem>
           ))}
         </List>
-        <Button onClick={handleLogout}>Logout</Button>
+        <Button onClick={handleLogout}>Çıxış</Button>
       </Drawer>
       <Box
         component="main"

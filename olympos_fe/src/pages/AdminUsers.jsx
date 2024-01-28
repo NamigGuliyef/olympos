@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import useUsers from "../features/users/useUsers";
 import useDeleteUser from "../features/users/useDeleteUser";
 import ReusableTable from "../components/adminPanel/ReusableTable";
@@ -9,8 +9,7 @@ import Inputs from "../components/adminPanel/Inputs";
 import useEditUser from "../features/users/useEditUser";
 import EachUserTableRow from "../components/adminPanel/EachUserTableRow";
 import { createUserApi } from "../services/apiUsers";
-import ReactQuill from "react-quill";
-import AddReviews from "../components/reusable/AddReviews";
+
 import UserSendMessage from "../components/adminPanel/UserSendMessage";
 
 const AdminUsers = () => {
@@ -20,7 +19,6 @@ const AdminUsers = () => {
   const { editUser, isUserEditing } = useEditUser();
   const { isUsersLoading, users } = useUsers();
   const { userDeleteLoading, deleteUser } = useDeleteUser();
-  const [sort, setSort] = useState("");
 
   if (isUsersLoading) return <Loader />;
 
@@ -33,7 +31,7 @@ const AdminUsers = () => {
 
   return (
     <Box>
-      <Button onClick={() => setSend(true)}>send message to users</Button>
+      <Button onClick={() => setSend(true)}> Bütün istifadəçilərə mesaj göndər</Button>
       {showInput && (
         <AdminModal
           openOrClose={showInput}
@@ -53,7 +51,7 @@ const AdminUsers = () => {
             <Inputs.Email />
             <Inputs.PhoneNumber />
             <Inputs.Role />
-            {/* <Inputs.UserOrders /> */}
+
             <Inputs.CreatedAt />
           </Inputs>
         </AdminModal>

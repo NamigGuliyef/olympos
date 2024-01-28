@@ -1,18 +1,21 @@
 import {
   Box,
   Drawer,
+  IconButton,
   List,
   ListItem,
   ListItemText,
   Slide,
+  Switch,
   Typography,
   useMediaQuery,
+  useTheme,
 } from "@mui/material";
-import React, { memo, useEffect, useMemo, useState } from "react";
+import React, { memo, useContext, useEffect, useMemo, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import FlightIcon from "@mui/icons-material/Flight";
 import HotelIcon from "@mui/icons-material/Hotel";
-import { CustomContainer } from "../../theme";
+import { CustomContainer, theme } from "../../theme";
 import AuthUser from "../auth/AuthUser";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,16 +25,26 @@ import { deleteCookie, getCookie } from "../../helper/setCookie";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CloseIcon from "@mui/icons-material/Close";
 import Logo from "./Logo";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { ColorModeContext } from "../../App";
 
-const Navbar = () => {
+import logo from "../../../public/Logo.jpeg";
+
+const Navbar = ({}) => {
   const dispatch = useDispatch();
   const [toggle, setToggle] = useState(false);
   const [account, setAccount] = useState(null);
   const [role, setRole] = useState(null);
   const location = useLocation();
   const token = useMemo(() => getCookie("token"), []);
+  const theme = useTheme();
+  const colorMode = useContext(ColorModeContext);
 
   const isHomePage = location.pathname === "/";
+
+
+
 
   /// detecting token expiration
   useEffect(() => {
@@ -53,10 +66,18 @@ const Navbar = () => {
     const getUser = async () => {
       try {
         const user = await getUserDetails();
+        console.log("user", user);
 
         if (user.statusCode === 403) {
           // deleteCookie(["token", "role"]);
           // navigate("/login");
+          const obj = {
+            profile_photo: "../../../public/Logo.jpeg",
+            // profile_photo:
+            //   "https://res.cloudinary.com/daxy3ke6i/image/upload/v1705745977/olympos_logo.ico.ico",
+            user: "Admin",
+          };
+          setAccount(obj);
         } else {
           setAccount(user);
           dispatch(login(user));
@@ -92,6 +113,9 @@ const Navbar = () => {
     setToggle((curr) => !curr);
   };
   console.log("role ", role);
+
+  // handleToggle Dark or light mode
+
   return (
     <Box
       sx={{
@@ -134,10 +158,35 @@ const Navbar = () => {
               <Typography variant="subtitle1">Otellər</Typography>
             </Box>
           </NavLink>
+          <Box
+            sx={{
+              display: "flex",
+              width: "100%",
+              alignItems: "center",
+              justifyContent: "center",
+
+              color: theme.palette.mode === "dark" ? "black" : "#FAAF00",
+              borderRadius: 1,
+              p: 3,
+            }}
+          >
+            <IconButton
+              sx={{ ml: 1 }}
+              onClick={colorMode.toggleColorMode}
+              color="inherit"
+            >
+              {console.log("mode", theme.palette.mode)}
+              {theme.palette.mode === "dark" ? (
+                <Brightness4Icon />
+              ) : (
+                <Brightness7Icon />
+              )}
+            </IconButton>
+          </Box>
         </Box>
         {/* <Box>Logo</Box> */}
 
-        <Logo />
+        {!isHomePage && <Logo />}
         {isMobile && (
           <div
             style={{ cursor: "pointer" }}
@@ -241,8 +290,7 @@ const Navbar = () => {
                     </Typography>
                   </Box>
                 ) : (
-                  <span>5</span>
-                  // <AuthUser user={account ? account : "admin"} isMobile />
+                  <AuthUser user={account} isMobile />
                 )}
               </Box>
             </Slide>
@@ -256,7 +304,7 @@ const Navbar = () => {
               >
                 <FavoriteIcon />
                 <NavLink style={navLinkStyle} to="/seçdiklərim">
-                  <Typography>Favorites</Typography>
+                  <Typography>Seçilmişlər</Typography>
                 </NavLink>
               </Box>
             )}
@@ -273,7 +321,7 @@ const Navbar = () => {
                       textDecoration: "none",
                     }}
                   >
-                    Login
+                    Giriş
                   </NavLink>
                 </Typography>
 
@@ -287,6 +335,13 @@ const Navbar = () => {
                     textAlign: "center",
                   }}
                 >
+                  {/* <img
+                    src="/public/assets/logo.svg"
+                    alt="main-img"
+                    width="100%"
+                    height="100%"
+                    style={{ objectFit: "cover", borderRadius: "10px" }}
+                  /> */}
                   <NavLink
                     style={{
                       color: isHomePage ? "black" : "white",
@@ -294,12 +349,12 @@ const Navbar = () => {
                     }}
                     to="/signup"
                   >
-                    Sign up
+                    Qeydiyyat
                   </NavLink>
                 </Typography>
               </Box>
             ) : (
-              <AuthUser user={account ? account : "admin"} />
+              <AuthUser user={account} />
             )}
           </Box>
         )}

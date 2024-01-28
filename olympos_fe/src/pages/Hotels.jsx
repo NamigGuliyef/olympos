@@ -1,7 +1,6 @@
 import { Box, useMediaQuery } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
-import useFetch from "../useFetch";
-import Navbar from "../components/home/Navbar";
+
 import FormSelections from "../components/reusable/FormSelections";
 import { theme } from "../theme";
 import format from "date-fns/format";
@@ -11,14 +10,13 @@ import { useSelector } from "react-redux";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import HotelListing from "../components/hotels/HotelListing";
-import useHotels, { useFilterHotel } from "../features/hotels/useHotels";
+import useHotels from "../features/hotels/useHotels";
 import Loader from "../components/reusable/Loader";
-import { baseUrl } from "./Tours";
+
 import { fetchHotelFilter } from "../services/apiHotels";
 import az from "date-fns/locale/az";
 
 const HotelTest = () => {
-  const [data, setData] = useState([]);
   const [searchedList, setSearchedList] = useState([]);
   const [priceValue, setPriceValue] = useState([0, 0]);
   const [newPrice, setNewPrice] = useState([0, 0]);
@@ -120,7 +118,6 @@ const HotelTest = () => {
     setCity(null);
     setCountry(null);
     setNext(0);
-    // dispatch(setTime(null));
 
     toast.success("Filter təmizləndi");
   };

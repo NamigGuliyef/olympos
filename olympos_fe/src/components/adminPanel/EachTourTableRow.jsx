@@ -51,12 +51,12 @@ const EachTourTableRow = ({
             // gap: "0.5rem",
           }}
         >
-          <Button onClick={() => handleOpenModal(table)}>Edit</Button>
+          <Button onClick={() => handleOpenModal(table)}>Düzəliş et</Button>
           <Button
             onClick={() => deleteData(table?.id)}
             disabled={deleteLoading}
           >
-            Delete
+            Sil
           </Button>
         </Box>
       </TableCell>

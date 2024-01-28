@@ -17,6 +17,7 @@ import { useSearchParams } from "react-router-dom";
 
 import SelectComponent from "../SelectComponent";
 import { motion } from "framer-motion";
+import { useTheme } from "@emotion/react";
 
 const FormSelections = ({
   forType,
@@ -35,6 +36,9 @@ const FormSelections = ({
   const selected = useSelector((store) => {
     return forType === "tour" ? store.tour.type : store.hotel.city;
   });
+
+  const modeTheme = useTheme();
+  const isDarkMode = modeTheme.palette.mode === "dark";
 
   return (
     <Box
@@ -68,8 +72,18 @@ const FormSelections = ({
         <SelectComponent onChange={setCity} value={city} list={cities} />
       )}
 
-      <FormControl sx={{ m: 1, width: { xs: 300, sm: 300 }, outline: "none" }}>
-        <InputLabel id="demo-simple-select-label">
+      <FormControl
+        sx={{
+          m: 1,
+          width: { xs: 300, sm: 300 },
+          border: isDarkMode ? "1px solid #D3D3D3" : null,
+          borderRadius: isDarkMode ? "2px" : null,
+        }}
+      >
+        <InputLabel
+          sx={{ color: isDarkMode ? "#D7D8D3" : "null", border: "black" }}
+          id="demo-simple-select-label"
+        >
           {forType === "tour" ? "Kateqoriya seç" : "Ölkə seç"}
         </InputLabel>
         <Select

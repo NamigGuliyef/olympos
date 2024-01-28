@@ -1,16 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Auth from "../components/auth/Auth";
-import { useNavigate } from "react-router-dom";
-import { getCookie } from "../helper/setCookie";
 
 // import Footer from "../components/Footer";
 // import Header from "../components/Header";
 
 const Login = () => {
   const [isRememberMe, setIsRememberMe] = useState(false);
-  const navigate = useNavigate();
-  const token = getCookie("token");
-  const role = getCookie("role");
 
   // useEffect(() => {
   //   if (token !== "null" && role) {

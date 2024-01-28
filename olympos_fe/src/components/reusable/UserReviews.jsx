@@ -87,7 +87,7 @@ const UserReviews = ({ reviews, singleHotel, setCrudEventHappened }) => {
         // width: "600px",
       }}
     >
-      <SectionTitle>Reviews</SectionTitle>
+      <SectionTitle>Rəylər</SectionTitle>
       <Box
         sx={{
           fontSize: "50px",
@@ -106,9 +106,16 @@ const UserReviews = ({ reviews, singleHotel, setCrudEventHappened }) => {
             <Box
               sx={{
                 display: "flex",
-                alignItems: "center",
+                alignItems: {
+                  xs: "flex-start",
+                  md: "center",
+                },
                 justifyContent: "space-between",
-                gap: "1rem",
+                flexDirection: {
+                  xs: "column",
+                  md: "row",
+                },
+                // gap: "1rem",
                 position: "relative",
                 padding: "1.5rem 0",
               }}
@@ -117,7 +124,15 @@ const UserReviews = ({ reviews, singleHotel, setCrudEventHappened }) => {
               <FlagIcon
                 sx={{ position: "absolute", right: "0", top: "10px" }}
               />
-              <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  flex: "1",
+                  gap: "1rem",
+                  // backgroundColor: "green",
+                }}
+              >
                 <Avatar
                   sx={{ objectFit: "cover" }}
                   alt="Remy Sharp"
@@ -149,8 +164,10 @@ const UserReviews = ({ reviews, singleHotel, setCrudEventHappened }) => {
               {/* {user[0]?._id === review?.userId?._id && ( */}
               <Stack
                 sx={{
-                  width: "40%",
+                  width: "100%",
                   display: "flex",
+                  flex: 1,
+                  // backgroundColor: "red",
                   justifyContent: "end",
                   alignItems: "flex-end",
                   mr: "1.5rem",
@@ -160,20 +177,20 @@ const UserReviews = ({ reviews, singleHotel, setCrudEventHappened }) => {
                 {role === "user" && user[0]?._id === review?.userId?._id && (
                   <>
                     <Button onClick={() => handleOpenReviewEdit(review)}>
-                      Edit
+                    Düzəliş et
                     </Button>
                     <Button onClick={() => handleDeleteReview(review._id)}>
-                      Delete
+                      Sil
                     </Button>
                   </>
                 )}
                 {token?.length && role === "admin" && (
                   <>
                     <Button onClick={() => handleOpenReviewEdit(review)}>
-                      Edit
+                    Düzəliş et
                     </Button>
                     <Button onClick={() => handleDeleteReview(review._id)}>
-                      Delete
+                    Sil
                     </Button>
                   </>
                 )}

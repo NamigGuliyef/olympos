@@ -6,6 +6,7 @@ import ErrorMessage from "./ErrorMessage";
 import { FlexBetween } from "../../theme";
 import ReusableButton from "./ReusableButton";
 import SortByPrice from "../SortByPrice";
+import { useTheme } from "@emotion/react";
 
 const TourList = ({
   data,
@@ -19,6 +20,9 @@ const TourList = ({
   compareData,
 }) => {
   const isDesktop = useMediaQuery("(max-width:1350px)");
+  const modeTheme = useTheme();
+
+  const btnColor = modeTheme.palette.mode === "dark" ? "white" : "black";
 
   return (
     <Box
@@ -46,7 +50,7 @@ const TourList = ({
         <Typography variant="subtitle1">
           Axtarışa uyğun {length} tur tapıldı
         </Typography>
-        <ReusableButton onClick={handleClearFilter}>
+        <ReusableButton color={btnColor} onClick={handleClearFilter}>
           Filtrləri təmizlə
         </ReusableButton>
         <SortByPrice handleSortChange={handleSortChange} sort={sort} />

@@ -1,14 +1,13 @@
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import TourListing from "../components/tours/TourListing";
-import useFetch from "../useFetch";
-import Navbar from "../components/home/Navbar";
+
 import FormSelections from "../components/reusable/FormSelections";
-import { CustomContainer, theme } from "../theme";
+import { theme } from "../theme";
 import ReusableButton from "../components/reusable/ReusableButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { useDispatch, useSelector } from "react-redux";
-import { setTime, setType } from "../store/slices/tourSlice";
+import { setType } from "../store/slices/tourSlice";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import useTours from "../features/tours/useTours";
@@ -20,7 +19,6 @@ import az from "date-fns/locale/az";
 export const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const Tours = ({ months, typeOfTours }) => {
-  const [data, setData] = useState([]);
   const [priceValue, setPriceValue] = useState([0, 0]);
   // priceRange slider-de min max deyerleri ucundu ve bir defe alandan sonra hec vaxt deyismir amma priceValue deyisir
   const [newPrice, setNewPrice] = useState([0, 0]);
@@ -37,7 +35,6 @@ const Tours = ({ months, typeOfTours }) => {
     isToursLoading: isLoading,
     tours: firstData,
     errorTours: error,
-    refetch,
   } = useTours(`${baseUrl}/tour`);
   const location = useLocation();
   const navigate = useNavigate();
@@ -79,10 +76,6 @@ const Tours = ({ months, typeOfTours }) => {
   if (isLoading || isFirstLoading) return <Loader />;
 
   const tourViaDays = [...new Set(queryTours.map((tour) => tour.tour_day))];
-
-  let url = location.search;
-
-  let additionalParams = "";
 
   const searchObj = {};
 
@@ -134,17 +127,6 @@ const Tours = ({ months, typeOfTours }) => {
 
     toast.success("Filter təmizləndi");
     navigate(0);
-    // setData([]);
-    // // setChecked([]);
-    // setChooseTour(null);
-    // // setTime(false);
-    // dispatch(setTime(null));
-    // dispatch(setType(null));
-    // setChooseMonth(null);
-    // setPriceValue([100, 3000]);
-    // setSearchParams(searchParams);
-    // setSort("");
-    // setNext(3);
   };
 
   const handleSortChange = (event) => {

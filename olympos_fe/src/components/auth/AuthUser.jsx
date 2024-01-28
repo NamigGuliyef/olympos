@@ -12,6 +12,8 @@ const AuthUser = ({ user, isMobile }) => {
     };
   }
 
+  console.log("usr auth", user);
+
   return (
     <Stack direction="row" spacing={2}>
       {!isMobile && (
@@ -19,7 +21,7 @@ const AuthUser = ({ user, isMobile }) => {
       )}
       <Box sx={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
         <Avatar src={user?.profile_photo} />
-        <UserMenu user={user} />
+        <UserMenu user={user?.user ? user.user : user} />
       </Box>
     </Stack>
   );

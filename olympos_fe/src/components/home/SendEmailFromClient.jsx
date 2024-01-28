@@ -33,7 +33,7 @@ const SendEmailFromClient = ({ sxButtonSubscribe }) => {
         />
 
         <Button type="submit" sx={sxButtonSubscribe}>
-          Subscribe
+          Abunə ol!
         </Button>
       </form>
     </Stack>

@@ -25,6 +25,7 @@ import { useWishlistBtn } from "../../hooks/useWishlistBtn";
 import { getCookie } from "../../helper/setCookie";
 import getUserAverageRating from "../../helper/getUserAverageRating";
 import { getStarRating } from "../../components/reusable/getStarRating";
+import { useTheme } from "@emotion/react";
 
 const LinkStyles = () => {
   return {
@@ -37,6 +38,7 @@ const TourListItem = ({ item, favorite, isFavorite, compareData }) => {
   const { wishlist, isWishlistLoading } = useUserWishlist();
   const token = getCookie("token");
   const role = getCookie("role");
+  const modeTheme = useTheme();
   // eger isWishlist varsa demeli tourListItem wishlist sehifesindedir ve click ile wishliste salinib evvelceden
   const type = item?.photos ? "hotel" : "tour";
   // const itemId =
@@ -89,7 +91,7 @@ const TourListItem = ({ item, favorite, isFavorite, compareData }) => {
             md: "800px",
           },
           height: {
-            xs: "400px",
+            xs: "430px",
             sm: "250px",
           },
           display: "flex",
@@ -129,7 +131,7 @@ const TourListItem = ({ item, favorite, isFavorite, compareData }) => {
             justifyContent: "space-between",
             flexDirection: "column",
             width: "100%",
-            padding: "1.5rem",
+            padding: "1rem",
             height: "100%",
           }}
         >
@@ -155,7 +157,7 @@ const TourListItem = ({ item, favorite, isFavorite, compareData }) => {
                   sx={{
                     textTransform: "capitalize",
                     fontSize: {
-                      xs: "16px",
+                      xs: "14px",
                       sm: "20px",
                     },
 
@@ -206,30 +208,26 @@ const TourListItem = ({ item, favorite, isFavorite, compareData }) => {
                     )}
                   </Box>
                 </Typography>
-                {/* <Stack direction="row" spacing={2}>
-                  <Typography>*****</Typography>
-                  <Typography
-                    sx={{
-                      fontFamily: "Montserrat",
-                      fontSize: "14px",
-                      fontWeight: 500,
-                      lineHeight: "15px",
-                      letterSpacing: "0em",
-                      textAlign: "left",
-                    }}
-                  >
-                    5 star hotel
-                  </Typography>
-                </Stack> */}
+
                 <Stack
                   direction="row"
                   spacing={2}
-                  sx={{ alignItems: "center" }}
+                  sx={{
+                    alignItems: "center",
+                    display: {
+                      xs: "none",
+                      sm: "flex",
+                    },
+                  }}
                 >
-                  <RatingComponent>
+                  <RatingComponent
+                    color={
+                      modeTheme.palette.mode === "dark" ? "white" : "black"
+                    }
+                  >
                     {getUserAverageRating(ratingData?.reviews) || 0}
                   </RatingComponent>
-                  <Typography>{item.reviews.length} reviews</Typography>
+                  <Typography>{item.reviews.length} rəy</Typography>
                 </Stack>
               </Box>
               <Typography
@@ -279,15 +277,6 @@ const TourListItem = ({ item, favorite, isFavorite, compareData }) => {
               </Typography>
             </Box>
           </CardContent>
-          {/* {!favorite && (
-            <Divider
-              sx={{
-                backgroundColor: theme.palette.divider,
-                borderBottomWidth: "0.5px",
-                marginTop: "1rem",
-              }}
-            />
-          )} */}
 
           <Stack direction="row" spacing={2} sx={{ mt: "0.5rem" }}>
             <FavoriteBtn

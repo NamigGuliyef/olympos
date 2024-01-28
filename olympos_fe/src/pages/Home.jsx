@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
-import React, { Suspense, useEffect, useState } from "react";
+import { Suspense } from "react";
 import Header from "../components/home/Header";
-import Footer from "../components/home/Footer";
+
 // import ShowCard from "../components/home/ShowCard";
 // import Reviews from "../components/home/Reviews";
 import { lazy } from "react";

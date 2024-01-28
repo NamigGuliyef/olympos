@@ -1,17 +1,8 @@
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-import useFetch from "../useFetch";
+
 import Loader from "../components/reusable/Loader";
 import ErrorMessage from "../components/reusable/ErrorMessage";
-import {
-  Box,
-  CardMedia,
-  Divider,
-  Grid,
-  ImageList,
-  ImageListItem,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Divider, Stack, Typography } from "@mui/material";
 import {
   CustomContainer,
   FlexBetween,
@@ -24,128 +15,22 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import FavoriteBtn from "../components/reusable/FavoriteBtn";
 import ReusableButton from "../components/reusable/ReusableButton";
 import UserReviews from "../components/reusable/UserReviews";
-import Footer from "../components/home/Footer";
-import Navbar from "../components/home/Navbar";
-import Map from "../components/reusable/Map";
-import { StringToHtml } from "../components/StringToHtml";
+
 import { baseUrl } from "./Tours";
-import { fetchClientSideSingleHotel } from "../services/apiHotels";
 import { useSingleHotel } from "../features/hotels/useHotels";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import AdminModal from "../components/reusable/AdminModal";
-import { operationStyle } from "./TourDetails";
+
 import { useWishlistBtn } from "../hooks/useWishlistBtn";
 import { createHotelOrderApi } from "../services/apiOrders";
-// import Gallery from "../components/LightBoxGallery";
-import LightboxGallery from "../components/LightBoxGallery";
 
-import { Gallery } from "react-grid-gallery";
 import LightBoxGallery from "../components/LightBoxGallery";
 import { getCookie } from "../helper/setCookie";
-import { fetchUserWishlist } from "../services/apiWishlist";
 import useUserWishlist from "../features/wishlist/useUserWishlist";
 import AddReviews from "../components/reusable/AddReviews";
-import styled from "@emotion/styled";
 import getUserAverageRating from "../helper/getUserAverageRating";
-
-const images = [
-  {
-    src: "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_b.jpg",
-    width: 320,
-    height: 174,
-    isSelected: true,
-    caption: "After Rain (Jeshu John - designerspics.com)",
-  },
-  {
-    src: "https://c2.staticflickr.com/9/8356/28897120681_3b2c0f43e0_b.jpg",
-    width: 320,
-    height: 212,
-    enableImageSelection: true,
-    tags: [
-      { value: "Ocean", title: "Ocean" },
-      { value: "People", title: "People" },
-    ],
-    alt: "Boats (Jeshu John - designerspics.com)",
-  },
-  {
-    src: "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
-    width: 320,
-    height: 212,
-  },
-];
-const images2 = [
-  {
-    src: "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_b.jpg",
-    width: 320,
-    height: 174,
-    isSelected: true,
-    caption: "After Rain (Jeshu John - designerspics.com)",
-  },
-  {
-    src: "https://c2.staticflickr.com/9/8356/28897120681_3b2c0f43e0_b.jpg",
-    width: 320,
-    height: 212,
-    enableImageSelection: true,
-    tags: [
-      { value: "Ocean", title: "Ocean" },
-      { value: "People", title: "People" },
-    ],
-    alt: "Boats (Jeshu John - designerspics.com)",
-  },
-  {
-    src: "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
-    width: 320,
-    height: 212,
-  },
-  {
-    src: "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_b.jpg",
-    width: 320,
-    height: 174,
-    isSelected: true,
-    caption: "After Rain (Jeshu John - designerspics.com)",
-  },
-  {
-    src: "https://c2.staticflickr.com/9/8356/28897120681_3b2c0f43e0_b.jpg",
-    width: 320,
-    height: 212,
-    enableImageSelection: true,
-    tags: [
-      { value: "Ocean", title: "Ocean" },
-      { value: "People", title: "People" },
-    ],
-    alt: "Boats (Jeshu John - designerspics.com)",
-  },
-  {
-    src: "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
-    width: 320,
-    height: 212,
-  },
-  {
-    src: "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_b.jpg",
-    width: 320,
-    height: 174,
-    isSelected: true,
-    caption: "After Rain (Jeshu John - designerspics.com)",
-  },
-  {
-    src: "https://c2.staticflickr.com/9/8356/28897120681_3b2c0f43e0_b.jpg",
-    width: 320,
-    height: 212,
-    enableImageSelection: true,
-    tags: [
-      { value: "Ocean", title: "Ocean" },
-      { value: "People", title: "People" },
-    ],
-    alt: "Boats (Jeshu John - designerspics.com)",
-  },
-  {
-    src: "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
-    width: 320,
-    height: 212,
-  },
-];
 
 const navLinkStyle = () => {
   return {
@@ -158,10 +43,7 @@ const HotelDetailTest = () => {
   const [openBronModal, setOpenBronModal] = useState(false);
   const [bronCounter, setBronCounter] = useState(1);
   const [crudEventHappened, setCrudEventHappened] = useState(false);
-  const [favoriteIsExist, setFavoriteIsExist] = useState(null);
-  const { wishlist, isWishlistLoading } = useUserWishlist();
-  const dispatch = useDispatch();
-  const users = useSelector((state) => state.user.user);
+  const { isWishlistLoading } = useUserWishlist();
 
   const token = useMemo(() => getCookie("token"), []);
   const role = useMemo(() => getCookie("role"), []);
@@ -387,7 +269,7 @@ const HotelDetailTest = () => {
           </Stack>
           <Divider sx={{ margin: "3rem 0" }} />
           <Box sx={{}}>
-            <SectionTitle>Overview</SectionTitle>
+            <SectionTitle>Məlumat</SectionTitle>
             <Typography sx={{ margin: "1rem 0" }} variant="body1">
               {/* {singleHotel?.description} */}
               <IframeWrapper

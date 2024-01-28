@@ -22,31 +22,44 @@
   border-bottom: 2px solid #8dd3bb !important;
 }
 
+/* select componentin max height-i */
+.css-6hp17o-MuiList-root-MuiMenu-list {
+  max-height: 116px;
+}
+
 .gallery {
-  -webkit-column-count: 5;
+  /* -webkit-column-count: 5;
   -moz-column-count: 5;
   column-count: 5;
   -webkit-column-width: 20%;
   -moz-column-width: 20%;
-  column-width: 20%;
-  padding: 0 12px;
+  column-width: 20%; */
+  /* padding: 0 12px; */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+
+  align-items: center;
+  justify-content: center;
 }
 
 .gallery .pics {
   -webkit-transition: all 350ms ease;
   transition: all 350ms ease;
   cursor: pointer;
-  margin-bottom: 12px;
+
+  /* margin-bottom: 12px; */
 }
 .gallery .pics:hover {
   filter: opacity(0.8);
 }
 
-@media (max-width: 991px) {
+/* @media (max-width: 991px) {
   .gallery {
-    -webkit-column-count: 3;
-    -moz-column-count: 3;
-    column-count: 3;
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    background-color: red;
   }
 }
 @media (max-width: 480px) {
@@ -58,7 +71,7 @@
     -moz-column-width: 100%;
     column-width: 100%;
   }
-}
+} */
 
 .model {
   width: 100%;

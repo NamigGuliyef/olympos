@@ -24,7 +24,7 @@ const AdminHotelCreateSpesific = ({ handleHotelSpesific }) => {
         >
           <TextField
             id="name"
-            label="Hotel spesifikasiya"
+            label="Otel spesifikasiya"
             error={!!errors["name"]}
             helperText={errors["name"]?.message}
             {...register("name", {
@@ -34,6 +34,7 @@ const AdminHotelCreateSpesific = ({ handleHotelSpesific }) => {
           <Button
             sx={{
               backgroundColor: `${theme.palette.primary.main}`,
+              color: "white",
             }}
             type="submit"
           >

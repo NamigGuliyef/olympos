@@ -1,4 +1,4 @@
-import { Box, Button, TableCell, TableRow, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import AdminModal from "../components/reusable/AdminModal";
 
 import useTours from "../features/tours/useTours";
@@ -52,7 +52,7 @@ const AdminTours = () => {
 
   return (
     <Box>
-      <Button onClick={() => handleOpenModal()}>Create New Tour</Button>
+      <Button onClick={() => handleOpenModal()}>Yeni tur yarat</Button>
       {showInput && (
         <AdminModal
           modalWidth={800}

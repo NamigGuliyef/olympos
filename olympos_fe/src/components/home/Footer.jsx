@@ -14,9 +14,11 @@ import {
 } from "@mui/material";
 import { theme } from "../../theme";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import YouTubeIcon from "@mui/icons-material/YouTube";
+
 import InstagramIcon from "@mui/icons-material/Instagram";
 import SendEmailFromClient from "./SendEmailFromClient";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import { Link } from "react-router-dom";
 
 const destinations = ["Gəncə", "Göyçay", "Şamaxı", "Quba"];
 
@@ -46,8 +48,9 @@ const sxButtonSubscribe = {
 };
 
 const Footer = () => {
-  const isMobile = useMediaQuery("(max-width: 900px)");
+  const isMedium = useMediaQuery("(max-width: 900px)");
   const tablet = useMediaQuery("(max-width: 600px)");
+  const isMobile = useMediaQuery("(max-width: 500px)");
 
   return (
     <Box
@@ -55,7 +58,7 @@ const Footer = () => {
       padding="14rem 0 4rem 0"
       position="relative"
       // mt="10rem"
-      mt={isMobile ? "28rem " : "10rem"}
+      mt={isMedium ? "28rem " : "10rem"}
     >
       <Grid
         container
@@ -72,7 +75,7 @@ const Footer = () => {
         margin="0 auto"
         position="absolute"
         left="50%"
-        top={isMobile ? "-20%" : "5%"}
+        top={isMedium ? "-20%" : "5%"}
         // columnGap="5rem"
       >
         <Grid item xs={12} md={6} sx={{ padding: "24px" }}>
@@ -84,6 +87,7 @@ const Footer = () => {
               lineHeight: "54px",
               letterSpacing: "0em",
               textAlign: "left",
+              color: "black",
             }}
             gutterBottom
           >
@@ -97,10 +101,11 @@ const Footer = () => {
               lineHeight: "25.26px",
               letterSpacing: "0em",
               textAlign: "left",
+              color: "black",
             }}
             gutterBottom
           >
-            The Travel
+              Həmən abunə olun!
           </Typography>
           <Typography
             variant="subtitle1"
@@ -110,11 +115,11 @@ const Footer = () => {
               lineHeight: "20px",
               letterSpacing: "0em",
               textAlign: "left",
+              color: "black",
             }}
             gutterBottom
           >
-            Get inspired! Receive travel discounts, tips and behind the scenes
-            stories.
+           Yeni turlardan və otellərdən , endirimlərdən ilk siz xəbərdar olun.
           </Typography>
           {/* footer */}
           <SendEmailFromClient sxButtonSubscribe={sxButtonSubscribe} />
@@ -137,13 +142,13 @@ const Footer = () => {
             justifyContent: "center",
           }}
         >
-          <img
-            src="/assets/footer-img.png"
+        {!isMobile &&   <img
+            src="/public/assets/footer-img.png"
             alt=""
             style={{ bottom: 0 }}
 
             // height="100%"
-          />
+          /> }
         </Grid>
       </Grid>
       <Box
@@ -151,6 +156,7 @@ const Footer = () => {
         gridTemplateColumns="repeat(4, 1fr)"
         width="85%"
         margin="0 auto"
+        color="black"
       >
         <Box
           gridColumn="span 1"
@@ -159,18 +165,25 @@ const Footer = () => {
             flexDirection: "column",
           }}
         >
-          <Typography variant="h6" gutterBottom>
-            Olympos travel
-          </Typography>
+          {/* <Typography variant="h6" gutterBottom>
+            Logo
+          </Typography> */}
           <Box>
             <IconButton sx={{ padding: "0", marginRight: "0.5rem" }}>
-              <FacebookIcon />
+              <Link to="">
+                <FacebookIcon sx={{ color: "#4267B2" }} />
+              </Link>
             </IconButton>
             <IconButton sx={{ padding: "0", marginRight: "0.5rem" }}>
-              <YouTubeIcon />
+              <Link to="">
+                <WhatsAppIcon sx={{ color: "#25D366" }} />
+              </Link>
             </IconButton>
+
             <IconButton sx={{ padding: "0", marginRight: "0.5rem" }}>
-              <InstagramIcon />
+              <Link to="">
+                <InstagramIcon sx={{ color: "#833AB4" }} />
+              </Link>
             </IconButton>
           </Box>
         </Box>

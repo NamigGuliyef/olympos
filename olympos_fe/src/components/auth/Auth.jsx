@@ -19,6 +19,9 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/slices/userSlice";
 import { useRef, useState } from "react";
+// import logo from "../../../public/Logo.jpeg"
+import Logo from "../home/Logo"
+
 
 const defaultTheme = createTheme();
 
@@ -97,25 +100,26 @@ export default function Auth({ isRememberMe, setIsRememberMe }) {
             }}
           >
             <RouterLink to="/">
-              <Box
+              {/* <Box
                 sx={{
                   alignSelf: "start",
-                  width: "100px",
-                  height: "35px",
+                  width: "60px",
+                  height: "15px",
                   marginBottom: "30px",
-                  backgroundImage: 'url("/assets/olympos_logo.png")',
+                  backgroundImage: 'url("../../../public/Logo.jpeg")',
                   backgroundRepeat: "no-repeat",
 
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
-              />
+              /> */}
+              <Logo />
             </RouterLink>
 
             <Typography component="h1" variant="h5" sx={{ alignSelf: "start" }}>
-              Log In
+              Giriş
             </Typography>
-            <Typography>Login to access your Golobe account</Typography>
+            <Typography>Olympos travel hesabınıza daxil olun!</Typography>
             <Box
               component="form"
               noValidate
@@ -159,7 +163,7 @@ export default function Auth({ isRememberMe, setIsRememberMe }) {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Daxil ol
               </Button>
               <Grid container>
                 <Grid item xs>
@@ -167,11 +171,11 @@ export default function Auth({ isRememberMe, setIsRememberMe }) {
                   {/* <Link href="#" variant="body2">
 
                   </Link> */}
-                  <RouterLink to="/forgotpassword">Forgot password?</RouterLink>
+                  <RouterLink to="/forgotpassword">Şifrəni unutmusan?</RouterLink>
                 </Grid>
                 <Grid item>
                   <RouterLink to="/signup">
-                    {"Don't have an account? Sign Up"}
+                    {"Hesabınız yoxdur? Qeydiyyat edin"}
                   </RouterLink>
                 </Grid>
               </Grid>
@@ -184,7 +188,7 @@ export default function Auth({ isRememberMe, setIsRememberMe }) {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url("/assets/loginImg.svg")',
+            backgroundImage: 'url("public/assets/loginImg.svg")',
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center",
