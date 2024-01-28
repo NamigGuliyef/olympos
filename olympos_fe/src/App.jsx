@@ -30,7 +30,7 @@ import AdminOrders from "./pages/AdminOrders";
 import { fetchClientTourCategory } from "./services/apiTours";
 import Main from "./pages/Main";
 import AdminCategory from "./pages/AdminCategory";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const months = [
   "yanvar",
@@ -193,7 +193,7 @@ function App() {
           {/* </Paper> */}
         </ThemeProvider>
 
-        <ReactQueryDevtools initialIsOpen={false} />
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       </ColorModeContext.Provider>
     </QueryClientProvider>
   );
