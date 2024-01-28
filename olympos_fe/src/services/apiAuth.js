@@ -66,7 +66,6 @@ export const getUserDetails = async () => {
 };
 
 export const editUserProfile = async (editProfile) => {
-  console.log("editUserProfile", editProfile);
   try {
     const token = getCookie("token");
 
@@ -77,9 +76,7 @@ export const editUserProfile = async (editProfile) => {
       },
       body: editProfile,
     });
-    console.log("resp", res);
     const data = await res.json();
-    console.log("update profile photo data", data);
     if (data.statusCode === 200) {
       location.reload();
 

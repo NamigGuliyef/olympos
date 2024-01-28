@@ -21,8 +21,6 @@ const AdminTours = () => {
   const { editTour, isTourEditing } = useEditTour();
   const [tourCategory, setTourCategory] = useState([]);
 
-  console.log("tours", tours);
-
   useEffect(() => {
     fetchTourCategory()
       .then((res) => {

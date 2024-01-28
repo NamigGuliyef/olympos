@@ -16,10 +16,8 @@ export async function fetchUsersApi() {
 }
 
 export const deleteUserApi = (id) => {
-  console.log("user id", id);
   const token = getCookie("token");
 
-  console.log("baseUrl", baseUrl);
   fetch(`${baseUrl}/admin/users/${id}`, {
     method: "DELETE",
     headers: {

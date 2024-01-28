@@ -36,8 +36,6 @@ export default function Reviews() {
 
   const darkOrLight = modeTheme.palette.mode;
 
-  console.log("modeTheme", darkOrLight);
-
   return (
     <CustomContainer
     // display="grid"

@@ -43,9 +43,6 @@ const Navbar = ({}) => {
 
   const isHomePage = location.pathname === "/";
 
-
-
-
   /// detecting token expiration
   useEffect(() => {
     if (token) {
@@ -66,7 +63,6 @@ const Navbar = ({}) => {
     const getUser = async () => {
       try {
         const user = await getUserDetails();
-        console.log("user", user);
 
         if (user.statusCode === 403) {
           // deleteCookie(["token", "role"]);
@@ -112,7 +108,6 @@ const Navbar = ({}) => {
   const handleToggleMobile = () => {
     setToggle((curr) => !curr);
   };
-  console.log("role ", role);
 
   // handleToggle Dark or light mode
 
@@ -175,7 +170,6 @@ const Navbar = ({}) => {
               onClick={colorMode.toggleColorMode}
               color="inherit"
             >
-              {console.log("mode", theme.palette.mode)}
               {theme.palette.mode === "dark" ? (
                 <Brightness4Icon />
               ) : (

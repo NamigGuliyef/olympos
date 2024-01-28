@@ -1,26 +1,41 @@
 import {
   Box,
-  Button,
   Grid,
   IconButton,
   List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Stack,
-  TextField,
   Typography,
   useMediaQuery,
 } from "@mui/material";
 import { theme } from "../../theme";
+import { v4 as uuidv4 } from "uuid";
+
 import FacebookIcon from "@mui/icons-material/Facebook";
 
 import InstagramIcon from "@mui/icons-material/Instagram";
 import SendEmailFromClient from "./SendEmailFromClient";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { Link } from "react-router-dom";
-
-const destinations = ["Gəncə", "Göyçay", "Şamaxı", "Quba"];
+import FooterRegionList from "./FooterRegionList";
+const destinations = [
+  { name: "Quba", url: "https://az.wikipedia.org/wiki/Quba" },
+  { name: "Qusar", url: "https://az.wikipedia.org/wiki/Qusar" },
+  {
+    name: "Şahdağ",
+    url: "https://az.wikipedia.org/wiki/%C5%9Eahda%C4%9F_(zirv%C9%99)",
+  },
+  { name: "Balakən", url: "https://az.wikipedia.org/wiki/Balak%C9%99n_rayonu" },
+  { name: "Zaqatala", url: "https://az.wikipedia.org/wiki/Zaqatala_rayonu" },
+  { name: "Qax", url: "https://az.wikipedia.org/wiki/Qax" },
+  { name: "Şəki", url: "https://az.wikipedia.org/wiki/%C5%9E%C9%99ki" },
+  {
+    name: "Qəbələ",
+    url: "https://az.wikipedia.org/wiki/Q%C9%99b%C9%99l%C9%99",
+  },
+  { name: "Lənkəran", url: "https://az.wikipedia.org/wiki/L%C9%99nk%C9%99ran" },
+  { name: "Lerik", url: "https://az.wikipedia.org/wiki/Lerik_rayonu" },
+  { name: "Astara", url: "https://az.wikipedia.org/wiki/Astara_rayonu" },
+  { name: "Tufandağ", url: "https://az.wikipedia.org/wiki/Tufanda%C4%9F" },
+];
 
 const sxMuiList = {
   width: "50%",
@@ -49,7 +64,6 @@ const sxButtonSubscribe = {
 
 const Footer = () => {
   const isMedium = useMediaQuery("(max-width: 900px)");
-  const tablet = useMediaQuery("(max-width: 600px)");
   const isMobile = useMediaQuery("(max-width: 500px)");
 
   return (
@@ -105,7 +119,7 @@ const Footer = () => {
             }}
             gutterBottom
           >
-              Həmən abunə olun!
+            Həmən abunə olun!
           </Typography>
           <Typography
             variant="subtitle1"
@@ -119,7 +133,7 @@ const Footer = () => {
             }}
             gutterBottom
           >
-           Yeni turlardan və otellərdən , endirimlərdən ilk siz xəbərdar olun.
+            Yeni turlardan və otellərdən , endirimlərdən ilk siz xəbərdar olun.
           </Typography>
           {/* footer */}
           <SendEmailFromClient sxButtonSubscribe={sxButtonSubscribe} />
@@ -142,13 +156,15 @@ const Footer = () => {
             justifyContent: "center",
           }}
         >
-        {!isMobile &&   <img
-            src="/public/assets/footer-img.png"
-            alt=""
-            style={{ bottom: 0 }}
+          {!isMobile && (
+            <img
+              src="/public/assets/footer-img.png"
+              alt=""
+              style={{ bottom: 0 }}
 
-            // height="100%"
-          /> }
+              // height="100%"
+            />
+          )}
         </Grid>
       </Grid>
       <Box
@@ -170,18 +186,27 @@ const Footer = () => {
           </Typography> */}
           <Box>
             <IconButton sx={{ padding: "0", marginRight: "0.5rem" }}>
-              <Link to="">
+              <Link
+                to="https://www.facebook.com/olympostravel.az/"
+                target="blank"
+              >
                 <FacebookIcon sx={{ color: "#4267B2" }} />
               </Link>
             </IconButton>
             <IconButton sx={{ padding: "0", marginRight: "0.5rem" }}>
-              <Link to="">
+              <Link
+                to="https://api.whatsapp.com/send?phone=994708255188"
+                target="blank"
+              >
                 <WhatsAppIcon sx={{ color: "#25D366" }} />
               </Link>
             </IconButton>
 
             <IconButton sx={{ padding: "0", marginRight: "0.5rem" }}>
-              <Link to="">
+              <Link
+                to="https://www.instagram.com/olympostravel.az/"
+                target="blank"
+              >
                 <InstagramIcon sx={{ color: "#833AB4" }} />
               </Link>
             </IconButton>
@@ -200,12 +225,8 @@ const Footer = () => {
             Bölgələr
           </Typography>
           <List sx={sxMuiList}>
-            {destinations.map((destination, id) => (
-              <ListItem disablePadding disableGutters key={id}>
-                <ListItemButton>
-                  <ListItemText primary={destination} />
-                </ListItemButton>
-              </ListItem>
+            {destinations.slice(0, 4).map((destination) => (
+              <FooterRegionList destination={destination} key={uuidv4()} />
             ))}
           </List>
         </Box>
@@ -222,12 +243,8 @@ const Footer = () => {
             Bölgələr haqqında
           </Typography>
           <List sx={sxMuiList}>
-            {destinations.map((destination, id) => (
-              <ListItem disablePadding disableGutters key={id}>
-                <ListItemButton>
-                  <ListItemText primary={destination} />
-                </ListItemButton>
-              </ListItem>
+            {destinations.slice(4, 8).map((destination) => (
+              <FooterRegionList destination={destination} key={uuidv4()} />
             ))}
           </List>
         </Box>
@@ -244,12 +261,8 @@ const Footer = () => {
             Gəzməli yerlər
           </Typography>
           <List sx={sxMuiList}>
-            {destinations.map((destination, id) => (
-              <ListItem disablePadding disableGutters key={id}>
-                <ListItemButton>
-                  <ListItemText primary={destination} />
-                </ListItemButton>
-              </ListItem>
+            {destinations.slice(8, 12).map((destination) => (
+              <FooterRegionList destination={destination} key={uuidv4()} />
             ))}
           </List>
         </Box>

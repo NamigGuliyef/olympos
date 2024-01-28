@@ -14,10 +14,10 @@ const UserMenu = ({ user }) => {
   const navigate = useNavigate();
   const open = Boolean(anchorEl);
   const role = getCookie("role");
-  const location = useLocation()
+  const location = useLocation();
   const isHomePage = location.pathname === "/";
-  const modeTheme = useTheme()
-  const isDarkMode  = modeTheme.palette.mode === "dark"
+  const modeTheme = useTheme();
+  const isDarkMode = modeTheme.palette.mode === "dark";
 
   let username;
   const handleClick = (event) => {
@@ -51,11 +51,6 @@ const UserMenu = ({ user }) => {
 
   const theme = useTheme();
 
-  console.log("theme", theme.palette.mode);
-
-  console.log("username", username);
-  console.log("user", user);
-
   return (
     <div>
       <Button
@@ -64,7 +59,15 @@ const UserMenu = ({ user }) => {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        sx={{ color: isDarkMode && !isHomePage ?    "black" : !isDarkMode ?  "black" : "white", textTransform: "capitalize" }}
+        sx={{
+          color:
+            isDarkMode && !isHomePage
+              ? "black"
+              : !isDarkMode
+              ? "black"
+              : "white",
+          textTransform: "capitalize",
+        }}
       >
         {username}
       </Button>

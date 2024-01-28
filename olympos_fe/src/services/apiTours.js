@@ -114,7 +114,6 @@ export const editTourApi = (editTour, id) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log("data edjt", data);
       if (data.statusCode === 200) {
         window.location.reload();
         toast.success(data.message);

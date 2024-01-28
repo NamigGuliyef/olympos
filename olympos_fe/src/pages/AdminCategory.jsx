@@ -15,7 +15,6 @@ const AdminCategory = () => {
     createTourCategory(obj);
   };
   const handleHotelSpesific = (obj) => {
-    console.log("hotelSpesific", obj);
     createHotelSpecific(obj);
     // reset();
   };

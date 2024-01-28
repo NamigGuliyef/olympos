@@ -12,8 +12,6 @@ const AuthUser = ({ user, isMobile }) => {
     };
   }
 
-  console.log("usr auth", user);
-
   return (
     <Stack direction="row" spacing={2}>
       {!isMobile && (

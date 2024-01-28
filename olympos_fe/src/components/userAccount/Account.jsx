@@ -142,7 +142,6 @@ const Account = ({ user }) => {
   const handleAccountModal = (field) => {
     setOpenModal(true);
   };
-  console.log("user profile", user.profile_photo);
 
   const handleChange = (event) => {
     const { name, value } = event.target;

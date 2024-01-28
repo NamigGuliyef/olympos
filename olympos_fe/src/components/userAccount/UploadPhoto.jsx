@@ -19,12 +19,8 @@ const UploadAndDisplayImage = ({ user }) => {
   //   });
   // }, []);
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
-    console.log("accepted files: " + acceptedFiles);
-
     setSelectedImages(acceptedFiles);
   }, []);
-
-  console.log("selected images: " + selectedImages);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 

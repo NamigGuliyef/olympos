@@ -62,9 +62,7 @@ const Header = ({ months, typeOfTours }) => {
         type: selectedTourType,
         month,
       });
-      navigate(
-        `/turlar?category=${selectedTourType}&start_date=${timeSTART}`
-      );
+      navigate(`/turlar?category=${selectedTourType}&start_date=${timeSTART}`);
     } else {
       toast.error("Tarix aralığı və kateqoriya seçin");
     }
@@ -90,7 +88,7 @@ const Header = ({ months, typeOfTours }) => {
         alt="main-img"
         width="100%"
         height="100%"
-        style={{ objectFit: "main", borderRadius: "5px" }}
+        style={{ objectFit: "cover", borderRadius: "5px" }}
       />
       {/* <Navbar /> */}
       <Box

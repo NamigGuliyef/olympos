@@ -5,7 +5,6 @@ import { deleteUserOrder } from "../../services/apiOrders";
 import { useNavigate } from "react-router-dom";
 
 const UserOrders = ({ orders }) => {
-  console.log("userOrders", orders);
   const navigate = useNavigate();
   const columns = [
     // { field: "_id", headerName: "ID", width: 70 },
@@ -59,7 +58,6 @@ const UserOrders = ({ orders }) => {
 
       width: 300,
       renderCell: ({ row }) => {
-        console.log("row", row);
         if (!row.ordered) {
           return (
             <button
@@ -90,10 +88,8 @@ const UserOrders = ({ orders }) => {
       },
     },
   ];
-  console.log("orders", orders);
 
   function handleUserOrderDelete(id) {
-    console.log("silinen id", id);
     deleteUserOrder(id);
     navigate(0);
   }
