@@ -158,7 +158,7 @@ const Footer = () => {
         >
           {!isMobile && (
             <img
-              src="/public/assets/footer-img.png"
+              src="/assets/footer-img.png"
               alt=""
               style={{ bottom: 0 }}
 

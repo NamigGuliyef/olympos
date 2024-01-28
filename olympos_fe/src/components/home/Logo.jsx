@@ -18,7 +18,7 @@ const Logo = () => {
       <NavLink style={navLinkStyle} to="/">
         <img
           style={{ objectFit: "cover", width: isMobile ?  "50px" : "100px", height: isMobile ? "50px" : "100px" }}
-          src="./public/Logo.jpeg"
+          src="./Logo.jpeg"
           alt="logo"
         />
       </NavLink>

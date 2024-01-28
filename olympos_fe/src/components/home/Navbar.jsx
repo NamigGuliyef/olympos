@@ -29,7 +29,7 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { ColorModeContext } from "../../App";
 
-import logo from "../../../public/Logo.jpeg";
+import logo from "../../../Logo.jpeg";
 
 const Navbar = ({}) => {
   const dispatch = useDispatch();
@@ -68,7 +68,7 @@ const Navbar = ({}) => {
           // deleteCookie(["token", "role"]);
           // navigate("/login");
           const obj = {
-            profile_photo: "../../../public/Logo.jpeg",
+            profile_photo: "../../../Logo.jpeg",
             // profile_photo:
             //   "https://res.cloudinary.com/daxy3ke6i/image/upload/v1705745977/olympos_logo.ico.ico",
             user: "Admin",
