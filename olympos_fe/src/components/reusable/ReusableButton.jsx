@@ -30,7 +30,7 @@ const ReusableButton = ({
         //   // md: `${width}`,
         // },
         width:
-          type === "prevNextBtn" ? width : isMobile || isFull ? "100%" : width,
+          type === "prevNextBtn" ? width : isMobile || isFull ? "95%" : width,
         height: height + "px",
         backgroundColor: bgColor,
         padding: "8px 16px",

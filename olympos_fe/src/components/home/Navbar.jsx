@@ -196,7 +196,7 @@ const Navbar = ({}) => {
                 }}
               />
             ) : (
-              <MenuIcon />
+              <MenuIcon sx={{color:"black"}}/>
             )}
           </div>
         )}
