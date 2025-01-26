@@ -1,34 +1,23 @@
-import {
-  Box,
-  Stack,
-  Typography,
-  CssBaseline,
-  FormControl,
-  InputLabel,
-  Select,
-  OutlinedInput,
-  MenuItem,
-} from "@mui/material";
 import FlightIcon from "@mui/icons-material/Flight";
 import HotelIcon from "@mui/icons-material/Hotel";
-import { useEffect, useMemo, useState } from "react";
 import TelegramIcon from "@mui/icons-material/Telegram";
-import { useNavigate } from "react-router-dom";
+import {
+  Box, CssBaseline, Stack,
+  Typography
+} from "@mui/material";
 import { motion } from "framer-motion";
+import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { State } from "country-state-city";
-import DateRangePicker from "../DateRangePicker";
 
-import { CustomContainer, FlexBetween, theme } from "../../theme";
-import ReusableButton from "../reusable/ReusableButton";
-import { Link, NavLink, useSearchParams, useLocation } from "react-router-dom";
-import Navbar from "./Navbar";
-import FormSelections from "../reusable/FormSelections";
-import { useSelector } from "react-redux";
 import { format } from "date-fns";
 import az from "date-fns/locale/az";
-import { getTime } from "../../helper/getTime";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
+import { NavLink, useLocation, useSearchParams } from "react-router-dom";
+import { CustomContainer, theme } from "../../theme";
+import FormSelections from "../reusable/FormSelections";
+import ReusableButton from "../reusable/ReusableButton";
 
 const linkStyle = (isActive) => {
   return {

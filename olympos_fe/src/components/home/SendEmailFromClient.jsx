@@ -13,7 +13,7 @@ const SendEmailFromClient = ({ sxButtonSubscribe }) => {
       if ((res.statusCode + "").startsWith("4")) {
         toast.error(res.message);
       } else {
-        toast.success("Subscribed");
+        toast.success("Abunə olundu!");
       }
     });
 
@@ -28,7 +28,7 @@ const SendEmailFromClient = ({ sxButtonSubscribe }) => {
           {...register("email", {
             required: "xana boş ola bilməz",
           })}
-          label="Your email address here"
+          label="Email ünvanı daxil edin!"
           sx={{ backgroundColor: "white", maxWidth: "473px", height: "56px" }}
         />
 

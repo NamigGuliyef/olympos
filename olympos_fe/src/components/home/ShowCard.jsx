@@ -8,7 +8,6 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
-import ReusableButton from "../reusable/ReusableButton";
 import { CustomContainer, theme } from "../../theme";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -17,7 +16,8 @@ const data = [
   {
     id: 77,
     img: "/assets/flight.png",
-    subtitle: "Turlarımızla dünyanın gözəlliklərinə yaxından baxın! Ailənizlə xoş anlar yaşamaq üçün ən yaxşı turlar bizimlədir! Təbiət qoynunda dinc anlar üçün indicə rezervasiya edin!",
+    subtitle:
+      "Turlarımızla dünyanın gözəlliklərinə yaxından baxın! Ailənizlə xoş anlar yaşamaq üçün ən yaxşı turlar bizimlədir! Təbiət qoynunda dinc anlar üçün indicə rezervasiya edin!",
     btnAction: "Turlara bax",
     title: "Turlar",
     styleSide: "left",
@@ -26,7 +26,8 @@ const data = [
   {
     id: 99,
     img: "/assets/hotel.png",
-    subtitle: "Otellərimizdə rahatlıq sizin üçün nəzərdə tutulub. Evdən uzaqda, ev rahatlığında: Sizin üçün özəl olanı bizimlə tapın! Unudulmaz anlar üçün rezervasiya edin. Biz buradayıq, sizi gözləyirik!”",
+    subtitle:
+      "Otellərimizdə rahatlıq sizin üçün nəzərdə tutulub. Evdən uzaqda, ev rahatlığında: Sizin üçün özəl olanı bizimlə tapın! Unudulmaz anlar üçün rezervasiya edin. Biz buradayıq, sizi gözləyirik!",
     btnAction: "Otellərə bax",
     title: "Otellər",
     styleSide: "right",
@@ -54,105 +55,132 @@ const ShowCard = () => {
     };
   }, []);
 
-  const isPassed = scrollPosition > componentPosition;
-
   return (
     <Grid
       ref={cardRef}
       container
       sx={{
-        // backgroundColor: "green",
-        padding: "5rem 0 3rem 0",
+        padding: "3rem 0 2rem 0",
         justifyContent: "center",
-        // backgroundColor: isPassed ? "red" : null,
+        gap: "1.5rem",
       }}
-      spacing={6}
+      spacing={4}
       columns={16}
     >
-      {data.map((card, i) => (
+      {data.map((card) => (
         <Grid
           component={motion.div}
-          initial={{ x: card.styleSide === "left" ? -250 : 250 }}
-          animate={{ x: 0 }}
-          transition={{ type: "spring", stiffness: 100, delay: 0.3 }}
-          variant="p"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           key={card.id}
           item
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
           <Card
             sx={{
               position: "relative",
               width: {
-                xs: "350px",
-                sm: "575px",
+                xs: "280px",
+                sm: "500px",
               },
               textAlign: "center",
-              height: "559px",
+              height: "450px",
+              boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)",
+              borderRadius: "12px",
+              overflow: "hidden",
+              transition: "transform 0.3s ease, box-shadow 0.3s ease",
+              '&:hover': {
+                transform: "scale(1.05)",
+                boxShadow: "0px 12px 24px rgba(0, 0, 0, 0.3)",
+              },
             }}
           >
             <CardMedia
-              sx={{ position: "absolute", inset: 0 }}
+              sx={{ position: "absolute", inset: 0, filter: "brightness(70%)" }}
               component="img"
               image={card.img}
-              // width="100"
-              height="559px"
-              alt="flight image"
-            ></CardMedia>
+              height="450px"
+              alt="card image"
+            />
 
             <CardContent
               sx={{
                 zIndex: 1,
-                padding: "0 4rem",
                 position: "absolute",
                 bottom: 0,
+                padding: "1.5rem",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 flexDirection: "column",
                 width: "100%",
+                background: "linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent)",
               }}
             >
               <Typography
-                // sx={{ color: "red", zIndex: "fab" }}
                 color="white"
-                variant="h4"
-                bottom="0"
+                variant="h5"
                 gutterBottom
                 fontWeight="bold"
+                sx={{
+                  fontSize: "1.5rem",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.8px",
+                }}
               >
                 {card.title}
               </Typography>
               <Typography
-                // sx={{ color: "red", zIndex: "fab" }}
                 color="white"
-                variant="h6"
-                bottom="0"
+                variant="body2"
                 gutterBottom
+                sx={{ fontSize: "0.9rem", lineHeight: "1.4" }}
               >
                 {card.subtitle}
               </Typography>
               <CardActions
                 sx={{
+                  marginTop: "1rem",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                 }}
               >
-                <ReusableButton
-                  width={144}
-                  height={48}
-                  bgColor={theme.palette.primary.main}
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
                 >
                   <Link
+                    to={card.url}
                     style={{
                       textDecoration: "none",
-                      color: "black",
                     }}
-                    to={card.url}
                   >
-                    {card.btnAction}
+                    <Button
+                      sx={{
+                        width: 140,
+                        height: 45,
+                        backgroundColor: theme.palette.primary.main,
+                        color: "white",
+                        fontWeight: "bold",
+                        fontSize: "0.9rem",
+                        borderRadius: "10px",
+                        textTransform: "none",
+                        transition: "background-color 0.3s ease, transform 0.3s ease",
+                        '&:hover': {
+                          backgroundColor: theme.palette.primary.dark,
+                        },
+                      }}
+                    >
+                      {card.btnAction}
+                    </Button>
                   </Link>
-                </ReusableButton>
+                </motion.div>
               </CardActions>
             </CardContent>
           </Card>

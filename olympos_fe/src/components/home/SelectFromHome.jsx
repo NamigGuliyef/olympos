@@ -1,13 +1,13 @@
+import { useTheme } from "@emotion/react";
 import { Box, Typography } from "@mui/material";
 import React from "react";
-import { CustomContainer, FlexBetween } from "../../theme";
 import { Link } from "react-router-dom";
-import ReusableButton from "../reusable/ReusableButton";
+import { CustomContainer } from "../../theme";
 import SectionHeader from "../reusable/SectionHeader";
-import { useTheme } from "@emotion/react";
 
 const SelectFromHome = ({ data, title, link }) => {
   const theme = useTheme();
+
   return (
     <CustomContainer
       sx={{
@@ -32,7 +32,7 @@ const SelectFromHome = ({ data, title, link }) => {
               textDecoration: "none",
               color: "#112211",
             }}
-            key={i + 103565666 + i * 556 + i + 46}
+            key={i}
             to={
               title === "Turlar"
                 ? "turlar/" + `${item._id}`
@@ -41,41 +41,81 @@ const SelectFromHome = ({ data, title, link }) => {
           >
             <Box
               sx={{
-                width: 293,
-                height: 122,
-                boxShadow: "0px 4px 16px 0px #1122110D",
-                borderRadius: "16px",
+                width: 320,
+                height: 200,
+                boxShadow: "0px 8px 24px rgba(0, 0, 0, 0.15)",
+                borderRadius: "20px",
                 padding: "16px",
+                position: "relative",
+                overflow: "hidden",
                 display: "flex",
-                alignItems: "center",
-                gap: "16px",
-                transition: "transform 0.3s, box-shadow 0.3s",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                background: theme.palette.mode === "dark"
+                  ? "linear-gradient(145deg, #1e1e1e, #292929)"
+                  : "linear-gradient(145deg, #ffffff, #f0f0f0)",
+                transition: "transform 0.5s ease, box-shadow 0.5s ease",
                 "&:hover": {
-                  transform: "scale(1.03)",
-                  boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+                  transform: "scale(1.1) rotate(-2deg)",
+                  boxShadow: "0px 12px 36px rgba(0, 0, 0, 0.25)",
                 },
               }}
             >
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  background: "rgba(0, 0, 0, 0.05)",
+                  borderRadius: "20px",
+                  zIndex: 1,
+                }}
+              />
               <img
                 width={90}
-                style={{ objectFit: "cover" }}
                 height={90}
+                style={{
+                  objectFit: "cover",
+                  borderRadius: "50%",
+                  zIndex: 2,
+                  alignSelf: "center",
+                  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+                }}
                 src={item.photo || item.photos[0]}
               />
-              <Box>
+              <Box
+                sx={{
+                  zIndex: 2,
+                  textAlign: "center",
+                  marginTop: "16px",
+                }}
+              >
                 <Typography
                   sx={{
                     fontFamily: "Montserrat",
-                    fontSize: "16px",
-                    fontWeight: 600,
-                    lineHeight: "20px",
+                    fontSize: "18px",
+                    fontWeight: 700,
+                    lineHeight: "22px",
                     letterSpacing: "0em",
-                    textAlign: "left",
-                    color: theme.palette.mode === "dark" ? "white" : "black",
+                    color: theme.palette.mode === "dark" ? "#ffffff" : "#222222",
                   }}
                   variant="h5"
                 >
                   {item.name}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontFamily: "Montserrat",
+                    fontSize: "16px",
+                    fontWeight: 500,
+                    lineHeight: "20px",
+                    color: theme.palette.mode === "dark" ? "#aaa" : "#444",
+                    marginTop: "8px",
+                  }}
+                >
+                  Qiymət: {item.price} AZN
                 </Typography>
               </Box>
             </Box>

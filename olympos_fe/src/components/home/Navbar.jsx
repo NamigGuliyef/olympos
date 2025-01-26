@@ -12,13 +12,13 @@ import {
   useTheme,
 } from "@mui/material";
 import React, { memo, useContext, useEffect, useMemo, useState } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import FlightIcon from "@mui/icons-material/Flight";
 import HotelIcon from "@mui/icons-material/Hotel";
-import { CustomContainer, theme } from "../../theme";
+import { CustomContainer } from "../../theme";
 import AuthUser from "../auth/AuthUser";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getUserDetails } from "../../services/apiAuth";
 import { login, logout } from "../../store/slices/userSlice";
 import { deleteCookie, getCookie } from "../../helper/setCookie";
@@ -29,9 +29,7 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { ColorModeContext } from "../../App";
 
-import logo from "../../../public/Logo.jpeg";
-
-const Navbar = ({ }) => {
+const Navbar = () => {
   const dispatch = useDispatch();
   const [toggle, setToggle] = useState(false);
   const [account, setAccount] = useState(null);
@@ -43,13 +41,11 @@ const Navbar = ({ }) => {
 
   const isHomePage = location.pathname === "/";
 
-  /// detecting token expiration
   useEffect(() => {
     if (token) {
       const tokenCheckInterval = setInterval(() => {
         const token = getCookie("token");
-        // Check token expiration
-        if (!token || !token.length) {
+        if (!token) {
           setRole(null);
           setAccount(null);
           dispatch(logout());
@@ -63,16 +59,8 @@ const Navbar = ({ }) => {
     const getUser = async () => {
       try {
         const user = await getUserDetails();
-
         if (user.statusCode === 403) {
-          // deleteCookie(["token", "role"]);
-          // navigate("/login");
-          const obj = {
-            profile_photo: "../../../Logo.jpeg",
-            // profile_photo:
-            //   "https://res.cloudinary.com/daxy3ke6i/image/upload/v1705745977/olympos_logo.ico.ico",
-            user: "Admin",
-          };
+          const obj = { profile_photo: "../../../Logo.jpeg", user: "Admin" };
           setAccount(obj);
         } else {
           setAccount(user);
@@ -91,25 +79,21 @@ const Navbar = ({ }) => {
     setRole(userRole);
   }, []);
 
-  // location deyisende mobile sheet baglansin
   useEffect(() => {
     setToggle(false);
   }, [location]);
 
   const isMobile = useMediaQuery("(max-width: 600px)");
 
-  function navLinkStyle(isActive) {
-    return {
-      color: isHomePage ? "white" : "black",
-      textDecoration: "none",
-    };
-  }
+  const navLinkStyle = (isActive) => ({
+    color: isHomePage ? "white" : "black",
+    textDecoration: "none",
+    fontWeight: isActive ? "bold" : "normal",
+  });
 
   const handleToggleMobile = () => {
     setToggle((curr) => !curr);
   };
-
-  // handleToggle Dark or light mode
 
   return (
     <Box
@@ -119,11 +103,9 @@ const Navbar = ({ }) => {
         left: isHomePage ? "0" : "null",
         right: isHomePage ? "0" : "null",
         zIndex: 1000,
-        // margin: "20px",
         borderRadius: "10px",
-        // padding: "10px",
-        backgroundColor: isHomePage ? "null" : "white",
         boxShadow: isHomePage ? "0" : " 0px 4px 16px 0px #1122110D",
+        backgroundColor: isHomePage ? "transparent" : "white",
       }}
     >
       <CustomContainer
@@ -133,22 +115,15 @@ const Navbar = ({ }) => {
           justifyContent: "space-between",
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: "1rem",
-            color: "white",
-          }}
-        >
+        <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
           <NavLink to="/turlar" style={navLinkStyle}>
-            <Box sx={{ display: "flex", alignItems: "center", gap: "0.2rem" }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
               <FlightIcon />
               <Typography variant="subtitle1">Turlar</Typography>
             </Box>
           </NavLink>
           <NavLink to="/otellər" style={navLinkStyle}>
-            <Box sx={{ display: "flex", alignItems: "center", gap: "0.2rem" }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
               <HotelIcon />
               <Typography variant="subtitle1">Otellər</Typography>
             </Box>
@@ -159,33 +134,26 @@ const Navbar = ({ }) => {
               width: "100%",
               alignItems: "center",
               justifyContent: "center",
-
-              color: theme.palette.mode === "dark" ? "black" : "#FAAF00",
               borderRadius: 1,
               p: 3,
             }}
           >
             <IconButton
-              sx={{ ml: 1 }}
+              sx={{
+                ml: 1,
+                color: theme.palette.mode === "dark" ? "black" : "#FAAF00",
+              }}
               onClick={colorMode.toggleColorMode}
-              color="inherit"
             >
-              {theme.palette.mode === "dark" ? (
-                <Brightness4Icon />
-              ) : (
-                <Brightness7Icon />
-              )}
+              {theme.palette.mode === "dark" ? <Brightness4Icon /> : <Brightness7Icon />}
             </IconButton>
           </Box>
         </Box>
-        {/* <Box>Logo</Box> */}
 
         {!isHomePage && <Logo />}
+
         {isMobile && (
-          <div
-            style={{ cursor: "pointer" }}
-            onClick={() => handleToggleMobile()}
-          >
+          <div style={{ cursor: "pointer" }} onClick={handleToggleMobile}>
             {toggle ? (
               <CloseIcon
                 style={{
@@ -218,7 +186,6 @@ const Navbar = ({ }) => {
                 sx={{
                   display: "flex",
                   flexDirection: "column",
-                  // alignItems: "center",
                   gap: "5rem",
                 }}
               >
@@ -226,13 +193,12 @@ const Navbar = ({ }) => {
                   <Box
                     sx={{
                       display: "flex",
-                      // alignItems: "center",
                       gap: "0.3rem",
                       justifyContent: "center",
                       mb: "3rem",
                     }}
                   >
-                    <FavoriteIcon />
+                    <FavoriteIcon sx={{ color: "red" }} />
                     <NavLink style={navLinkStyle} to="/seçdiklərim">
                       <Typography sx={{ color: "black" }}>Seçilmişlər</Typography>
                     </NavLink>
@@ -267,8 +233,6 @@ const Navbar = ({ }) => {
                         padding: "1rem 2rem",
                         borderRadius: "10px",
                         backgroundColor: "black",
-                        // color: isHomePage ? "black" : "white",
-
                         textAlign: "center",
                       }}
                     >
@@ -290,24 +254,20 @@ const Navbar = ({ }) => {
             </Slide>
           </Drawer>
         )}
+
         {!isMobile && (
           <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             {role !== "admin" && (
-              <Box
-                sx={{ display: "flex", alignItems: "center", gap: "0.3rem" }}
-              >
-                <FavoriteIcon sx={{ color: "black" }} />
+              <Box sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <FavoriteIcon sx={{ color: "red" }} />
                 <NavLink style={navLinkStyle} to="/seçdiklərim">
                   <Typography>Seçilmişlər</Typography>
                 </NavLink>
               </Box>
             )}
             {role === "null" || !role ? (
-              <Box sx={{ display: "flex", alignItems: "center", gap: "2rem" }}>
-                <Typography
-                  variant="subtitle1"
-                  sx={{ color: isHomePage ? "white" : "black" }}
-                >
+              <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                <Typography variant="subtitle1" sx={{ color: isHomePage ? "white" : "black" }}>
                   <NavLink
                     to="/login"
                     style={{
@@ -323,22 +283,13 @@ const Navbar = ({ }) => {
                   sx={{
                     padding: "1rem 2rem",
                     borderRadius: "10px",
-                    backgroundColor: isHomePage ? "white" : "black",
-                    color: isHomePage ? "black" : "white",
-
-                    textAlign: "center",
+                    backgroundColor: "black",
+                    color: "white",
                   }}
                 >
-                  {/* <img
-                    src="/public/assets/logo.svg"
-                    alt="main-img"
-                    width="100%"
-                    height="100%"
-                    style={{ objectFit: "cover", borderRadius: "10px" }}
-                  /> */}
                   <NavLink
                     style={{
-                      color: isHomePage ? "black" : "white",
+                      color: "white",
                       textDecoration: "none",
                     }}
                     to="/signup"
@@ -357,4 +308,4 @@ const Navbar = ({ }) => {
   );
 };
 
-export default Navbar;
+export default memo(Navbar);

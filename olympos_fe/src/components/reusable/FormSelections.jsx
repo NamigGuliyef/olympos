@@ -1,23 +1,17 @@
-import { useSelector, useDispatch } from "react-redux";
 import {
   Box,
   FormControl,
   InputLabel,
-  MenuItem,
-  OutlinedInput,
-  Select,
+  MenuItem, Select
 } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 
-import DateRangePicker from "../DateRangePicker";
-import { State } from "country-state-city";
 import { setType } from "../../store/slices/tourSlice";
-import { setCity as HotelCity } from "../../store/slices/hotelSlice";
-import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import DateRangePicker from "../DateRangePicker";
 
-import SelectComponent from "../SelectComponent";
-import { motion } from "framer-motion";
 import { useTheme } from "@emotion/react";
+import { motion } from "framer-motion";
+import SelectComponent from "../SelectComponent";
 
 const FormSelections = ({
   forType,
