@@ -4,76 +4,23 @@ import {
   Card,
   CardContent,
   CardMedia,
-  Divider,
-  IconButton,
   Stack,
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import { FlexBetween, RatingComponent, theme } from "../../theme";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import FavoriteBtn from "./FavoriteBtn";
-import { useDispatch, useSelector } from "react-redux";
-import StarIcon from "@mui/icons-material/Star";
-
-import FmdGoodIcon from "@mui/icons-material/FmdGood";
-import useUserWishlist from "../../features/wishlist/useUserWishlist";
-import { useWishlistBtn } from "../../hooks/useWishlistBtn";
-import { getCookie } from "../../helper/setCookie";
-import getUserAverageRating from "../../helper/getUserAverageRating";
-import { getStarRating } from "../../components/reusable/getStarRating";
 import { useTheme } from "@emotion/react";
+import FmdGoodIcon from "@mui/icons-material/FmdGood";
 
-const LinkStyles = () => {
-  return {
-    TextDecoderation: "none",
-  };
-};
-
-const TourListItem = ({ item, favorite, isFavorite, compareData }) => {
-  const [heartIcon, setHeartIcon] = useState(false);
-  const { wishlist, isWishlistLoading } = useUserWishlist();
-  const token = getCookie("token");
-  const role = getCookie("role");
-  const modeTheme = useTheme();
-  // eger isWishlist varsa demeli tourListItem wishlist sehifesindedir ve click ile wishliste salinib evvelceden
-  const type = item?.photos ? "hotel" : "tour";
-  // const itemId =
-  //   token && role === "user" ? item?.[`${type}Id`]?._id : item?._id;
-  const itemId = item?._id;
-
-  const { isInFavorite, handleFavoriteClick } = useWishlistBtn(
-    item,
-    itemId,
-    type
-  );
-
-  const ratingData = compareData?.find((el) => el._id === item?._id);
-
-  let imageUrl;
-
-  if (favorite) {
-    if (item?.hotelId) {
-      imageUrl = item?.hotelId.photos?.[0];
-    } else if (item?.photos) {
-      imageUrl = item?.photos[0];
-    } else if (item?.tourId) {
-      imageUrl = item?.tourId?.photo;
-    } else if (item?.photo) {
-      imageUrl = item?.photo;
-    }
-  } else {
-    if (type === "tour") {
-      imageUrl = item?.photo;
-    } else {
-      imageUrl = item?.photos[0];
-    }
-  }
-
+const TourListItem = ({ item, isFavorite, compareData }) => {
+  const theme = useTheme();
   const isTablet = useMediaQuery("(max-width: 600px)");
+
+  const type = item?.photos ? "hotel" : "tour";
+  const imageUrl =
+    item?.photos?.[0] || item?.photo || item?.hotelId?.photos?.[0] || "";
   const path = isFavorite
     ? type === "tour"
       ? `/turlar/${item?._id}`
@@ -82,233 +29,156 @@ const TourListItem = ({ item, favorite, isFavorite, compareData }) => {
 
   return (
     <Link style={{ textDecoration: "none" }} to={path}>
-      <Card
-        sx={{
-          // width: favorite || isTablet ? "300px" : null,
-          width: {
-            xs: "300px",
-            sm: "565px",
-            md: "800px",
-          },
-          height: {
-            xs: "430px",
-            sm: "250px",
-          },
-          display: "flex",
-          alignItems: "center",
-
-          flexDirection: isTablet ? "column" : "row",
-          borderRadius: "12px",
-          mb: "1.5rem",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-          transition: "transform 0.3s, box-shadow 0.3s",
-          "&:hover": {
-            transform: "scale(1.03)",
-          },
-        }}
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ type: "spring", stiffness: 300 }}
       >
-        <CardMedia
-          component="img"
-          sx={{
-            width: {
-              xs: 300,
-              sm: 250,
-              md: 300,
-            },
-            height: {
-              xs: 198.5,
-              sm: 298.5,
-              md: 298.5,
-            },
-            objectFit: "cover",
-          }}
-          image={imageUrl}
-          alt="Live from space album cover"
-        />
-        <Box
+        <Card
           sx={{
             display: "flex",
-            justifyContent: "space-between",
-            flexDirection: "column",
-            width: "100%",
-            padding: "1rem",
-            height: "100%",
+            flexDirection: isTablet ? "column" : "row",
+            borderRadius: "16px",
+            boxShadow: "0 12px 40px rgba(0, 0, 0, 0.2)",
+            overflow: "hidden",
+            background: "linear-gradient(135deg, #ffffff, #f8f9fd)",
+            mb: "1.5rem",
+            position: "relative",
+            "&:hover": {
+              transform: "translateY(-8px)",
+              transition: "transform 0.3s ease",
+            },
           }}
         >
-          <CardContent sx={{ width: "100%", padding: "0" }}>
-            <Box
-              sx={{
-                display: "flex",
-                gap: "2rem",
-                justifyContent: "space-between",
-              }}
-              direction="row"
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  // alignItems: "center",
-                  flexDirection: "column",
-                  gap: "21px",
-                  flex: 5,
-                }}
-              >
-                <Typography
-                  sx={{
-                    textTransform: "capitalize",
-                    fontSize: {
-                      xs: "14px",
-                      sm: "20px",
-                    },
+          <CardMedia
+            component="img"
+            sx={{
+              width: isTablet ? "100%" : "250px",
+              height: "auto",
+              objectFit: "cover",
+            }}
+            image={imageUrl}
+            alt={item?.name || "Tour Image"}
+          />
 
-                    fontWeight: 700,
-                    lineHeight: "25px",
-                    letterSpacing: "0em",
-                    textAlign: "left",
-                  }}
-                  component="div"
-                  variant="h5"
-                >
-                  {item?.name?.toLowerCase() ||
-                    item?.hotelId?.name?.toLowerCase() ||
-                    item?.tourId?.name?.toLowerCase()}
-                </Typography>
-                <Typography component="div" variant="h5">
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "2px",
-                    }}
-                  >
-                    {item?.location && (
-                      <div>
-                        <FmdGoodIcon sx={{ width: "18px" }} />
-                        <Typography
-                          sx={{
-                            fontFamily: " Montserrat",
-                            fontSize: "16px",
-                            fontWeight: 500,
-                            lineHeight: "15px",
-                            letterSpacing: "0em",
-                            textAlign: "left",
-                          }}
-                          // variant="body1"
-                        >
-                          {item?.location?.substring(0, 50)}
-                        </Typography>
-                      </div>
-                    )}
-                    {item.tour_day && (
-                      <div>
-                        {getStarRating(
-                          getUserAverageRating(ratingData?.reviews)
-                        )}
-                      </div>
-                    )}
-                  </Box>
-                </Typography>
-
-                <Stack
-                  direction="row"
-                  spacing={2}
-                  sx={{
-                    alignItems: "center",
-                    display: {
-                      xs: "none",
-                      sm: "flex",
-                    },
-                  }}
-                >
-                  <RatingComponent
-                    color={
-                      modeTheme.palette.mode === "dark" ? "white" : "black"
-                    }
-                  >
-                    {getUserAverageRating(ratingData?.reviews) || 0}
-                  </RatingComponent>
-                  <Typography>{item.reviews.length} rəy</Typography>
-                </Stack>
-              </Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              p: 3,
+              flex: 1,
+            }}
+          >
+            <CardContent>
               <Typography
-                variant="subtitle1"
-                component="div"
                 sx={{
-                  display: "flex",
-                  flex: 2,
-                  padding: 0,
-                  margin: 0,
-                  textAlign: "right",
-                  justifyContent: "center",
-                  fontSize: "22px",
-                  color: `${theme.palette.primary.pink}`,
+                  fontSize: "20px",
+                  fontWeight: 700,
+                  color: theme.palette.primary.main,
+                  mb: 1,
+                  letterSpacing: "0.5px",
+                  textTransform: "capitalize",
                 }}
               >
-                {/* ₼ {item?.price} */}
-
-                {item?.tour_day ? (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <span>₼ {item?.price}</span>
-                    <span>{item?.tour_day} gün</span>
-                    <span style={{ fontSize: "18px" }}>
-                      {item?.tour_date.slice(0, 10)}
-                    </span>
-                  </div>
-                ) : (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <span>₼ {item?.price}</span>
-
-                    <span style={{ fontSize: "14px" }}>
-                      {item?.start_date.slice(0, 10)}/
-                      {item?.end_date.slice(5, 10)}
-                    </span>
-                  </div>
-                )}
+                {item?.name || item?.hotelId?.name || item?.tourId?.name}
               </Typography>
-            </Box>
-          </CardContent>
 
-          <Stack direction="row" spacing={2} sx={{ mt: "0.5rem" }}>
-            <FavoriteBtn
-              onClick={(e) => handleFavoriteClick(e)}
-              favoriteClicked={isInFavorite}
-              id={item?._id}
-            />
-            <Button
-              sx={{
-                backgroundColor: `${theme.palette.primary.main}`,
-                borderRadius: "4px",
-                fontFamily: "Montserrat",
-                fontSize: "14px",
-                fontWeight: 600,
-                lineHeight: "17px",
-                letterSpacing: "0em",
-                textAlign: "left",
-                color: "black",
-                textTransform: "capitalize",
-                // width: favorite ? "50%" : "100%",
-                width: "100%",
+              {item?.location && (
+                <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <FmdGoodIcon
+                    sx={{
+                      color: theme.palette.primary.main,
+                      fontSize: "20px",
+                    }}
+                  />
+                  <Typography
+                    sx={{
+                      fontSize: "14px",
+                      color: "#6b7280",
+                      fontWeight: 500,
+                    }}
+                  >
+                    {item.location}
+                  </Typography>
+                </Box>
+              )}
 
-                "&:hover": { backgroundColor: `${theme.palette.primary.main}` },
-              }}
+              <Stack spacing={1} sx={{ mt: 2 }}>
+                {item?.tour_day && (
+                  <Typography
+                    sx={{
+                      fontSize: "14px",
+                      fontWeight: 600,
+                      color: "#6b7280",
+                    }}
+                  >
+                    Tur müddəti: {item.tour_day} gün
+                  </Typography>
+                )}
+
+                {item?.tour_date && (
+                  <Typography
+                    sx={{
+                      fontSize: "14px",
+                      fontWeight: 600,
+                      color: "#6b7280",
+                    }}
+                  >
+                    Tarix: {item.tour_date.slice(0, 10)}
+                  </Typography>
+                )}
+
+                {item?.price && (
+                  <Typography
+                    sx={{
+                      fontSize: "18px",
+                      fontWeight: 700,
+                      color: theme.palette.primary.main,
+                    }}
+                  >
+                    Qiymət: {item.price} AZN
+                  </Typography>
+                )}
+              </Stack>
+            </CardContent>
+
+            <Stack
+              direction="row"
+              spacing={2}
+              alignItems="center"
+              sx={{ mt: 2 }}
             >
-              Ətraflı
-            </Button>
-          </Stack>
-        </Box>
-      </Card>
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                <FavoriteBtn id={item?._id} />
+              </motion.div>
+
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                <Button
+                  variant="contained"
+                  sx={{
+                    backgroundColor: theme.palette.primary.main,
+                    color: "white",
+                    textTransform: "capitalize",
+                    px: 4,
+                    py: 1,
+                    borderRadius: "30px",
+                    fontSize: "14px",
+                    fontWeight: 600,
+                    boxShadow: "0 6px 15px rgba(0, 0, 0, 0.2)",
+                    "&:hover": {
+                      backgroundColor: theme.palette.primary.dark,
+                    },
+                  }}
+                >
+                  Ətraflı
+                </Button>
+              </motion.div>
+            </Stack>
+          </Box>
+        </Card>
+      </motion.div>
     </Link>
-    // </Link>
   );
 };
 

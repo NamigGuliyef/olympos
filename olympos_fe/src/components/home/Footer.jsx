@@ -15,16 +15,23 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { Link } from "react-router-dom";
 import FooterRegionList from "./FooterRegionList";
 import SendEmailFromClient from "./SendEmailFromClient";
+import { useTheme } from "@emotion/react";
 
 const destinations = [
   { name: "Quba", url: "https://az.wikipedia.org/wiki/Quba" },
   { name: "Qusar", url: "https://az.wikipedia.org/wiki/Qusar" },
-  { name: "Şahdağ", url: "https://az.wikipedia.org/wiki/%C5%9Eahda%C4%9F_(zirv%C9%99)" },
+  {
+    name: "Şahdağ",
+    url: "https://az.wikipedia.org/wiki/%C5%9Eahda%C4%9F_(zirv%C9%99)",
+  },
   { name: "Balakən", url: "https://az.wikipedia.org/wiki/Balak%C9%99n_rayonu" },
   { name: "Zaqatala", url: "https://az.wikipedia.org/wiki/Zaqatala_rayonu" },
   { name: "Qax", url: "https://az.wikipedia.org/wiki/Qax" },
   { name: "Şəki", url: "https://az.wikipedia.org/wiki/%C5%9E%C9%99ki" },
-  { name: "Qəbələ", url: "https://az.wikipedia.org/wiki/Q%C9%99b%C9%99l%C9%99" },
+  {
+    name: "Qəbələ",
+    url: "https://az.wikipedia.org/wiki/Q%C9%99b%C9%99l%C9%99",
+  },
   { name: "Lənkəran", url: "https://az.wikipedia.org/wiki/L%C9%99nk%C9%99ran" },
   { name: "Lerik", url: "https://az.wikipedia.org/wiki/Lerik_rayonu" },
   { name: "Astara", url: "https://az.wikipedia.org/wiki/Astara_rayonu" },
@@ -34,7 +41,8 @@ const destinations = [
 const Footer = () => {
   const isMedium = useMediaQuery("(max-width: 900px)");
   const isMobile = useMediaQuery("(max-width: 500px)");
-
+  const modeTheme = useTheme();
+  const isDarkMode = modeTheme.palette.mode === "dark";
   return (
     <Box
       background={`linear-gradient(135deg, #112211, #224422)`}
@@ -150,24 +158,31 @@ const Footer = () => {
           .fill(null)
           .map((_, i) => (
             <Box gridColumn="span 1" key={i}>
-              <Typography
-                sx={{
-                  fontSize: "16px",
-                  fontWeight: "700",
-                  lineHeight: "20px",
-                  textAlign: "left",
-                  marginBottom: "8px",
-                  textDecoration: "underline",
-                }}
-              >
-                Bölgələr {i + 1}
-              </Typography>
-              <List>
-                {destinations.slice(i * 4, i * 4 + 4).map((destination) => (
-                  <FooterRegionList destination={destination} key={uuidv4()} />
-                ))}
-              </List>
-            </Box>
+            <Typography
+              sx={{
+                fontSize: "16px",
+                fontWeight: "700",
+                lineHeight: "20px",
+                textAlign: "left",
+                marginBottom: "8px",
+                textDecoration: "underline",
+              }}
+            >
+              {/* Burada başlıq əlavə edə bilərsiniz */}
+            </Typography>
+            <List>
+              {destinations.slice(i * 4, i * 4 + 4).map((destination) => (
+                <FooterRegionList
+                  destination={destination}
+                  key={uuidv4()}
+                  sx={{
+                    color: isDarkMode ? "white" : "black", // Rəngi dark mode-a əsasən dəyişir
+                  }}
+                />
+              ))}
+            </List>
+          </Box>
+          
           ))}
       </Box>
 
@@ -184,21 +199,21 @@ const Footer = () => {
         <IconButton
           component={Link}
           to="https://www.facebook.com"
-          sx={{ color: "white", margin: "0 10px" }}
+          sx={{ color: isDarkMode ? "white" : "black", margin: "0 10px" }}
         >
           <FacebookIcon />
         </IconButton>
         <IconButton
           component={Link}
           to="https://www.instagram.com"
-          sx={{ color: "white", margin: "0 10px" }}
+          sx={{ color: isDarkMode ? "white" : "black", margin: "0 10px" }}
         >
           <InstagramIcon />
         </IconButton>
         <IconButton
           component={Link}
           to="https://wa.me"
-          sx={{ color: "white", margin: "0 10px" }}
+          sx={{ color: isDarkMode ? "white" : "black", margin: "0 10px" }}
         >
           <WhatsAppIcon />
         </IconButton>
