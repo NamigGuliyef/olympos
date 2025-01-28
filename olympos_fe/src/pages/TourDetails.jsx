@@ -28,23 +28,6 @@ import { createTourOrderApi } from "../services/apiOrders";
 import AddReviews from "../components/reusable/AddReviews";
 import { getCookie } from "../helper/setCookie";
 
-const navLinkStyle = () => {
-  return {
-    textDecoration: "none",
-    color: "#112211",
-  };
-};
-
-export const operationStyle = {
-  padding: "5px",
-  border: "1px solid black",
-  background: "#ccc",
-  color: "black",
-  marginRight: "10px",
-  userSelect: "none",
-  cursor: "pointer",
-};
-
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const TourDetails = () => {
@@ -110,8 +93,8 @@ const TourDetails = () => {
       {error && <ErrorMessage />}
       {!isLoading && !error && (
         <CustomContainer>
-          <Box sx={{ display: " flex", alignItems: "center", gap: "0.7rem" }}>
-            <NavLink to="/" style={navLinkStyle}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: "0.7rem" }}>
+            <NavLink to="/" style={{ textDecoration: "none", color: "#112211" }}>
               <Box
                 sx={{
                   display: "flex",
@@ -125,13 +108,17 @@ const TourDetails = () => {
                   textAlign: "left",
                   textDecoration: "none",
                   color: theme.palette.primary.pink,
+                  transition: "color 0.3s ease",
+                  "&:hover": {
+                    color: theme.palette.primary.main,
+                  },
                 }}
               >
                 Ana səhifə
                 <ChevronRightIcon />
               </Box>
             </NavLink>
-            <NavLink style={navLinkStyle} to="/turlar">
+            <NavLink to="/turlar" style={{ textDecoration: "none", color: "#112211" }}>
               <Box
                 sx={{
                   display: "flex",
@@ -145,6 +132,10 @@ const TourDetails = () => {
                   textAlign: "left",
                   textDecoration: "none",
                   color: theme.palette.primary.pink,
+                  transition: "color 0.3s ease",
+                  "&:hover": {
+                    color: theme.palette.primary.main,
+                  },
                 }}
               >
                 Turlar
@@ -153,27 +144,27 @@ const TourDetails = () => {
             </NavLink>
             <Typography>{data?.name}</Typography>
           </Box>
+
           <FlexBetween sx={{ margin: "1rem 0" }}>
             <Stack spacing={2}>
-              <Box>
-                <Typography
-                  variant="h4"
-                  sx={{
-                    fontSize: {
-                      xs: "16px",
-                      sm: "20px",
-                      md: "24px",
-                    },
-                    fontWeight: 700,
-                    lineHeight: "30px",
-                    letterSpacing: "0em",
-                    textAlign: "left",
-                  }}
-                >
-                  {data?.name}
-                </Typography>
-              </Box>
+              <Typography
+                variant="h4"
+                sx={{
+                  fontSize: { xs: "16px", sm: "20px", md: "24px" },
+                  fontWeight: 700,
+                  lineHeight: "30px",
+                  letterSpacing: "0em",
+                  textAlign: "left",
+                  transition: "color 0.3s ease",
+                  "&:hover": {
+                    color: theme.palette.primary.main,
+                  },
+                }}
+              >
+                {data?.name}
+              </Typography>
             </Stack>
+
             <Stack spacing={2}>
               <Typography
                 variant="h4"
@@ -185,6 +176,10 @@ const TourDetails = () => {
                   lineHeight: "29px",
                   letterSpacing: "0em",
                   textAlign: "right",
+                  transition: "color 0.3s ease",
+                  "&:hover": {
+                    color: theme.palette.primary.main,
+                  },
                 }}
               >
                 ₼ {data?.price}
@@ -207,21 +202,18 @@ const TourDetails = () => {
                   width={150}
                   height={48}
                   size="14px"
+                  sx={{
+                    transition: "background-color 0.3s ease",
+                    "&:hover": {
+                      backgroundColor: theme.palette.secondary.main,
+                    },
+                  }}
                 >
                   Bron et
                 </ReusableButton>
                 {openBronModal && (
-                  <AdminModal
-                    openOrClose={openBronModal}
-                    setShowInput={setOpenBronModal}
-                  >
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "1rem",
-                      }}
-                    >
+                  <AdminModal openOrClose={openBronModal} setShowInput={setOpenBronModal}>
+                    <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                       <FlexBetween>
                         <Typography
                           sx={{
@@ -233,11 +225,7 @@ const TourDetails = () => {
                         >
                           {data?.name}
                         </Typography>
-                        <Typography
-                          sx={{
-                            ml: "1rem",
-                          }}
-                        >
+                        <Typography sx={{ ml: "1rem" }}>
                           boş yerlərin sayı:{" "}
                           {data?.person_count - data?.confirmed_person_count}
                         </Typography>
@@ -246,14 +234,40 @@ const TourDetails = () => {
                         <Typography>Turun sayını daxil edin</Typography>
                         <Box>
                           <span
-                            style={operationStyle}
+                            style={{
+                              padding: "5px",
+                              border: "1px solid black",
+                              background: "#ccc",
+                              color: "black",
+                              marginRight: "10px",
+                              userSelect: "none",
+                              cursor: "pointer",
+                              transition: "background-color 0.3s ease",
+                              "&:hover": {
+                                backgroundColor: "#bbb",
+                              },
+                            }}
                             onClick={() => handleCounter("increment")}
                           >
                             +
                           </span>
-                          <span style={operationStyle}>{bronCounter}</span>
+                          <span style={{ padding: "5px", border: "1px solid #ccc" }}>
+                            {bronCounter}
+                          </span>
                           <span
-                            style={operationStyle}
+                            style={{
+                              padding: "5px",
+                              border: "1px solid black",
+                              background: "#ccc",
+                              color: "black",
+                              marginLeft: "10px",
+                              userSelect: "none",
+                              cursor: "pointer",
+                              transition: "background-color 0.3s ease",
+                              "&:hover": {
+                                backgroundColor: "#bbb",
+                              },
+                            }}
                             onClick={() => handleCounter("decrement")}
                           >
                             -
@@ -266,7 +280,12 @@ const TourDetails = () => {
                         }
                         onClick={() => handleOrder(data)}
                         bgColor={theme.palette.primary.main}
-                        sx={{}}
+                        sx={{
+                          transition: "background-color 0.3s ease",
+                          "&:hover": {
+                            backgroundColor: theme.palette.secondary.main,
+                          },
+                        }}
                       >
                         Rezerv et
                       </ReusableButton>
@@ -276,11 +295,8 @@ const TourDetails = () => {
               </Box>
             </Stack>
           </FlexBetween>
-          <Stack
-            sx={{ width: "100%", height: "550px" }}
-            direction="row"
-            spacing={1}
-          >
+
+          <Stack sx={{ width: "100%", height: "550px" }} direction="row" spacing={1}>
             <Box sx={{ width: "100%", objectFit: "cover" }}>
               <img
                 src={data?.photo}
@@ -304,7 +320,9 @@ const TourDetails = () => {
               ))}
             </Box>
           </Stack>
+
           <Divider sx={{ margin: "3rem 0" }} />
+
           <Box sx={{}}>
             <SectionTitle>Məlumat</SectionTitle>
             <Typography sx={{ margin: "1rem 0" }} variant="body1">
@@ -319,9 +337,6 @@ const TourDetails = () => {
           {token && role === "user" && (
             <AddReviews type="tour" id={data._id} editOrCreate="create" />
           )}
-
-          {/* {data.position && <Map mapPosition={data.position} />} */}
-          {/* <IframeWrapper dangerouslySetInnerHTML={{ __html: data.position }} /> */}
         </CustomContainer>
       )}
     </Box>
