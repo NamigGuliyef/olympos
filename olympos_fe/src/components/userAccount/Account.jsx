@@ -293,71 +293,115 @@ const Account = ({ user }) => {
         setShowInput={setOpenModal}
         openOrClose={openModal}
       >
-        <Typography
+        <Box
           sx={{
-            fontSize: "20px",
-            textAlign: "center",
-            mb: "1rem",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "2rem",
+            borderRadius: "12px",
+            boxShadow: 3,
+            background: "linear-gradient(135deg, #f5f7fa, #c3cfe2)",
           }}
         >
-          Məlumatları dəyişdir
-        </Typography>
-        <form onSubmit={handleSubmit}>
-          <TextField
-            value={inputs.first_name}
-            onChange={handleChange}
-            name="first_name"
-            label="Ad"
-            required
-          />
-          <TextField
-            value={inputs.last_name}
-            onChange={handleChange}
-            name="last_name"
-            label="Soyad"
-            required
-          />
-          <TextField
-            value={inputs.email}
-            onChange={handleChange}
-            name="email"
-            label="Email"
-            required
-          />
-          <TextField
-            value={inputs.phone_number}
-            onChange={handleChange}
-            name="phone_number"
-            label="Telefon"
-            required
-          />
-          <TextField
-            type="password"
-            value={inputs.old_password}
-            onChange={handleChange}
-            name="old_password"
-            label="Köhnə parol"
-          />
-          <TextField
-            type="password"
-            value={inputs.new_password}
-            onChange={handleChange}
-            name="new_password"
-            label="Yeni parol"
-          />
-
-          <Button
-            type="submit"
+          <Typography
             sx={{
-              backgroundColor: `${theme.palette.primary.main}`,
-              width: "100%",
-              mt: "1rem",
+              fontSize: "22px",
+              fontWeight: "bold",
+              textAlign: "center",
+              mb: "1.5rem",
+              color: theme.palette.primary.dark,
             }}
           >
-            Təsdiq et
-          </Button>
-        </form>
+            Məlumatları dəyişdir
+          </Typography>
+
+          <form onSubmit={handleSubmit} style={{ width: "100%" }}>
+            <Stack spacing={2}>
+              <TextField
+                value={inputs.first_name}
+                onChange={handleChange}
+                name="first_name"
+                label="Ad"
+                required
+                fullWidth
+                variant="outlined"
+                sx={{ borderRadius: "8px" }}
+              />
+              <TextField
+                value={inputs.last_name}
+                onChange={handleChange}
+                name="last_name"
+                label="Soyad"
+                required
+                fullWidth
+                variant="outlined"
+                sx={{ borderRadius: "8px" }}
+              />
+              <TextField
+                value={inputs.email}
+                onChange={handleChange}
+                name="email"
+                label="Email"
+                required
+                fullWidth
+                variant="outlined"
+                sx={{ borderRadius: "8px" }}
+              />
+              <TextField
+                value={inputs.phone_number}
+                onChange={handleChange}
+                name="phone_number"
+                label="Telefon"
+                required
+                fullWidth
+                variant="outlined"
+                sx={{ borderRadius: "8px" }}
+              />
+              <TextField
+                type="password"
+                value={inputs.old_password}
+                onChange={handleChange}
+                name="old_password"
+                label="Köhnə parol"
+                fullWidth
+                variant="outlined"
+                sx={{ borderRadius: "8px" }}
+              />
+              <TextField
+                type="password"
+                value={inputs.new_password}
+                onChange={handleChange}
+                name="new_password"
+                label="Yeni parol"
+                fullWidth
+                variant="outlined"
+                sx={{ borderRadius: "8px" }}
+              />
+            </Stack>
+
+            <Button
+              type="submit"
+              fullWidth
+              sx={{
+                mt: 3,
+                p: 1.5,
+                borderRadius: "8px",
+                background: "linear-gradient(135deg, #667eea, #764ba2)",
+                color: "white",
+                fontWeight: "bold",
+                "&:hover": {
+                  background: "linear-gradient(135deg, #5a67d8, #6b46c1)",
+                },
+              }}
+              onClick={() => toast.success("Profil məlumatı dəyişdi")} // Toast mesajı
+            >
+              Təsdiq et
+            </Button>
+          </form>
+        </Box>
       </AdminModal>
+
     </Box>
   );
 };
