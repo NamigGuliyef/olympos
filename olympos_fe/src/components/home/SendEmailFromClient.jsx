@@ -29,7 +29,7 @@ const SendEmailFromClient = ({ sxButtonSubscribe }) => {
             required: "xana boş ola bilməz",
           })}
           label="Email ünvanı daxil edin!"
-          sx={{ backgroundColor: "white", maxWidth: "473px", height: "56px" }}
+          sx={{ backgroundColor: "white", maxWidth: "490px", height: "56px" }}
         />
 
         <Button type="submit" sx={sxButtonSubscribe}>

@@ -1,91 +1,81 @@
-import {
-  Box,
-  Grid,
-  IconButton,
-  List,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
-import { theme } from "../../theme";
-import { v4 as uuidv4 } from "uuid";
-import { motion } from "framer-motion";
+import { useTheme } from "@emotion/react";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import {
+  Box,
+  Grid,
+  IconButton, Typography,
+  useMediaQuery
+} from "@mui/material";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import FooterRegionList from "./FooterRegionList";
+import { theme } from "../../theme";
 import SendEmailFromClient from "./SendEmailFromClient";
-import { useTheme } from "@emotion/react";
 
-const destinations = [
-  { name: "Quba", url: "https://az.wikipedia.org/wiki/Quba" },
-  { name: "Qusar", url: "https://az.wikipedia.org/wiki/Qusar" },
-  {
-    name: "Şahdağ",
-    url: "https://az.wikipedia.org/wiki/%C5%9Eahda%C4%9F_(zirv%C9%99)",
-  },
-  { name: "Balakən", url: "https://az.wikipedia.org/wiki/Balak%C9%99n_rayonu" },
-  { name: "Zaqatala", url: "https://az.wikipedia.org/wiki/Zaqatala_rayonu" },
-  { name: "Qax", url: "https://az.wikipedia.org/wiki/Qax" },
-  { name: "Şəki", url: "https://az.wikipedia.org/wiki/%C5%9E%C9%99ki" },
-  {
-    name: "Qəbələ",
-    url: "https://az.wikipedia.org/wiki/Q%C9%99b%C9%99l%C9%99",
-  },
-  { name: "Lənkəran", url: "https://az.wikipedia.org/wiki/L%C9%99nk%C9%99ran" },
-  { name: "Lerik", url: "https://az.wikipedia.org/wiki/Lerik_rayonu" },
-  { name: "Astara", url: "https://az.wikipedia.org/wiki/Astara_rayonu" },
-  { name: "Tufandağ", url: "https://az.wikipedia.org/wiki/Tufanda%C4%9F" },
-];
+// const destinations = [
+//   { name: "Quba", url: "https://az.wikipedia.org/wiki/Quba" },
+//   { name: "Qusar", url: "https://az.wikipedia.org/wiki/Qusar" },
+//   { name: "Şahdağ", url: "https://az.wikipedia.org/wiki/%C5%9Eahda%C4%9F_(zirv%C9%99)" },
+//   { name: "Balakən", url: "https://az.wikipedia.org/wiki/Balak%C9%99n_rayonu" },
+//   { name: "Zaqatala", url: "https://az.wikipedia.org/wiki/Zaqatala_rayonu" },
+//   { name: "Qax", url: "https://az.wikipedia.org/wiki/Qax" },
+//   { name: "Şəki", url: "https://az.wikipedia.org/wiki/%C5%9E%C9%99ki" },
+//   { name: "Qəbələ", url: "https://az.wikipedia.org/wiki/Q%C9%99b%C9%99l%C9%99" },
+//   { name: "Lənkəran", url: "https://az.wikipedia.org/wiki/L%C9%99nk%C9%99ran" },
+//   { name: "Lerik", url: "https://az.wikipedia.org/wiki/Lerik_rayonu" },
+//   { name: "Astara", url: "https://az.wikipedia.org/wiki/Astara_rayonu" },
+//   { name: "Tufandağ", url: "https://az.wikipedia.org/wiki/Tufanda%C4%9F" },
+// ];
 
 const Footer = () => {
   const isMedium = useMediaQuery("(max-width: 900px)");
   const isMobile = useMediaQuery("(max-width: 500px)");
   const modeTheme = useTheme();
   const isDarkMode = modeTheme.palette.mode === "dark";
+
   return (
     <Box
-      background={`linear-gradient(135deg, #112211, #224422)`}
-      padding="14rem 0 4rem 0"
+      background="linear-gradient(135deg, #112211, #224422)"
+      padding="8rem 0 2rem 0"
       position="relative"
-      mt={isMedium ? "28rem" : "10rem"}
+      mt={isMedium ? "16rem" : "6rem"}
       color="white"
     >
       <Grid
         container
         sx={{
-          borderRadius: "20px",
+          top: isMobile ? "10px" : "120px", // Mobile görünüşdə `top` deaktiv olur
+          borderRadius: "15px",
           transform: "translate(-50%, -50%)",
-          boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.3)",
+          boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)",
         }}
-        width="84%"
+        width="80%"
         backgroundColor={theme.palette.primary.light}
         margin="0 auto"
         position="absolute"
         left="50%"
-        top={isMedium ? "-20%" : "5%"}
+        top={isMedium ? "-15%" : "3%"}
       >
-        <Grid item xs={12} md={6} sx={{ padding: "24px" }}>
+        <Grid item xs={12} md={6} sx={{ padding: "16px" }}>
           <Typography
-            variant="h2"
+            variant="h3"
             sx={{
-              fontSize: "44px",
+              fontSize: "36px",
               fontWeight: 700,
-              lineHeight: "54px",
               textAlign: "left",
               color: "white",
-              textShadow: "2px 2px 4px rgba(0, 0, 0, 0.7)",
+              textShadow: "2px 2px 3px rgba(0, 0, 0, 0.6)",
             }}
             gutterBottom
           >
-            Turlardan <br /> xəbərdar ol
+            Turlardan xəbərdar ol
           </Typography>
           <Typography
-            variant="h4"
+            variant="h5"
             sx={{
-              fontSize: "20px",
+              fontSize: "18px",
               fontWeight: 700,
-              lineHeight: "25.26px",
               textAlign: "left",
               color: "black",
             }}
@@ -96,9 +86,8 @@ const Footer = () => {
           <Typography
             variant="subtitle1"
             sx={{
-              fontSize: "16px",
+              fontSize: "14px",
               fontWeight: 500,
-              lineHeight: "20px",
               textAlign: "left",
               color: "grey",
             }}
@@ -108,16 +97,16 @@ const Footer = () => {
           </Typography>
           <SendEmailFromClient
             sxButtonSubscribe={{
-              padding: "8px 16px",
+              top:"5px",
+              padding: "6px 12px",
               backgroundColor: "#112211",
               color: "#ffffff",
               borderRadius: "5px",
               textTransform: "capitalize",
-              fontFamily: "Montserrat",
-              fontSize: "14px",
+              fontSize: "13px",
               fontWeight: 600,
-              width: "104px",
-              height: "56px",
+              width: "100px",
+              height: "48px",
               "&:hover": {
                 backgroundColor: "#112211",
               },
@@ -138,19 +127,19 @@ const Footer = () => {
             <motion.img
               src="/assets/footer-img.png"
               alt="Footer"
-              style={{ width: "80%", height: "auto" }}
+              style={{ width: "70%", height: "auto" }}
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.7 }}
             />
           )}
         </Grid>
       </Grid>
 
-      <Box
+      {/* <Box
         display="grid"
-        gridTemplateColumns="repeat(4, 1fr)"
-        width="85%"
+        gridTemplateColumns="repeat(3, 1fr)"
+        width="80%"
         margin="0 auto"
         color="white"
       >
@@ -158,62 +147,49 @@ const Footer = () => {
           .fill(null)
           .map((_, i) => (
             <Box gridColumn="span 1" key={i}>
-            <Typography
-              sx={{
-                fontSize: "16px",
-                fontWeight: "700",
-                lineHeight: "20px",
-                textAlign: "left",
-                marginBottom: "8px",
-                textDecoration: "underline",
-              }}
-            >
-              {/* Burada başlıq əlavə edə bilərsiniz */}
-            </Typography>
-            <List>
-              {destinations.slice(i * 4, i * 4 + 4).map((destination) => (
-                <FooterRegionList
-                  destination={destination}
-                  key={uuidv4()}
-                  sx={{
-                    color: isDarkMode ? "white" : "black", // Rəngi dark mode-a əsasən dəyişir
-                  }}
-                />
-              ))}
-            </List>
-          </Box>
-          
+              <List>
+                {destinations.slice(i * 4, i * 4 + 4).map((destination) => (
+                  <FooterRegionList
+                    destination={destination}
+                    key={uuidv4()}
+                    sx={{
+                      color: isDarkMode ? "white" : "black",
+                    }}
+                  />
+                ))}
+              </List>
+            </Box>
           ))}
-      </Box>
+      </Box> */}
 
-      {/* Sosial şəbəkələr hissəsi */}
+      {/* Sosial şəbəkələr */}
       <Box
         display="flex"
         justifyContent="center"
         sx={{
-          marginTop: "20px",
+          marginTop: isMobile ? "50px" : "110px",
           color: "white",
-          paddingBottom: "20px", // Sosial şəbəkələrə daha çox yer ver
+          paddingBottom: "10px",
         }}
       >
         <IconButton
           component={Link}
           to="https://www.facebook.com"
-          sx={{ color: isDarkMode ? "white" : "black", margin: "0 10px" }}
+          sx={{ color: isDarkMode ? "white" : "black", margin: "0 8px" }}
         >
           <FacebookIcon />
         </IconButton>
         <IconButton
           component={Link}
           to="https://www.instagram.com"
-          sx={{ color: isDarkMode ? "white" : "black", margin: "0 10px" }}
+          sx={{ color: isDarkMode ? "white" : "black", margin: "0 8px" }}
         >
           <InstagramIcon />
         </IconButton>
         <IconButton
           component={Link}
           to="https://wa.me"
-          sx={{ color: isDarkMode ? "white" : "black", margin: "0 10px" }}
+          sx={{ color: isDarkMode ? "white" : "black", margin: "0 8px" }}
         >
           <WhatsAppIcon />
         </IconButton>

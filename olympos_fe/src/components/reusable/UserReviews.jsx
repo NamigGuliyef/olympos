@@ -71,7 +71,7 @@ const UserReviews = ({ reviews, setCrudEventHappened }) => {
                   </Typography>
                 </Stack>
               </FlexBetween>
-              <Typography>{review?.description}</Typography>
+              <Typography sx={{ mt: 1.5 }}>{review?.description}</Typography>
             </Stack>
             {role === "user" && user[0]?._id === review?.userId?._id && (
               <Stack direction="row" spacing={1} sx={{ ml: "auto" }}>
